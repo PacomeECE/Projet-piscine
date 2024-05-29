@@ -149,7 +149,6 @@ main::-webkit-scrollbar-thumb {
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  cursor=pointer;
 }
 
 .nav-button:hover {
