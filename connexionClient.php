@@ -15,12 +15,10 @@ echo '<head>
 // Création du wrapper
 echo '<body>
 <div class="wrapper">
-    <div class="search-container">
-        <div class="search">
-            <input type="search" id="search-input" placeholder="Taper pour Rechercher">
-            <i id="search-button" class="fa-solid fa-magnifying-glass"></i>
-        </div>
-    </div>
+<div class="search-container form-inline my-2 my-lg-0 ml-auto">
+<input type="search" id="search-input" placeholder="Taper pour Rechercher" class="form-control mr-sm-2">
+<button id="search-button" class="btn my-2 my-sm-0" type="button">Rechercher</button>
+</div>
     <script src="https://kit.fontawesome.com/c0bfb983cf.js" crossorigin="anonymous"></script>
     <div class="nav-item">
         <a href="accueil.html">
