@@ -1,175 +1,113 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <!-- Inclusion des headers nécessaires au wrapper, au footer et au bon fonctionnement de la page-->
+    <!-- Meta tags and Bootstrap CSS -->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <title>Tout parcourir</title>
-    <link rel="stylesheet" type="text/css" href="toutParcourir.css">
-    <link rel="stylesheet" href="connexion.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="accueil.css" />
+    <title>SPORTIFY</title>
 </head>
 
-<!-- script permettant d'afficher la liste des activités et des sports quand on clique sur le bouton correspondant-->
-<script>
-    function toggleActivities() {
-        var activitiesContainer = document.getElementById("activities-container");
-        activitiesContainer.style.display = (activitiesContainer.style.display === "none") ? "block" : "none";
-    }
-
-    function toggleSports() {
-        var sportsContainer = document.getElementById("sports-container");
-        sportsContainer.style.display = (sportsContainer.style.display === 'none') ? "block" : "none";
-    }
-</script>
-
 <body>
-    <!-- Création du wrapper -->
-    <div class="wrapper">
-        <div class="search-container"> <!-- Barre de recherche -->
-            <div class="search">
-                <input type="search" id="search-input" placeholder="Taper pour Rechercher">
-                <i id="search-button" class="fa-solid fa-magnifying-glass"></i>
-            </div>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <a class="navbar-brand" href="accueil.html">
+            <img src="images/logo.png" height="60" alt="Sportify Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="accueil.html">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="connexion.html">Compte</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="toutParcourir.html">Tout Parcourir</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="rdv.html">Rendez-Vous</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0 ml-auto">
+                <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
+                <button class="btn my-2 my-sm-0" type="submit">Rechercher</button>
+            </form>
         </div>
-        <script src="https://kit.fontawesome.com/c0bfb983cf.js" crossorigin="anonymous"></script>
-        <div class="nav-item">
-            <!-- Logo du site qui permet de retourner rapidement à l'accueil quand on clique dessus -->
-            <a href="accueil.html">
-                <img src="SportifyV2.png" height="80px" width="70px" />
-            </a>
+    </nav>
+
+    <main class="container mt-5 pt-5">
+        <h1>Tout Parcourir</h1><br><br>
+
+        <div class="d-flex flex-column align-items-center">
+            <div class="dropdown mb-3">
+                <button class="btn btn-primary">Activités Sportives</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="tp7exo1.php?choix=1">Musculation</a>
+                    <a class="dropdown-item" href="tp7exo1.php?choix=2">Fitness</a>
+                    <a class="dropdown-item" href="tp7exo1.php?choix=3">Biking</a>
+                    <a class="dropdown-item" href="tp7exo1.php?choix=4">Cardio-Training</a>
+                    <a class="dropdown-item" href="tp7exo1.php?choix=5">Cours collectifs</a>
+                </div>
+            </div>
+
+            <div class="dropdown mb-3">
+                <button class="btn btn-primary">Sports de Compétition</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="tp7exo1.php?choix=6">Basketball</a>
+                    <a class="dropdown-item" href="tp7exo1.php?choix=7">Football</a>
+                    <a class="dropdown-item" href="tp7exo1.php?choix=8">Rugby</a>
+                    <a class="dropdown-item" href="tp7exo1.php?choix=9">Tennis</a>
+                    <a class="dropdown-item" href="tp7exo1.php?choix=10">Natation</a>
+                    <a class="dropdown-item" href="tp7exo1.php?choix=11">Plongeon</a>
+                </div>
+            </div>
+
+            <button class="btn btn-primary mb-3" onclick="window.location.href='salle.html'">Salle de Sport Omnes</button>
         </div>
-        <div id="nav-latteral" class="nav-latteral">
-            <!-- Création de la barre latérale permettant d'avoir accès à l'accueil, à tout parcourir, au menu compte et au menu rendez-vous -->
-            <div id="nav-close" class="nav-button">
-                <ion-icon name="close"></ion-icon>
-            </div>
-            <div class="nav-links">
-                <a href="accueil.html">
-                    <div class="nav-link">
-                        <ion-icon name="home"></ion-icon>
-                        Accueil
-                    </div>
-                </a>
-                <a href="connexion.html">
-                    <div class="nav-link">
-                        <ion-icon name="person"></ion-icon>
-                        Compte
-                    </div>
-                </a>
-                <a href="toutParcourir.html">
-                    <div class="nav-link">
-                        <ion-icon name="book"></ion-icon>
-                        Tout Parcourir
-                    </div>
-                </a>
-                <a href="rdv.html">
-                    <div class="nav-link">
-                        <ion-icon name="time"></ion-icon>
-                        Rendez-Vous
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div id="nav-wrapper"></div>
-        <nav>
-            <div id="nav-open" class="nav-button">
-                <ion-icon name="reorder-three"></ion-icon>
-            </div>
-        </nav>
-        <main>
-            <h1>Tout Parcourir</h1><br><br>
 
-            <div class="button-subcontainer">
-                <div class="button-subcontainer">
-                    <button class="button" onclick="toggleActivities()">Activités Sportives</button>
-                </div>
-                <div class="button-subcontainer">
-                    <button class="button" onclick="toggleSports()">Sports de Compétition</button>
-                </div>
-                <div class="button-subcontainer">
-                    <button class="button" onclick="window.location.href='salle.html'">Salle de Sport Omnes</button>
-                </div>
-            </div>
+        <p align="center">
+            <img src="images/toutParcourir.jpg" alt="Course" width=1000px class="image" style="text-align:center">
 
 
-                <!-- On met les boutons correspondants aux sports et activités. Ces boutons renvoient vers le fichier php avec le choix de l'activité dans l'URL-->
-
-            <p align="center">
-                <img src="Course.jpg" alt="Fitness" class="image" style="text-align:center">
-                <img src="Football.jpg" alt="Football" class="image" style="text-align:center">
-                <img src="SalleSports.jpg" alt="Salle de Sport" class="image" style="text-align:center">
-            </p align="center">
-
-            <br><br><br><br>
-
-            <div class="button-subcontainer">
-                <div class="activities-container" id="activities-container" style="display: none;">
-                    <button class="button" name="choix" value="1"
-                        onclick="window.location.href='tp7exo1.php?choix=1'">Musculation</button>
-                    <button class="button" name="choix" value="2"
-                        onclick="window.location.href='tp7exo1.php?choix=2'">Fitness</button>
-                    <button class="button" name="choix" value="3"
-                        onclick="window.location.href='tp7exo1.php?choix=3'">Biking</button>
-                        <button class="button" name="choix" value="4"
-                        onclick="window.location.href='tp7exo1.php?choix=4'">Cardio-Training</button>
-                        <button class="button" name="choix" value="5"
-                        onclick="window.location.href='tp7exo1.php?choix=5'">Cours collectifs</button>
-                </div>
-            </div>
-            <br>
-            <div class="button-subcontainer">
-                <div class="sports-container" id="sports-container" style="display: none;">
-                    <button class="button" name="choix" value="6"
-                        onclick="window.location.href='tp7exo1.php?choix=6'">Basketball</button>
-                        <button class="button" name="choix" value="7"
-                        onclick="window.location.href='tp7exo1.php?choix=7'">Football</button>
-                        <button class="button" name="choix" value="8"
-                        onclick="window.location.href='tp7exo1.php?choix=8'">Rugby</button>
-                        <button class="button" name="choix" value="9"
-                        onclick="window.location.href='tp7exo1.php?choix=9'">Tennis</button>
-                        <button class="button" name="choix" value="10"
-                        onclick="window.location.href='tp7exo1.php?choix=10'">Natation</button>
-                        <button class="button" name="choix" value="11"
-                        onclick="window.location.href='tp7exo1.php?choix=11'">Plongeon</button>
-                </div>
-            </div>
-
-            <br><br>
-
-            <footer class="footer"> <!-- Création du footer -->
+        <footer class="footer text-center py-4">
+            <div class="container">
                 <p>Contactez-nous :</p>
                 <p>
-                    <ion-icon name="call-outline" style="margin-right: 10px;"></ion-icon>
+                    <i class="fas fa-phone" style="margin-right: 10px;"></i>
                     <a href="tel:0144876211">01 44 87 62 11</a>
                 </p>
                 <p>
-                    <ion-icon name="storefront-outline" style="margin-right: 10px;"></ion-icon>
-                    <a href="https://www.google.com/maps/search/?api=1&query=10+Rue+Sextius+Michel,+Paris,+France">10
-                        rue Sextius Michel, Paris</a>
+                    <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>
+                    <a href="https://www.google.com/maps/search/?api=1&query=10+Rue+Sextius+Michel,+Paris,+France">10 rue Sextius Michel, Paris</a>
                 </p>
                 <p>
-                    <ion-icon name="mail-outline" style="margin-right: 10px;"></ion-icon>
+                    <i class="fas fa-envelope" style="margin-right: 10px;"></i>
                     <a href="mailto:salle.sports@omnessports.fr">salle.sports@omnessports.fr</a>
                 </p>
                 <br><br>
-                <!-- Insertion de la carte google maps-->
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8767.74803941555!2d2.28749683632621!3d48.84760618152228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2sECE%20-%20Ecole%20d&#39;ing%C3%A9nieurs%20-%20Engineering%20school.!5e0!3m2!1sfr!2sfr!4v1685374726975!5m2!1sfr!2sfr"
-                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    width="1000" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
-            </footer>
-            <br><br><br>
-        </main>
-        <!-- Insertion des codes javascript nécessaires au bon fonctionnement de la page-->
-        <script src="accueil.js"></script>
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="accueil.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
