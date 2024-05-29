@@ -9,7 +9,7 @@ echo '<head>
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <title>Choix Profil</title>
 <link rel="stylesheet" type="text/css" href="toutParcourir.css">
-<link rel="stylesheet" href="connexion.css">
+<link rel="stylesheet" href="accueil.css">
 </head>';
 
 // Création du wrapper
@@ -140,7 +140,7 @@ echo '</center><footer class="footer">
 </footer>
 <br><br><br>
 </main>
-<script src="accueil.js"></script>
+<script src="recherche.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </div>
