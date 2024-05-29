@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<head>
+    <!-- Ajout des styles nécessaires au bon fonctionnement de la page Web-->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="accueil.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>SPORTIFY</title>
+</head>
+
+<body>
+    <!-- Implémentation du wrapper-->
+    <div class="wrapper">
+        <div class="search-container">
+            <div class="search">
+                <!-- Barre de recherche -->
+                <input type="search" id="search-input" placeholder="Taper pour Rechercher">
+                <i id="search-button" class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </div>
+        <script src="https://kit.fontawesome.com/c0bfb983cf.js" crossorigin="anonymous"></script>
+        <div class="nav-item">
+            <a href="acceuil.html">
+            <img src="SportifyV2.png" height="80px" width="70px" />
+            </a>
+        </div>
+        <!-- Menu déroulant -->
+        <div id="nav-latteral" class="nav-latteral">
+            <div id="nav-close" class="nav-button">
+                <ion-icon name="close"></ion-icon>
+            </div>
+            <div class="nav-links">
+                <a href="accueil.html">
+                    <!-- Lien vers l'accueil -->
+                    <div class="nav-link">
+                        <ion-icon name="home"></ion-icon>
+                        Accueil
+                    </div>
+                </a>
+                <!-- Lien vers la page de connexion-->
+                <a href="connexion.html">
+                    <div class="nav-link">
+                        <ion-icon name="person"></ion-icon>
+                        Compte
+                    </div>
+                </a>
+                <!-- Lien vers la page pour tout parcourir-->
+                <a href="toutParcourir.html">
+                    <div class="nav-link">
+                        <ion-icon name="book"></ion-icon>
+                        Tout Parcourir
+                    </div>
+                </a>
+                <!-- Lien vers la page pour prendre un RDV (non fonctionnelle)-->
+                <a href="rdv.html">
+                    <div class="nav-link">
+                        <ion-icon name="time"></ion-icon>
+                        Rendez-Vous
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div id="nav-wrapper"></div>
+        <nav>
+            <div id="nav-open" class="nav-button">
+                <ion-icon name="reorder-three"></ion-icon>
+            </div>
+        </nav>
+        <main>
+            <h1><strong>Sportify</strong></h1>
+            <center><p><strong>Consultation Sportive</strong></p></center><br><br>
+            <center>
+            <p class="bienvenue">
+            <strong>
+                Bienvenue sur Sportify, la plateforme de consultation sportive de la communauté Omnes Education. Que
+                votre intérêt porte pour les sports d’équipe, de raquette, de natation ou bien d’autres, Sportify saura
+                vous garder informé de ce qui se passe dans notre communauté et vous donner l’opportunité de pratiquer
+                ces sports, en étant accompagné de nos meilleurs coachs, terrains et équipements.
+                Explorez notre site et surpassez-vous !
+            </strong>
+            </p>
+            </center>
+            <br><br><br><br>
+            <h2>Bulletin sportif de la semaine</h2><br>
+
+
+            <div class="book">
+                <input type="checkbox" id="c1">
+                <input type="checkbox" id="c2">
+                <input type="checkbox" id="c3">
+                <div id="cover"><img src="ski.jpg" style="width: 100%; height: 100%;"></div>
+                <div class="flip-book">
+                    <!-- Iplémentation du carroussel d'images et de texte -->
+                    <div class="flip" id="p1">
+                        <div class="back">
+                            <img src="foot.jpg" style="width: 100%; height: 100%;">
+                            <label class="back-btn" for="c1">Précédent</label>
+                        </div>
+                        <div class="front">
+                            <h2>SkiBeary 2023</h2>
+                            <p>Plus de 200 étudiants réunis pour une semaine de sport et de festivités, voilà les
+                                ingrédients pour une expérience inoubliable. Malgré le faible nombre d’heures de
+                                sommeil, ce séjour n’en fut pas moins mémorable pour les étudiants de l’ECE Paris et son
+                                staff (que l’on remercie tout particulièrement).</p>
+                            <label class="next-btn" for="c1">Suivant</label>
+                        </div>
+                    </div>
+                    <div class="flip" id="p2">
+                        <div class="back">
+                            <img src="boule.jpg" style="width: 100%; height: 100%;">
+                            <label class="back-btn" for="c2">Précédent</label>
+                        </div>
+                        <div class="front">
+                            <h2>Football ECE vs Polytechnique</h2>
+                            <p>Victoire écrasante de la part de l’équipe du groupe Omnes avec 2-0 contre les joueurs de
+                                l’X. On salue leur effort face à une bonne équipe dans une compétion acharnée, l’ECE
+                                s’en souviendra !</p>
+                            <label class="next-btn" for="c2">Suivant</label>
+                        </div>
+                    </div>
+
+                    <div class="flip" id="p3">
+                        <div class="back">
+                            <label class="back-btn" for="c3">Précédent</label>
+                        </div>
+                        <div class="front">
+                            <h2>Après-midi pétanque</h2>
+                            <p>Venez profiter d’un évènement Pétanque le 27 mai prochain avec le BDS de l’ECE. A 14h au
+                                boulodrome Suzanne Lenglen, venez profiter d’une ambiance conviviale et festive, tout en
+                                restant dans l’esprit du sport !</p>
+                            <label class="next-btn" for="c3">Suivant</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br>
+            <!-- Implémentation d'avis clients afin d'avoir plus de profondeur sur la page d'accueil-->
+            <h2>Avis client</h2>
+            <br>
+            <h4 class="text-left">Giloulefifou05 :</h4>
+            <p class="text-left" style="font-size: 20px;"><i>" Salle de sport très propre, les coachs sont super sympas
+                    et de bons conseils ,<br>
+                    facilité de pouvoir utiliser toutes les machines même pendant les heures d'affluence.<br>
+                    Prix des abonnements plus que corrects "</i></p>
+            <h4 class="text-right">Maxime Tran :</h4>
+            <p class="text-right" style="font-size: 20px;"><i>" Salle de sport magnifique, les coachs et les adhérents sont prêts à aider ,<br>
+                on peut demander conseil à qui on veut sans problème.<br>
+                Je recommande ! "</i></p>
+            <h4 class="text-left">The rock :</h4>
+            <p class="text-left" style="font-size: 20px;"><i>" Salle tres agreable avec tout ce qu'il faut afin de s'entrainer.<br>
+                A 6h du matin c'est parfait pour s'entrainer car il n'y a pas beaucoup de monde.<br>
+                La gym est tres propre et lumineuse. "</i></p>
+            <br><br><br><br><br><br>
+            <footer class="footer">
+                <!-- Implémentation du footer -->
+                <p>Contactez-nous :</p>
+                <p>
+                    <ion-icon name="call-outline" style="margin-right: 10px;"></ion-icon>
+                    <a href="tel:0144876211">01 44 87 62 11</a>
+                </p>
+                <p>
+                    <ion-icon name="storefront-outline" style="margin-right: 10px;"></ion-icon>
+                    <a href="https://www.google.com/maps/search/?api=1&query=10+Rue+Sextius+Michel,+Paris,+France">10 rue Sextius Michel, Paris, France</a>
+                </p>
+                <p>
+                    <ion-icon name="mail-outline" style="margin-right: 10px;"></ion-icon>
+                    <a href="salle.sports@omnessports.fr">salle.sports@omnessports.fr</a>
+                </p>
+                <br><br>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8767.74803941555!2d2.28749683632621!3d48.84760618152228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2sECE%20-%20Ecole%20d&#39;ing%C3%A9nieurs%20-%20Engineering%20school.!5e0!3m2!1sfr!2sfr!4v1685374726975!5m2!1sfr!2sfr"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </footer>
+        </main>
+        <!-- Implémentation des scripts JS nécessaires au bon fonctionnement de la page Web-->
+        <script src="accueil.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    </div>
+
+</body>
+
+</html>
