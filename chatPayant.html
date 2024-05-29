@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Inclusion des headers nécessaires au wrapper, au footer et au bon fonctionnement de la page-->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>ERREUR</title>
+    <link rel="stylesheet" type="text/css" href="toutParcourir.css">
+    <link rel="stylesheet" href="connexion.css">
+    <style>
+        /* Permet d'ajuster précisemment le contenu de notre page sans passer par un fichier css*/
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+        }
+
+        p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: green;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Création du wrapper -->
+    <div class="wrapper">
+        <div class="search-container"> <!-- Barre de recherche -->
+            <div class="search">
+                <input type="search" id="search-input" placeholder="Taper pour Rechercher">
+                <i id="search-button" class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </div>
+        <script src="https://kit.fontawesome.com/c0bfb983cf.js" crossorigin="anonymous"></script>
+        <div class="nav-item">
+            <!-- Logo du site qui permet de retourner rapidement à l'accueil quand on clique dessus -->
+            <a href="accueil.html">
+                <img src="SportifyV2.png" height="80px" width="70px" />
+            </a>
+        </div>
+        <div id="nav-latteral" class="nav-latteral">
+            <!-- Création de la barre latérale permettant d'avoir accès à l'accueil, à tout parcourir, au menu compte et au menu rendez-vous -->
+            <div id="nav-close" class="nav-button">
+                <ion-icon name="close"></ion-icon>
+            </div>
+            <div class="nav-links">
+                <a href="accueil.html">
+                    <div class="nav-link">
+                        <ion-icon name="home"></ion-icon>
+                        Accueil
+                    </div>
+                </a>
+                <a href="connexion.html">
+                    <div class="nav-link">
+                        <ion-icon name="person"></ion-icon>
+                        Compte
+                    </div>
+                </a>
+                <a href="toutParcourir.html">
+                    <div class="nav-link">
+                        <ion-icon name="book"></ion-icon>
+                        Tout Parcourir
+                    </div>
+                </a>
+                <a href="rdv.html">
+                    <div class="nav-link">
+                        <ion-icon name="time"></ion-icon>
+                        Rendez-Vous
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div id="nav-wrapper"></div>
+        <nav>
+            <div id="nav-open" class="nav-button">
+                <ion-icon name="reorder-three"></ion-icon>
+            </div>
+        </nav>
+        <main>
+            <div class="container">
+                <h1>Service Payant:</h1>
+                <center>
+                    <p>En cliquant sur le bouton ci-dessous, vous serez débité de 5€ par mois à partir de ce jour.</p>
+                    <p>Le débit ne sera pas effectué une deuxième fois si vous avez déjà réalisé cette action
+                        auparavant.</p>
+
+                    <button class="button" onclick="location.href='paiement.html'">Accéder au paiement</button>
+                    <!-- Bouton pour accéder à la page de paiement -->
+
+                    <p>Si vous avez déjà souscris à cet abonnement.</p>
+                    <button class="button" onclick="location.href='choixChat.html'">Accéder au choix des coach</button>
+                    <!-- Bouton pour accéder au choix des coachs -->
+
+                    <p>Revenir à la page client.</p>
+                    <button class="button" onclick="history.go(-1)">Compte client </button>
+                    <!-- Bouton pour revenir à la page précédente (page client) -->
+                </center>
+
+            </div>
+            <br><br>
+
+            <footer class="footer"> <!-- Création du footer -->
+                <p>Contactez-nous :</p>
+                <p>
+                    <ion-icon name="call-outline" style="margin-right: 10px;"></ion-icon>
+                    <a href="tel:0144876211">01 44 87 62 11</a>
+                </p>
+                <p>
+                    <ion-icon name="storefront-outline" style="margin-right: 10px;"></ion-icon>
+                    <a href="https://www.google.com/maps/search/?api=1&query=10+Rue+Sextius+Michel,+Paris,+France">10
+                        rue Sextius Michel, Paris</a>
+                </p>
+                <p>
+                    <ion-icon name="mail-outline" style="margin-right: 10px;"></ion-icon>
+                    <a href="mailto:salle.sports@omnessports.fr">salle.sports@omnessports.fr</a>
+                </p>
+                <br><br>
+                <!-- Insertion de la carte google maps-->
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8767.74803941555!2d2.28749683632621!3d48.84760618152228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2sECE%20-%20Ecole%20d&#39;ing%C3%A9nieurs%20-%20Engineering%20school.!5e0!3m2!1sfr!2sfr!4v1685374726975!5m2!1sfr!2sfr"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </footer>
+            <br><br><br>
+        </main>
+        <!-- Insertion des codes javascript nécessaires au bon fonctionnement de la page-->
+        <script src="accueil.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    </div>
+</body>
+
+</html>

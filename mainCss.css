@@ -1,0 +1,243 @@
+/* Réinitialisation des marges, des paddings et de la boîte de modèle de tous les éléments */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gotham', sans-serif;
+  }
+  
+  /* Style du corps de la page */
+  body {
+    /* Définition du fond d'écran de la page */
+    background: url(sport3.jpg);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Style du conteneur de recherche */
+  .search-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 10px;
+    z-index: 5;
+  }
+  
+  /* Style du composant de recherche */
+  .search {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Style de l'input de recherche */
+  .search input {
+    width: 300px;
+    border: 2px solid green;
+    padding: 10px;
+    border-radius: 30px;
+  }
+  
+  /* Style de l'icône de recherche */
+  .search i {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  /* Style du titre de niveau 1 */
+  h1 {
+    font-size: 45pt;
+    margin-bottom: 10px;
+    color: green; 
+    text-align: center;
+    margin: 2rem 0.5rem 0;
+  }
+  
+  /* Style du titre de niveau 2 */
+  h2 {
+    color: black; 
+    text-align: center;
+    margin: 2rem 0 4rem 0;
+  }
+  
+  /* Style de la barre de navigation */
+  nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1;
+  }
+  
+  /* Style du contenu principal */
+  main {
+    width: 100%;
+    line-height: 2rem;
+    font-size: 20px;
+    height: 100vh;
+    overflow: auto;
+    padding: 2rem 5vw;
+    text-align: justify;
+  }
+  
+  /* Style de la barre de défilement personnalisée pour le contenu principal */
+  main::-webkit-scrollbar {
+    background-color: #dedede;
+    width: 0.5rem;
+  }
+  
+  /* Style de la poignée de défilement personnalisée pour le contenu principal */
+  main::-webkit-scrollbar-thumb {
+    background-color: #757575;
+  }
+  
+  /* Style du volet de navigation latéral */
+  .nav-latteral {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    background:  url(sport5.jpg);
+    z-index: 3;
+    height: 100vh;
+    width: max-content;
+    transition: all 0.1s ease;
+  }
+  
+  /* Style de l'enveloppe du volet de navigation */
+  #nav-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    display: none;
+  }
+  
+  /* Style de l'enveloppe du volet de navigation active */
+  #nav-wrapper.active {
+    display: block;
+  }
+  
+  /* Style du bouton de fermeture du volet de navigation */
+  #nav-close {
+    margin-bottom: 4rem;
+  }
+  
+  /* Style des liens de navigation */
+  .nav-links {
+    padding: 1rem 6rem 1rem 3rem;
+  }
+  
+  /* Style d'un lien de navigation */
+  .nav-link {
+    cursor: pointer;
+    font-size: 25px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Style du bouton de navigation */
+  .nav-button {
+    transition: all 0.2s ease;
+  }
+  
+  /* Style du bouton de navigation */
+  .nav-button {
+    font-size: 40px;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor:pointer;
+  }
+  
+  /* Style du bouton de navigation au survol */
+  .nav-button:hover {
+    color: white;
+    background-color: green;
+  }
+  
+  /* Style de l'enveloppe principale */
+  .wrapper {
+    width: 100%;
+    margin: 0 auto;
+    height: 80%;
+  }
+  
+  /* Style de la liste de navigation */
+  .nav-list {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+  }
+  
+  /* Style d'un élément de navigation */
+  .nav-item {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    justify-content: right;
+    align-items: right;
+  }
+  
+  /* Style d'un lien d'élément de navigation */
+  .nav-item a {
+    color: green;
+    letter-spacing: 1.2px;
+  }
+  
+  /* Style de la classe .book */
+  .book {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Style de l'élément avec l'id #cover */
+  #cover {
+    width: 250px;
+    height: 400px;
+  }
+  
+  /* Style de la classe .bienvenue */
+  .bienvenue {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  
+  /* Style de l'élément <p> */
+  p {
+    font-size: 14px;
+    line-height: 24px;
+  }
+  
+  /* Style de la classe .front */
+  .front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 110;
+    left: 0;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 0 13px;
+    box-shadow: inset 20px 0 50px rgba(0,0,0,0.5) 0 2px
+  }
+  
