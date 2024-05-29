@@ -1,0 +1,187 @@
+body {
+    background: url(images/fond.png) no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.navbar {
+    background-color: #00bfff;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #5e42a6;
+}
+
+.nav-link {
+    color: #5e42a6 !important;
+}
+
+.nav-link:hover {
+    color: #ffd700 !important;
+}
+
+.form-inline .btn {
+    background-color: #5e42a6;
+    color: #fff;
+}
+
+.form-inline .btn:hover {
+    background-color: #ffd700;
+}
+
+h1.display-4 {
+    color: #ffd700;
+    font-family: fantasy;
+}
+
+h2 {
+    color: #00bfff;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    height: 400px;
+}
+
+.carousel-caption h5 {
+    background-color: rgba(94, 66, 166, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.carousel-caption p {
+    background-color: rgba(0, 191, 255, 0.7);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.text-left, .text-right {
+    color: black;
+}
+
+footer {
+    background-color: #00bfff;
+    width: auto;
+    color: #5e42a6;
+}
+
+footer a {
+    color: black;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #5e42a6;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.coach-profile {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.card-header {
+    background-color: #00bfff;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coach-info {
+    width: 100%;
+}
+
+.coach-info h3 {
+    color: #5e42a6;
+    text-align: center;
+}
+
+.coach-info p {
+    color: black;
+    text-align: center;
+}
+
+.table {
+    background-color: white;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    color: black;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table thead th {
+    background-color: #00bfff;
+    color: white;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tbody tr:hover {
+    background-color: #ddd;
+}
+
+.table tbody td div {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 2px 0;
+}
+
+.text-muted {
+    color: #ccc;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.buttons .btn {
+    margin: 5px;
+}
