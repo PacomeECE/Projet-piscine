@@ -9,6 +9,25 @@ body {
   margin: 0;
 }
 
+.carousel-item img {
+  object-fit: cover;
+  height: 400px;
+}
+
+.carousel-caption h5 {
+  background-color: rgba(94, 66, 166, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+}
+
+.carousel-caption p {
+  background-color: rgba(0, 191, 255, 0.7);
+  padding: 5px;
+  border-radius: 5px;
+  color: #ffffff;
+}
+
 .navbar {
   background-color: #00bfff;
 }
@@ -55,17 +74,20 @@ h2 {
   color: #00bfff;
 }
 
-.btn-primary {
-  background-color: #5e42a6;
-  border: none;
+.button {
+  display: inline-block;
+  margin: 0.5rem;
   padding: 0.75rem 1.5rem;
   font-size: 1.25rem;
-  margin: 0.5rem;
+  color: #fff;
+  background-color: #5e42a6;
+  border: none;
   border-radius: 5px;
+  text-decoration: none;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.btn-primary:hover {
+.button:hover {
   background-color: #ffd700;
   color: #5e42a6;
 }
@@ -74,7 +96,7 @@ h2 {
   background-color: #00bfff;
   color: black;
   padding: 20px 0;
-  width: auto;
+  width: 100%;
 }
 
 .footer a {
