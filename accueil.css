@@ -36,7 +36,8 @@ body {
 }
 
 h1.display-4 {
-  color: #5e42a6;
+  color: #ffd700;
+  font-family: fantasy;
 }
 
 h2 {
@@ -66,7 +67,7 @@ h2 {
 
 footer {
   background-color: #00bfff;
-  width: 1800px;
+  width:auto;
   color: #5e42a6;
 }
 
