@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+/* Importer une police similaire à Gotham depuis Google Fonts */
+
+#photo img {
+    max-width: 8%;
+    height: auto;
+}
+/* Style pour les images dans la section avec l'id "photo" */
+
+body {
+    background-color: #f0f8ff;
+    font-family: 'Roboto', Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    margin: 3%;
+}
+/* Style global pour le corps de la page */
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+/* Style pour les paragraphes */
+
+input {
+    border: none;
+    background: none;
+    font-size: 18px;
+}
+/* Style pour les champs de saisie */
+
+button {
+    background-color: green;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border: none;
+}
+/* Style pour les boutons */
+
+button:hover {
+    background-color:  darkgreen;
+}
+/* Style au survol des boutons */
+
+#bienvenue {
+    font-size: 24px;
+    font-weight: bold;
+}
+/* Style pour l'élément avec l'id "bienvenue" */
+
+#cv {
+    font-size: 24px;
+    font-weight: bold;
+}
+/* Style pour l'élément avec l'id "cv" */
+
+#info {
+    font-size: 20px;
+    margin-top: 20px;
+}
+/* Style pour l'élément avec l'id "info" */
