@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -52,54 +53,79 @@
             <div class="col-md-8">
                 <h1 class="display-4 text-center">Créer un Compte</h1>
                 <br><br>
-                <form>
+                <form action="creerCompte.php" method="POST" onsubmit="return validateForm()">
                     <div class="form-group">
-                        <label for="fullName">Nom</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Entrez votre nom">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez votre nom" value="<?= isset($_POST['nom']) ? htmlspecialchars($_POST['nom']) : '' ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="fullName">Prénom</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Entrez votre prénom">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Entrez votre prénom" value="<?= isset($_POST['prenom']) ? htmlspecialchars($_POST['prenom']) : '' ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="address1">Adresse Ligne 1</label>
-                        <input type="text" class="form-control" id="address1" placeholder="Entrez votre adresse ligne 1">
+                        <label for="adresse1">Adresse Ligne 1</label>
+                        <input type="text" class="form-control" id="adresse1" name="adresse1" placeholder="Entrez votre adresse ligne 1" value="<?= isset($_POST['adresse1']) ? htmlspecialchars($_POST['adresse1']) : '' ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="address2">Adresse Ligne 2</label>
-                        <input type="text" class="form-control" id="address2" placeholder="Entrez votre adresse ligne 2 (facultatif)">
+                        <label for="adresse2">Adresse Ligne 2</label>
+                        <input type="text" class="form-control" id="adresse2" name="adresse2" placeholder="Entrez votre adresse ligne 2 (facultatif)" value="<?= isset($_POST['adresse2']) ? htmlspecialchars($_POST['adresse2']) : '' ?>">
                     </div>
                     <div class="form-group">
-                        <label for="city">Ville</label>
-                        <input type="text" class="form-control" id="city" placeholder="Entrez votre ville">
+                        <label for="ville">Ville</label>
+                        <input type="text" class="form-control" id="ville" name="ville" placeholder="Entrez votre ville" value="<?= isset($_POST['ville']) ? htmlspecialchars($_POST['ville']) : '' ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="postalCode">Code Postal</label>
-                        <input type="text" class="form-control" id="postalCode" placeholder="Entrez votre code postal">
+                        <label for="codePostal">Code Postal</label>
+                        <input type="text" class="form-control" id="codePostal" name="codePostal" placeholder="Entrez votre code postal" value="<?= isset($_POST['codePostal']) ? htmlspecialchars($_POST['codePostal']) : '' ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="country">Pays</label>
-                        <input type="text" class="form-control" id="country" placeholder="Entrez votre pays">
+                        <label for="pays">Pays</label>
+                        <input type="text" class="form-control" id="pays" name="pays" placeholder="Entrez votre pays" value="<?= isset($_POST['pays']) ? htmlspecialchars($_POST['pays']) : '' ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="phoneNumber">Numéro de téléphone</label>
-                        <input type="text" class="form-control" id="phoneNumber" placeholder="Entrez votre numéro de téléphone">
+                        <label for="telephone">Numéro de téléphone</label>
+                        <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Entrez votre numéro de téléphone" value="<?= isset($_POST['telephone']) ? htmlspecialchars($_POST['telephone']) : '' ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre email" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>" required>
                     </div>
                     <div class="form-group">
-                        <label for="studentCard">Carte Etudiante</label>
-                        <input type="text" class="form-control" id="studentCard" placeholder="Entrez votre numéro de carte étudiante">
+                        <label for="carteEtudiant">Carte Etudiante</label>
+                        <input type="text" class="form-control" id="carteEtudiant" name="carteEtudiant" placeholder="Entrez votre numéro de carte étudiante" value="<?= isset($_POST['carteEtudiant']) ? htmlspecialchars($_POST['carteEtudiant']) : '' ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" value="<?= isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '' ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword">Confirmez le mot de passe</label>
-                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmez votre mot de passe">
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmez votre mot de passe" value="<?= isset($_POST['confirmPassword']) ? htmlspecialchars($_POST['confirmPassword']) : '' ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="numeroCarte">Numéro de Carte</label>
+                        <input type="text" class="form-control" id="numeroCarte" name="numeroCarte" placeholder="Entrez votre numéro de carte" value="<?= isset($_POST['numeroCarte']) ? htmlspecialchars($_POST['numeroCarte']) : '' ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nomProprietaire">Nom du Propriétaire</label>
+                        <input type="text" class="form-control" id="nomProprietaire" name="nomProprietaire" placeholder="Entrez le nom du propriétaire de la carte" value="<?= isset($_POST['nomProprietaire']) ? htmlspecialchars($_POST['nomProprietaire']) : '' ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateExpiration">Date d'Expiration</label>
+                        <input type="text" class="form-control" id="dateExpiration" name="dateExpiration" placeholder="MM/AA" value="<?= isset($_POST['dateExpiration']) ? htmlspecialchars($_POST['dateExpiration']) : '' ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Entrez le CVV" value="<?= isset($_POST['cvv']) ? htmlspecialchars($_POST['cvv']) : '' ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="typeCarte">Type de Carte</label>
+                        <select class="form-control" id="typeCarte" name="typeCarte" required>
+                            <option value="Visa" <?= (isset($_POST['typeCarte']) && $_POST['typeCarte'] == 'Visa') ? 'selected' : '' ?>>Visa</option>
+                            <option value="MasterCard" <?= (isset($_POST['typeCarte']) && $_POST['typeCarte'] == 'MasterCard') ? 'selected' : '' ?>>MasterCard</option>
+                            <option value="American Express" <?= (isset($_POST['typeCarte']) && $_POST['typeCarte'] == 'American Express') ? 'selected' : '' ?>>American Express</option>
+                            <option value="PayPal" <?= (isset($_POST['typeCarte']) && $_POST['typeCarte'] == 'PayPal') ? 'selected' : '' ?>>PayPal</option>
+                        </select>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary my-2 my-sm-0">Créer un Compte</button>
@@ -137,7 +163,19 @@
     <script src="recherche.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function validateForm() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
 
+            if (password !== confirmPassword) {
+                alert("Les mots de passe ne correspondent pas.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </body>
 
 </html>
