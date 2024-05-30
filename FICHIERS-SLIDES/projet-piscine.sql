@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 30 mai 2024 à 11:47
+-- Généré le : jeu. 30 mai 2024 à 16:16
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -335,24 +335,28 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `type_carte` enum('Visa','MasterCard','American Express','PayPal') DEFAULT NULL,
   PRIMARY KEY (`id_utilisateur`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`id_utilisateur`, `prenom`, `nom`, `email`, `mot_de_passe`, `adresse_ligne1`, `adresse_ligne2`, `ville`, `code_postal`, `pays`, `telephone`, `carte_etudiant`, `role_utilisateur`, `cree_a`, `numero_carte`, `nom_proprietaire`, `date_expiration`, `cvv`, `type_carte`) VALUES
-(1, 'Guy', 'Fit', 'guy.fit@edu.ece.fr', 'hashed_password1', '123 Fitness St.', 'Apt 1', 'Paris', '75001', 'France', '07 46 91 73 22', '123456789', 'coach', '2024-05-30 11:45:05', '1234567890123456', 'Guy Fit', '12/25', '123', 'Visa'),
-(2, 'Maxine', 'Detente', 'maxine.detente@edu.ece.fr', 'hashed_password2', '456 Cardio Blvd.', 'Suite 2', 'Lyon', '69001', 'France', '07 46 91 73 23', '987654321', 'coach', '2024-05-30 11:45:05', '2345678901234567', 'Maxine Detente', '11/24', '456', 'MasterCard'),
-(3, 'Sylvain', 'Saroule', 'sylvain.saroule@edu.ece.fr', 'hashed_password3', '789 Biking Way', '', 'Marseille', '13001', 'France', '07 46 91 73 24', '192837465', 'coach', '2024-05-30 11:45:05', '3456789012345678', 'Sylvain Saroule', '10/23', '789', 'American Express'),
-(4, 'Angela', 'Baha', 'angela.baha@edu.ece.fr', 'hashed_password4', '321 Collective Rd.', 'Floor 4', 'Toulouse', '31000', 'France', '07 46 91 73 25', '564738291', 'coach', '2024-05-30 11:45:05', '4567890123456789', 'Angela Baha', '09/22', '012', 'PayPal'),
-(5, 'Ilies', 'Matrixé', 'ilies.matrixe@edu.ece.fr', 'hashed_password5', '654 Muscle Ave.', 'Apt 5', 'Nice', '06000', 'France', '07 46 91 73 26', '918273645', 'coach', '2024-05-30 11:45:05', '5678901234567890', 'Ilies Matrixé', '08/21', '345', 'Visa'),
-(6, 'Kim', 'Possible', 'kim.possible@edu.ece.fr', 'hashed_password6', '987 Basket St.', '', 'Bordeaux', '33000', 'France', '07 46 91 73 27', '837465192', 'coach', '2024-05-30 11:45:05', '6789012345678901', 'Kim Possible', '07/20', '678', 'MasterCard'),
-(7, 'Zizou', 'Legrand', 'zizou.legrand@edu.ece.fr', 'hashed_password7', '159 Football Dr.', '', 'Lille', '59000', 'France', '07 46 91 73 28', '647382910', 'coach', '2024-05-30 11:45:05', '7890123456789012', 'Zizou Legrand', '06/19', '901', 'American Express'),
-(8, 'Come', 'Unfrigo', 'come.unfrigo@edu.ece.fr', 'hashed_password8', '753 Rugby Cir.', '', 'Strasbourg', '67000', 'France', '07 46 91 73 29', '564738291', 'coach', '2024-05-30 11:45:05', '8901234567890123', 'Come Unfrigo', '05/18', '234', 'PayPal'),
-(9, 'Nina', 'Iguess', 'nina.iguess@edu.ece.fr', 'hashed_password9', '951 Tennis Ln.', '', 'Montpellier', '34000', 'France', '07 46 91 73 30', '182736495', 'coach', '2024-05-30 11:45:05', '9012345678901234', 'Nina Iguess', '04/17', '567', 'Visa'),
-(10, 'Ariel', 'Laptitesirene', 'ariel.laptitesirene@edu.ece.fr', 'hashed_password10', '357 Swim Dr.', '', 'Rennes', '35000', 'France', '07 46 91 73 31', '293847561', 'coach', '2024-05-30 11:45:05', '0123456789012345', 'Ariel Laptitesirene', '03/16', '890', 'MasterCard'),
-(11, 'Nicolas', 'Latetenba', 'nicolas.latetenba@edu.ece.fr', 'hashed_password11', '468 Dive Blvd.', '', 'Reims', '51100', 'France', '07 46 91 73 32', '748392615', 'coach', '2024-05-30 11:45:05', '1234567890123456', 'Nicolas Latetenba', '02/15', '123', 'American Express');
+(1, 'Guy', 'Fit', 'guy.fit@edu.ece.fr', 'password1', '123 Fitness St.', 'Apt 1', 'Paris', '75001', 'France', '07 46 91 73 22', '123456789', 'coach', '2024-05-30 11:45:05', '1234567890123456', 'Guy Fit', '12/25', '123', 'Visa'),
+(2, 'Maxine', 'Detente', 'maxine.detente@edu.ece.fr', 'password2', '456 Cardio Blvd.', 'Suite 2', 'Lyon', '69001', 'France', '07 46 91 73 23', '987654321', 'coach', '2024-05-30 11:45:05', '2345678901234567', 'Maxine Detente', '11/24', '456', 'MasterCard'),
+(3, 'Sylvain', 'Saroule', 'sylvain.saroule@edu.ece.fr', 'password3', '789 Biking Way', '', 'Marseille', '13001', 'France', '07 46 91 73 24', '192837465', 'coach', '2024-05-30 11:45:05', '3456789012345678', 'Sylvain Saroule', '10/23', '789', 'American Express'),
+(4, 'Angela', 'Baha', 'angela.baha@edu.ece.fr', 'password4', '321 Collective Rd.', 'Floor 4', 'Toulouse', '31000', 'France', '07 46 91 73 25', '564738291', 'coach', '2024-05-30 11:45:05', '4567890123456789', 'Angela Baha', '09/22', '012', 'PayPal'),
+(5, 'Ilies', 'Matrixé', 'ilies.matrixe@edu.ece.fr', 'password5', '654 Muscle Ave.', 'Apt 5', 'Nice', '06000', 'France', '07 46 91 73 26', '918273645', 'coach', '2024-05-30 11:45:05', '5678901234567890', 'Ilies Matrixé', '08/21', '345', 'Visa'),
+(6, 'Kim', 'Possible', 'kim.possible@edu.ece.fr', 'password6', '987 Basket St.', '', 'Bordeaux', '33000', 'France', '07 46 91 73 27', '837465192', 'coach', '2024-05-30 11:45:05', '6789012345678901', 'Kim Possible', '07/20', '678', 'MasterCard'),
+(7, 'Zizou', 'Legrand', 'zizou.legrand@edu.ece.fr', 'password7', '159 Football Dr.', '', 'Lille', '59000', 'France', '07 46 91 73 28', '647382910', 'coach', '2024-05-30 11:45:05', '7890123456789012', 'Zizou Legrand', '06/19', '901', 'American Express'),
+(8, 'Come', 'Unfrigo', 'come.unfrigo@edu.ece.fr', 'password8', '753 Rugby Cir.', '', 'Strasbourg', '67000', 'France', '07 46 91 73 29', '564738291', 'coach', '2024-05-30 11:45:05', '8901234567890123', 'Come Unfrigo', '05/18', '234', 'PayPal'),
+(9, 'Nina', 'Iguess', 'nina.iguess@edu.ece.fr', 'password9', '951 Tennis Ln.', '', 'Montpellier', '34000', 'France', '07 46 91 73 30', '182736495', 'coach', '2024-05-30 11:45:05', '9012345678901234', 'Nina Iguess', '04/17', '567', 'Visa'),
+(10, 'Ariel', 'Laptitesirene', 'ariel.laptitesirene@edu.ece.fr', 'password10', '357 Swim Dr.', '', 'Rennes', '35000', 'France', '07 46 91 73 31', '293847561', 'coach', '2024-05-30 11:45:05', '0123456789012345', 'Ariel Laptitesirene', '03/16', '890', 'MasterCard'),
+(11, 'Nicolas', 'Latetenba', 'nicolas.latetenba@edu.ece.fr', 'password11', '468 Dive Blvd.', '', 'Reims', '51100', 'France', '07 46 91 73 32', '748392615', 'coach', '2024-05-30 11:45:05', '1234567890123456', 'Nicolas Latetenba', '02/15', '123', 'American Express'),
+(12, 'Lola', 'Legall', 'lola.legall@edu.ece.fr', 'martin', '1 Admin St.', 'Apt 101', 'Paris', '75001', 'France', '06 12 34 56 78', '123456780', 'admin', '2024-05-30 15:06:16', '1111222233334444', 'Lola Legall', '12/26', '123', 'Visa'),
+(13, 'Pacôme', 'Golvet', 'pacome.golvet@edu.ece.fr', 'Rohr', '2 Admin Blvd.', '', 'Epalles', '03251', 'France', '06 87 65 43 21', '123456781', 'admin', '2024-05-30 15:06:16', '5555666677778888', 'Pacôme Golvet', '11/25', '456', 'MasterCard'),
+(14, 'Amandine', 'Soyez', 'amandine.soyez@edu.ece.fr', 'Rohr', '3 Admin Ave.', 'Suite 300', 'Fayot', '03250', 'France', '06 98 76 54 32', '123456782', 'admin', '2024-05-30 15:06:16', '9999000011112222', 'Amandine Soyez', '10/24', '789', 'American Express'),
+(16, 'Amandine', 'Soyez', 'amandine27478@gmail.com', 'Moulin', '25 Bis rue de l\'Armorique', 'Appartement 4', 'PARIS 15', '75015', 'France', '0631779407', '123456789', 'client', '2024-05-30 16:11:50', '1234567890123456', 'Amandine Soyez', '12/14', '123', 'American Express');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
