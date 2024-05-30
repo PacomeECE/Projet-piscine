@@ -183,3 +183,16 @@ h2 {
 main {
     margin-top: 80px; 
 }
+
+.rules-container {
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #00bfff;
+  max-width: 600px;
+  margin: 20px auto;
+  color: #ffffff; /* White text */
+}
+.rules-container p {
+  margin: 0 0 10px;
+}
