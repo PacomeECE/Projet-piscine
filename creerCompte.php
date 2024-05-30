@@ -13,6 +13,8 @@ if (!$db_found) {
     die("Base de données introuvable.");
 }
 
+$errors = [];
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nom = mysqli_real_escape_string($db_handle, $_POST['nom']);
     $prenom = mysqli_real_escape_string($db_handle, $_POST['prenom']);
@@ -34,46 +36,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Validation des données côté serveur
     if (empty($nom) || empty($prenom) || empty($adresse1) || empty($ville) || empty($codePostal) || empty($pays) || empty($telephone) || empty($email) || empty($carteEtudiant) || empty($password) || empty($confirmPassword) || empty($numeroCarte) || empty($nomProprietaire) || empty($dateExpiration) || empty($cvv) || empty($typeCarte)) {
-        echo "<script>alert('Veuillez remplir tous les champs obligatoires.'); window.location.href = 'creerCompte.html';</script>";
-        exit;
+        $errors[] = 'Veuillez remplir tous les champs obligatoires.';
     }
 
     if ($password !== $confirmPassword) {
-        echo "<script>alert('Les mots de passe ne correspondent pas.'); window.location.href = 'creerCompte.html';</script>";
-        exit;
+        $errors[] = 'Les mots de passe ne correspondent pas.';
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('Adresse email invalide.'); window.location.href = 'creerCompte.html';</script>";
-        exit;
+        $errors[] = 'Adresse email invalide.';
     }
 
     if (!preg_match("/^[0-9]{16}$/", $numeroCarte)) {
-        echo "<script>alert('Numéro de carte invalide.'); window.location.href = 'creerCompte.html';</script>";
-        exit;
+        $errors[] = 'Numéro de carte invalide.';
     }
 
     if (!preg_match("/^[0-9]{3,4}$/", $cvv)) {
-        echo "<script>alert('CVV invalide.'); window.location.href = 'creerCompte.html';</script>";
-        exit;
+        $errors[] = 'CVV invalide.';
     }
 
     if (!preg_match("/^(0[1-9]|1[0-2])\/?([0-9]{2})$/", $dateExpiration)) {
-        echo "<script>alert('Date d\'expiration invalide. Utilisez le format MM/AA.'); window.location.href = 'creerCompte.html';</script>";
-        exit;
+        $errors[] = 'Date d\'expiration invalide. Utilisez le format MM/AA.';
     }
 
-    // Hachage du mot de passe
-    $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+    if (empty($errors)) {
+        // Insertion des données dans la base de données
+        $sql = "INSERT INTO utilisateurs (prenom, nom, email, mot_de_passe, adresse_ligne1, adresse_ligne2, ville, code_postal, pays, telephone, carte_etudiant, role_utilisateur, numero_carte, nom_proprietaire, date_expiration, cvv, type_carte) 
+                VALUES ('$prenom', '$nom', '$email', '$password', '$adresse1', '$adresse2', '$ville', '$codePostal', '$pays', '$telephone', '$carteEtudiant', 'client', '$numeroCarte', '$nomProprietaire', '$dateExpiration', '$cvv', '$typeCarte')";
 
-    // Insertion des données dans la base de données
-    $sql = "INSERT INTO utilisateurs (prenom, nom, email, mot_de_passe, adresse_ligne1, adresse_ligne2, ville, code_postal, pays, telephone, carte_etudiant, role_utilisateur, numero_carte, nom_proprietaire, date_expiration, cvv, type_carte) 
-            VALUES ('$prenom', '$nom', '$email', '$passwordHashed', '$adresse1', '$adresse2', '$ville', '$codePostal', '$pays', '$telephone', '$carteEtudiant', 'client', '$numeroCarte', '$nomProprietaire', '$dateExpiration', '$cvv', '$typeCarte')";
-
-    if (mysqli_query($db_handle, $sql)) {
-        echo "<script>alert('Compte créé avec succès.'); window.location.href = 'connexion.html';</script>";
+        if (mysqli_query($db_handle, $sql)) {
+            echo "<script>alert('Compte créé avec succès.'); window.location.href = 'connexion.html';</script>";
+        } else {
+            echo "Erreur : " . $sql . "<br>" . mysqli_error($db_handle);
+        }
     } else {
-        echo "Erreur : " . $sql . "<br>" . mysqli_error($db_handle);
+        // Réinjecter les valeurs dans le formulaire et afficher les erreurs
+        echo '<script>';
+        echo 'alert("' . implode("\\n", $errors) . '");';
+        echo 'window.history.back();';
+        echo '</script>';
     }
 }
 
