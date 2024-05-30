@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en"> <!-- Ajouté la balise html manquante -->
 
 <head>
     <meta charset="UTF-8" />
@@ -52,14 +53,14 @@
             <div class="col-md-6">
                 <h1 class="display-4 text-center">Page Coach</h1>
                 <br><br>
-                <form action="connexionCoachAdmin.php" >
+                <form action="connexionCoachAdmin.php" method="POST"> <!-- Ajouté l'attribut method="POST" -->
                     <div class="form-group">
                         <label for="Email">Email</label>
-                        <input type="text" class="form-control" id="Email" placeholder="Entrez votre Email">
+                        <input type="text" class="form-control" id="Email" name="email" placeholder="Entrez votre Email"> <!-- Ajouté l'attribut name="email" -->
                     </div>
                     <div class="form-group">
                         <label for="password">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe"> <!-- Ajouté l'attribut name="password" -->
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary my-2 my-sm-0">Se connecter</button>
@@ -97,4 +98,4 @@
 
 </body>
 
-</html>
+</html
