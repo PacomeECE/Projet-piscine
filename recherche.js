@@ -1,9 +1,3 @@
-/* Sélection des éléments du DOM */
-let openBtn = document.getElementById("nav-open");
-let closeBtn = document.getElementById("nav-close");
-let navWrapper = document.getElementById("nav-wrapper");
-let navLatteral = document.getElementById("nav-latteral");
-
 /* Sélection de l'input de recherche */
 var searchInput = document.getElementById("search-input");
 
@@ -34,7 +28,7 @@ function performSearch() {
   } else if (query === "règles" || query === "regles" || query === "regle" || query === "regles" || query === "reglement" || query === "règlement" || query === "reglements" || query === "règlements"){
     targetFile = "regles.html" ;
   } else if (query === "nouveaux clients" || query === "nouveau client" || query === "nouveau" || query === "nouveaux" || query === "new"){
-    targetFile = "nouveauClient.html";
+    targetFile = "creerCompte.html";
   } else if (query === "salle" || query === "salles" || query ==="omnes" || query === "ece" || query === "inseec" || query === "supdepub" || query === "heip" ||query === "esce" || query === "ifg" || query === "ceds" || query === "supdecreation" || query === "crea" || query === "supcareer" || query === "univesity of monaco" || query === "eu business school" || query === "ebs" | query ==="cei" || query === "datascientist" || query === "eiffel"){
     targetFile = "salle.html";
   } else if (query === "Biking" || query === "Velo" || query === "Vélo" || query === "Velos" || query === "Vélos" || query === "Cyclisme"|| query === "Cycliste"|| query === "Leonardio diCarpaccio"|| query === "Leo diCarpaccio"|| query === "Leonardo"|| query === "Leo"|| query === "Coach Leo"){
