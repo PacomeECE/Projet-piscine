@@ -14,7 +14,7 @@
             color: yellow;
         }
     </style>
-    <title>SPORTIFY - Connexion</title>
+    <title>SPORTIFY - Créer un Compte</title>
 </head>
 
 <body>
@@ -46,27 +46,63 @@
             </div>
         </div>
     </nav>
-    <br><br><br><br><br>
+    <br>
     <div class="container mt-5 pt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h1 class="display-4 text-center">Page Client</h1>
+            <div class="col-md-8">
+                <h1 class="display-4 text-center">Créer un Compte</h1>
                 <br><br>
                 <form>
                     <div class="form-group">
-                        <label for="studentId">ID (Numero Carte etudiant)</label>
-                        <input type="text" class="form-control" id="studentId" placeholder="Entrez votre ID">
+                        <label for="fullName">Nom et Prénom</label>
+                        <input type="text" class="form-control" id="fullName" placeholder="Entrez votre nom et prénom">
+                    </div>
+                    <div class="form-group">
+                        <label for="address1">Adresse Ligne 1</label>
+                        <input type="text" class="form-control" id="address1" placeholder="Entrez votre adresse ligne 1">
+                    </div>
+                    <div class="form-group">
+                        <label for="address2">Adresse Ligne 2</label>
+                        <input type="text" class="form-control" id="address2" placeholder="Entrez votre adresse ligne 2 (facultatif)">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Ville</label>
+                        <input type="text" class="form-control" id="city" placeholder="Entrez votre ville">
+                    </div>
+                    <div class="form-group">
+                        <label for="postalCode">Code Postal</label>
+                        <input type="text" class="form-control" id="postalCode" placeholder="Entrez votre code postal">
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Pays</label>
+                        <input type="text" class="form-control" id="country" placeholder="Entrez votre pays">
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Numéro de téléphone</label>
+                        <input type="text" class="form-control" id="phoneNumber" placeholder="Entrez votre numéro de téléphone">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
+                    </div>
+                    <div class="form-group">
+                        <label for="studentCard">Carte Etudiante</label>
+                        <input type="text" class="form-control" id="studentCard" placeholder="Entrez votre numéro de carte étudiante">
                     </div>
                     <div class="form-group">
                         <label for="password">Mot de passe</label>
                         <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe">
                     </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmez le mot de passe</label>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmez votre mot de passe">
+                    </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary my-2 my-sm-0">Se connecter</button>
+                        <button type="submit" class="btn btn-primary my-2 my-sm-0">Créer un Compte</button>
                     </div>
                 </form>
                 <div class="text-center mt-3">
-                    <p>Je n'ai pas encore de compte chez vous. <a href="creerCompte.html" class="hover-link">Je souhaite m'en créer un</a></p>
+                    <p>J'ai déjà un compte. <a href="connexion.html" class="hover-link">Je souhaite me connecter</a></p>
                 </div>
             </div>
         </div>
