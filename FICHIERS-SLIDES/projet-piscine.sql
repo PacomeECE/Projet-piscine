@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 30 mai 2024 à 09:44
+-- Généré le : jeu. 30 mai 2024 à 11:47
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -37,7 +37,24 @@ CREATE TABLE IF NOT EXISTS `coachs` (
   `cv` text,
   PRIMARY KEY (`id_coach`),
   KEY `id_utilisateur` (`id_utilisateur`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `coachs`
+--
+
+INSERT INTO `coachs` (`id_coach`, `id_utilisateur`, `specialite`, `photo_url`, `video_url`, `cv`) VALUES
+(1, 1, 'Fitness', 'coach1.jpg', 'https://youtu.be/EKR3kZg6wck?si=LLk9X3yrei0id2VM', '<Coach>\r\n    <ID>1</ID>\r\n    <Nom>Fit</Nom>\r\n    <Prenom>Guy</Prenom>\r\n    <Specialite>Fitness</Specialite>\r\n    <Photo>coach1.jpg</Photo>\r\n    <Video>https://youtu.be/EKR3kZg6wck?si=LLk9X3yrei0id2VM</Video>\r\n    <Telephone>07 46 91 73 22</Telephone>\r\n    <Email>guy.fit@edu.ece.fr</Email>\r\n    <CV>Formation: Licence STAPS. Expériences: Coach personnel depuis 5 ans. Autres: Spécialisé en nutrition sportive.</CV>\r\n</Coach>'),
+(2, 2, 'Cardio-Training', 'coach2.jpeg', 'https://youtu.be/cJhMDf1UzD8?si=vNgclgB0CdG7pfzw', '<Coach>\r\n    <ID>2</ID>\r\n    <Nom>Detente</Nom>\r\n    <Prenom>Maxine</Prenom>\r\n    <Specialite>Cardio-Training</Specialite>\r\n    <Photo>coach2.jpeg</Photo>\r\n    <Video>https://youtu.be/cJhMDf1UzD8?si=vNgclgB0CdG7pfzw</Video>\r\n    <Telephone>07 46 91 73 23</Telephone>\r\n    <Email>maxine.detente@edu.ece.fr</Email>\r\n    <CV>Formation: Diplôme de professeur de yoga sportif. Expériences: Enseigne le Cardio-Training depuis 8 ans. Autres: Expert en méditation et relaxation.</CV>\r\n</Coach>'),
+(3, 3, 'Biking', 'coach3.jpg', 'None', '<Coach>\r\n    <ID>3</ID>\r\n    <Nom>Saroule</Nom>\r\n    <Prenom>Sylvain</Prenom>\r\n    <Specialite>Biking</Specialite>\r\n    <Photo>coach3.jpg</Photo>\r\n    <Video>None</Video>\r\n    <Telephone>07 46 91 73 24</Telephone>\r\n    <Email>sylvain.saroule@edu.ece.fr</Email>\r\n    <CV>Formation: Champion national de vélo d\'interieur. Expériences: Entraîneur de Biking depuis 10 ans. Autres: Spécialisé en préparation physique.</CV>\r\n</Coach>'),
+(4, 4, 'Cours Collectifs', 'coach4.jpg', 'None', '<Coach>\r\n    <ID>4</ID>\r\n    <Nom>Baha</Nom>\r\n    <Prenom>Angela</Prenom>\r\n    <Specialite>Cours Collectifs</Specialite>\r\n    <Photo>coach4.jpg</Photo>\r\n    <Video>None</Video>\r\n    <Telephone>07 46 91 73 25</Telephone>\r\n    <Email>angela.baha@edu.ece.fr</Email>\r\n    <CV>Formation: Instructrice certifiée Pilates. Expériences: Enseigne le Pilates depuis 7 ans. Autres: Spécialisée en rééducation posturale.</CV>\r\n</Coach>'),
+(5, 5, 'Musculation', 'coach5.jpeg', 'https://youtu.be/45l6bl8Uyr4?si=bqgYPtALl3NsEV3h', '<Coach>\r\n    <ID>5</ID>\r\n    <Nom>Matrixé</Nom>\r\n    <Prenom>Ilies</Prenom>\r\n    <Specialite>Musculation</Specialite>\r\n    <Photo>coach5.jpeg</Photo>\r\n    <Video>https://youtu.be/45l6bl8Uyr4?si=bqgYPtALl3NsEV3h</Video>\r\n    <Telephone>07 46 91 73 26</Telephone>\r\n    <Email>ilies.matrixe@edu.ece.fr</Email>\r\n    <CV>Formation: Diplôme en sciences du sport. Expériences: Entraîneur personnel depuis 12 ans. Autres: Spécialisé en hypertrophie musculaire.</CV>\r\n</Coach>'),
+(6, 6, 'Basketball', 'coach6.jpeg', 'https://youtu.be/3bxihqPKF08?si=7gbvOv2naC0KVgOA', '<Coach>\r\n    <ID>6</ID>\r\n    <Nom>Possible</Nom>\r\n    <Prenom>Kim</Prenom>\r\n    <Specialite>Basketball</Specialite>\r\n    <Photo>coach6.jpeg</Photo>\r\n    <Video>https://youtu.be/3bxihqPKF08?si=7gbvOv2naC0KVgOA</Video>\r\n    <Telephone>07 46 91 73 27</Telephone>\r\n    <Email>kim.possible@edu.ece.fr</Email>\r\n    <CV>Formation: Diplôme en éducation physique. Expériences: Entraîneur de basketball depuis 10 ans. Autres: Spécialisée en stratégie de jeu.</CV>\r\n</Coach>'),
+(7, 7, 'Football', 'coach7.jpeg', 'None', '<Coach>\r\n    <ID>7</ID>\r\n    <Nom>Legrand</Nom>\r\n    <Prenom>Zizou</Prenom>\r\n    <Specialite>Football</Specialite>\r\n    <Photo>coach7.jpeg</Photo>\r\n    <Video>None</Video>\r\n    <Telephone>07 46 91 73 28</Telephone>\r\n    <Email>zizou.legrand@edu.ece.fr</Email>\r\n    <CV>Formation: Licence en sciences du sport. Expériences: Entraîneur de football depuis 8 ans. Autres: Spécialisé en technique de jeu et fitness.</CV>\r\n</Coach>'),
+(8, 8, 'Rugby', 'coach8.jpg', 'None', '<Coach>\r\n    <ID>8</ID>\r\n    <Nom>Unfrigo</Nom>\r\n    <Prenom>Come</Prenom>\r\n    <Specialite>Rugby</Specialite>\r\n    <Photo>coach8.jpg</Photo>\r\n    <Video>None</Video>\r\n    <Telephone>07 46 91 73 29</Telephone>\r\n    <Email>come.unfrigo@edu.ece.fr</Email>\r\n    <CV>Formation: Champion national de rugby. Expériences: Entraîneur de rugby depuis 12 ans. Autres: Spécialisé en préparation physique.</CV>\r\n</Coach>'),
+(9, 9, 'Tennis', 'coach9.jpeg', 'None', '<Coach>\r\n    <ID>9</ID>\r\n    <Nom>Iguess</Nom>\r\n    <Prenom>Nina</Prenom>\r\n    <Specialite>Tennis</Specialite>\r\n    <Photo>coach9.jpeg</Photo>\r\n    <Video>None</Video>\r\n    <Telephone>07 46 91 73 30</Telephone>\r\n    <Email>nina.iguess@edu.ece.fr</Email>\r\n    <CV>Formation: Diplômée en tennis de compétition. Expériences: Entraîneur de tennis depuis 7 ans. Autres: Spécialisée en technique de jeu et stratégie.</CV>\r\n</Coach>'),
+(10, 10, 'Natation', 'coach10.jpeg', 'None', '<Coach>\r\n    <ID>10</ID>\r\n    <Nom>Laptitesirene</Nom>\r\n    <Prenom>Ariel</Prenom>\r\n    <Specialite>Natation</Specialite>\r\n    <Photo>coach10.jpeg</Photo>\r\n    <Video>None</Video>\r\n    <Telephone>07 46 91 73 31</Telephone>\r\n    <Email>ariel.laptitesirene@edu.ece.fr</Email>\r\n    <CV>Formation: Diplômée en natation sportive. Expériences: Entraîneur de natation depuis 5 ans. Autres: Spécialisée en endurance et technique de nage.</CV>\r\n</Coach>'),
+(11, 11, 'Plongeon', 'coach11.jpeg', 'None', '<Coach>\r\n    <ID>11</ID>\r\n    <Nom>Latetenba</Nom>\r\n    <Prenom>Nicolas</Prenom>\r\n    <Specialite>Plongeon</Specialite>\r\n    <Photo>coach11.jpeg</Photo>\r\n    <Video>None</Video>\r\n    <Telephone>07 46 91 73 32</Telephone>\r\n    <Email>nicolas.latetenba@edu.ece.fr</Email>\r\n    <CV>Formation: Champion national de plongeon. Expériences: Entraîneur de plongeon depuis 6 ans. Autres: Spécialisé en technique et acrobatie.</CV>\r\n</Coach>');
 
 -- --------------------------------------------------------
 
@@ -311,14 +328,31 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `carte_etudiant` varchar(9) DEFAULT NULL,
   `role_utilisateur` enum('admin','coach','client') DEFAULT NULL,
   `cree_a` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `type_carte` enum('Visa','MasterCard','American Express','PayPal') DEFAULT NULL,
   `numero_carte` varchar(16) DEFAULT NULL,
   `nom_proprietaire` varchar(100) DEFAULT NULL,
   `date_expiration` varchar(5) DEFAULT NULL,
   `cvv` varchar(4) DEFAULT NULL,
+  `type_carte` enum('Visa','MasterCard','American Express','PayPal') DEFAULT NULL,
   PRIMARY KEY (`id_utilisateur`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `utilisateurs`
+--
+
+INSERT INTO `utilisateurs` (`id_utilisateur`, `prenom`, `nom`, `email`, `mot_de_passe`, `adresse_ligne1`, `adresse_ligne2`, `ville`, `code_postal`, `pays`, `telephone`, `carte_etudiant`, `role_utilisateur`, `cree_a`, `numero_carte`, `nom_proprietaire`, `date_expiration`, `cvv`, `type_carte`) VALUES
+(1, 'Guy', 'Fit', 'guy.fit@edu.ece.fr', 'hashed_password1', '123 Fitness St.', 'Apt 1', 'Paris', '75001', 'France', '07 46 91 73 22', '123456789', 'coach', '2024-05-30 11:45:05', '1234567890123456', 'Guy Fit', '12/25', '123', 'Visa'),
+(2, 'Maxine', 'Detente', 'maxine.detente@edu.ece.fr', 'hashed_password2', '456 Cardio Blvd.', 'Suite 2', 'Lyon', '69001', 'France', '07 46 91 73 23', '987654321', 'coach', '2024-05-30 11:45:05', '2345678901234567', 'Maxine Detente', '11/24', '456', 'MasterCard'),
+(3, 'Sylvain', 'Saroule', 'sylvain.saroule@edu.ece.fr', 'hashed_password3', '789 Biking Way', '', 'Marseille', '13001', 'France', '07 46 91 73 24', '192837465', 'coach', '2024-05-30 11:45:05', '3456789012345678', 'Sylvain Saroule', '10/23', '789', 'American Express'),
+(4, 'Angela', 'Baha', 'angela.baha@edu.ece.fr', 'hashed_password4', '321 Collective Rd.', 'Floor 4', 'Toulouse', '31000', 'France', '07 46 91 73 25', '564738291', 'coach', '2024-05-30 11:45:05', '4567890123456789', 'Angela Baha', '09/22', '012', 'PayPal'),
+(5, 'Ilies', 'Matrixé', 'ilies.matrixe@edu.ece.fr', 'hashed_password5', '654 Muscle Ave.', 'Apt 5', 'Nice', '06000', 'France', '07 46 91 73 26', '918273645', 'coach', '2024-05-30 11:45:05', '5678901234567890', 'Ilies Matrixé', '08/21', '345', 'Visa'),
+(6, 'Kim', 'Possible', 'kim.possible@edu.ece.fr', 'hashed_password6', '987 Basket St.', '', 'Bordeaux', '33000', 'France', '07 46 91 73 27', '837465192', 'coach', '2024-05-30 11:45:05', '6789012345678901', 'Kim Possible', '07/20', '678', 'MasterCard'),
+(7, 'Zizou', 'Legrand', 'zizou.legrand@edu.ece.fr', 'hashed_password7', '159 Football Dr.', '', 'Lille', '59000', 'France', '07 46 91 73 28', '647382910', 'coach', '2024-05-30 11:45:05', '7890123456789012', 'Zizou Legrand', '06/19', '901', 'American Express'),
+(8, 'Come', 'Unfrigo', 'come.unfrigo@edu.ece.fr', 'hashed_password8', '753 Rugby Cir.', '', 'Strasbourg', '67000', 'France', '07 46 91 73 29', '564738291', 'coach', '2024-05-30 11:45:05', '8901234567890123', 'Come Unfrigo', '05/18', '234', 'PayPal'),
+(9, 'Nina', 'Iguess', 'nina.iguess@edu.ece.fr', 'hashed_password9', '951 Tennis Ln.', '', 'Montpellier', '34000', 'France', '07 46 91 73 30', '182736495', 'coach', '2024-05-30 11:45:05', '9012345678901234', 'Nina Iguess', '04/17', '567', 'Visa'),
+(10, 'Ariel', 'Laptitesirene', 'ariel.laptitesirene@edu.ece.fr', 'hashed_password10', '357 Swim Dr.', '', 'Rennes', '35000', 'France', '07 46 91 73 31', '293847561', 'coach', '2024-05-30 11:45:05', '0123456789012345', 'Ariel Laptitesirene', '03/16', '890', 'MasterCard'),
+(11, 'Nicolas', 'Latetenba', 'nicolas.latetenba@edu.ece.fr', 'hashed_password11', '468 Dive Blvd.', '', 'Reims', '51100', 'France', '07 46 91 73 32', '748392615', 'coach', '2024-05-30 11:45:05', '1234567890123456', 'Nicolas Latetenba', '02/15', '123', 'American Express');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
