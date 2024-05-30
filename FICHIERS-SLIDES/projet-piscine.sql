@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 29 mai 2024 à 10:28
+-- Généré le : jeu. 30 mai 2024 à 09:39
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -240,24 +240,6 @@ CREATE TABLE IF NOT EXISTS `disponibilites_coachs` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `messages`
---
-
-DROP TABLE IF EXISTS `messages`;
-CREATE TABLE IF NOT EXISTS `messages` (
-  `id_message` int NOT NULL AUTO_INCREMENT,
-  `id_expediteur` int DEFAULT NULL,
-  `id_destinataire` int DEFAULT NULL,
-  `texte_message` text,
-  `envoye_a` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_message`),
-  KEY `id_expediteur` (`id_expediteur`),
-  KEY `id_destinataire` (`id_destinataire`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `paiements`
 --
 
@@ -265,11 +247,6 @@ DROP TABLE IF EXISTS `paiements`;
 CREATE TABLE IF NOT EXISTS `paiements` (
   `id_paiement` int NOT NULL AUTO_INCREMENT,
   `id_client` int DEFAULT NULL,
-  `methode_paiement` enum('Visa','MasterCard','American Express','PayPal') DEFAULT NULL,
-  `numero_carte` varchar(20) DEFAULT NULL,
-  `nom_carte` varchar(100) DEFAULT NULL,
-  `expiration_carte` date DEFAULT NULL,
-  `code_securite_carte` varchar(4) DEFAULT NULL,
   `montant` decimal(10,2) DEFAULT NULL,
   `date_paiement` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_paiement`),
