@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 30 mai 2024 à 09:39
+-- Généré le : jeu. 30 mai 2024 à 09:44
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -311,6 +311,10 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `carte_etudiant` varchar(9) DEFAULT NULL,
   `role_utilisateur` enum('admin','coach','client') DEFAULT NULL,
   `cree_a` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `numero_carte` varchar(16) DEFAULT NULL,
+  `nom_proprietaire` varchar(100) DEFAULT NULL,
+  `date_expiration` varchar(5) DEFAULT NULL,
+  `cvv` varchar(4) DEFAULT NULL,
   PRIMARY KEY (`id_utilisateur`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
