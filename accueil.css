@@ -56,7 +56,6 @@ body {
 }
 
 .type {
-  padding-top: 100px; /* Adjust to ensure it's visible under the navbar */
   text-align: center;
   color: #5e42a6;
 }
@@ -179,4 +178,8 @@ h2 {
 
 .dropdown:hover .dropdown-menu {
   display: block;
+}
+
+main {
+    margin-top: 80px; 
 }
