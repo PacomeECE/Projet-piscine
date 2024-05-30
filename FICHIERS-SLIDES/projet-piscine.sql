@@ -311,6 +311,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `carte_etudiant` varchar(9) DEFAULT NULL,
   `role_utilisateur` enum('admin','coach','client') DEFAULT NULL,
   `cree_a` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `type_carte` enum('Visa','MasterCard','American Express','PayPal') DEFAULT NULL,
   `numero_carte` varchar(16) DEFAULT NULL,
   `nom_proprietaire` varchar(100) DEFAULT NULL,
   `date_expiration` varchar(5) DEFAULT NULL,
