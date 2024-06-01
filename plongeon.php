@@ -11,7 +11,7 @@ if (!$db_handle) {
 $sql = "SELECT c.jour_semaine, c.heure_debut, c.heure_fin
         FROM disponibilites_coachs dc
         JOIN creneaux c ON dc.id_creneau = c.id_creneau
-        WHERE dc.id_coach = 6 AND dc.disponible = 1
+        WHERE dc.id_coach = 11 AND dc.disponible = 1
         ORDER BY c.jour_semaine, c.heure_debut";
 
 $result = mysqli_query($db_handle, $sql);
