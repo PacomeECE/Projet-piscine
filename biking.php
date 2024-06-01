@@ -60,7 +60,7 @@ mysqli_close($db_handle);
         }
 
         .availability-table td.available {
-            background-color: #d4edda;
+            background-color: #f8f9fa;
             color: black;
         }
 
@@ -69,7 +69,7 @@ mysqli_close($db_handle);
         }
 
         .badge {
-            background-color: #d4edda;
+            background-color: #9fb7ff;
             color: black;
             padding: 5px 10px;
             border-radius: 5px;

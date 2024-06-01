@@ -26,10 +26,32 @@ if ($result) {
 }
 
 mysqli_close($db_handle);
+
+function regrouperCreneaux($creneauxJour) {
+    $regroupes = [];
+    $debut = null;
+    $fin = null;
+    foreach ($creneauxJour as $creneau) {
+        if ($debut === null) {
+            $debut = $creneau['heure_debut'];
+            $fin = $creneau['heure_fin'];
+        } elseif ($creneau['heure_debut'] === $fin) {
+            $fin = $creneau['heure_fin'];
+        } else {
+            $regroupes[] = ['heure_debut' => $debut, 'heure_fin' => $fin];
+            $debut = $creneau['heure_debut'];
+            $fin = $creneau['heure_fin'];
+        }
+    }
+    if ($debut !== null) {
+        $regroupes[] = ['heure_debut' => $debut, 'heure_fin' => $fin];
+    }
+    return $regroupes;
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8" />
@@ -43,10 +65,13 @@ mysqli_close($db_handle);
     <style>
         .availability-table {
             margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
         }
 
         .availability-table th, .availability-table td {
-            vertical-align: middle;
+            border: 1px solid #ddd;
+            padding: 8px;
             text-align: center;
         }
 
@@ -64,26 +89,23 @@ mysqli_close($db_handle);
         }
 
         .availability-table td.unavailable {
-            background-color: #f8d7da;
+            background-color: #96bbfe;
         }
 
         .badge {
-            background-color: #d4edda;
-            color: black;
+            background-color: #96bbfe;
+            color: white;
             padding: 5px 10px;
             border-radius: 5px;
             display: inline-block;
             margin-bottom: 5px;
         }
 
-        .badge.unavailable {
-            background-color: #f8d7da;
-        }
-
         .coach-profile {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
         .coach-info {
@@ -93,6 +115,32 @@ mysqli_close($db_handle);
         .coach-info img {
             border-radius: 8px;
             margin-bottom: 20px;
+        }
+
+        .day-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .creneau-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .creneau-list .badge {
+            background-color: #007bff;
+            color: white;
         }
     </style>
 </head>
@@ -152,11 +200,11 @@ mysqli_close($db_handle);
                         </div>
 
                         <!-- Tableau des disponibilités -->
-                        <table class="table table-bordered mt-3 availability-table">
+                        <table class="availability-table mt-4">
                             <thead>
                                 <tr>
                                     <th>Jour</th>
-                                    <th>Créneaux Disponibles</th>
+                                    <th>Disponibilité</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -170,7 +218,8 @@ mysqli_close($db_handle);
                                         echo "<td>" . htmlspecialchars($jour) . "</td>";
                                         echo "<td>";
                                         if (isset($creneaux[$jour])) {
-                                            foreach ($creneaux[$jour] as $creneau) {
+                                            $creneaux_regroupes = regrouperCreneaux($creneaux[$jour]);
+                                            foreach ($creneaux_regroupes as $creneau) {
                                                 echo "<div class='badge'>" . htmlspecialchars($creneau['heure_debut']) . " - " . htmlspecialchars($creneau['heure_fin']) . "</div> ";
                                             }
                                         } else {
@@ -185,8 +234,8 @@ mysqli_close($db_handle);
                         </table>
 
                         <div class="buttons mt-3 text-center">
-                            <button class="btn btn-success mr-2">Prendre un RDV</button>
-                            <button class="btn btn-info mr-2">Communiquer avec le coach</button>
+                            <a href="prendreRdv.php" class="btn btn-success mr-2">Prendre un RDV</a>
+                            <a href="contact.php" class="btn btn-info mr-2">Communiquer avec le coach</a>
                         </div>
                     </div>
                 </div>

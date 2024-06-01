@@ -183,5 +183,92 @@ main {
 }
 
 .buttons .btn {
+    background-color: #5e42a6;
+    color: white;
     margin: 5px;
+}
+
+.buttons .btn:hover {
+    background-color: #ffd700;
+    color: black;
+}
+
+.availability-table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.availability-table th, .availability-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.availability-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.availability-table td {
+    background-color: #f8f9fa;
+}
+
+.availability-table td.available {
+    background-color: #d4edda;
+}
+
+.availability-table td.unavailable {
+    background-color: #f8d7da;
+}
+
+.badge {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.coach-profile {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.coach-info {
+    padding: 20px;
+}
+
+.coach-info img {
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.day-header {
+    font-weight: bold;
+    font-size: 1.2em;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.creneau-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.creneau-list .badge {
+    background-color: #007bff;
+    color: white;
 }
