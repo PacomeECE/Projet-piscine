@@ -48,7 +48,7 @@ echo '<body>
                     Tout Parcourir
                 </div>
             </a>
-            <a href="rdv.html">
+            <a href="rdv.php">
                 <div class="nav-link">
                     <ion-icon name="time"></ion-icon>
                     Rendez-Vous
