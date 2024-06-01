@@ -9,33 +9,30 @@ if (!$db_handle) {
     die("Échec de la connexion à la base de données : " . mysqli_connect_error());
 }
 
-// Variables d'erreur
-$error_message = "";
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_email'])) {
+    header("Location: connexion.php");
+    exit();
+}
 
-// Traitement de la connexion
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+$user_id = $_SESSION['user_id'];
 
-    // Vérifier les informations de connexion
-    $sql = "SELECT id_utilisateur, nom, prenom FROM utilisateurs WHERE email = '$email' AND mot_de_passe = '$password'";
-    $result = mysqli_query($db_handle, $sql);
-
-    if ($result) {
-        if (mysqli_num_rows($result) == 1) {
-            $user = mysqli_fetch_assoc($result);
-            $_SESSION['user_email'] = $email;
-            $_SESSION['user_id'] = $user['id_utilisateur']; // Ajout de l'ID utilisateur
-            $_SESSION['user_nom'] = $user['nom'];
-            $_SESSION['user_prenom'] = $user['prenom'];
-            header("Location: prendreRdv.php");
-            exit();
-        } else {
-            $error_message = "Email ou mot de passe incorrect.";
-        }
-    } else {
-        $error_message = "Erreur dans la requête SQL : " . mysqli_error($db_handle);
+// Récupérer les rendez-vous de l'utilisateur connecté
+$sql = "SELECT r.id_rdv, u.nom AS coach_nom, u.prenom AS coach_prenom, c.heure_debut, c.heure_fin, c.jour_semaine
+        FROM rendezvous r
+        JOIN coachs co ON r.id_coach = co.id_coach
+        JOIN utilisateurs u ON co.id_coach = u.id_utilisateur
+        JOIN creneaux c ON r.id_creneau = c.id_creneau
+        WHERE r.id_client = $user_id
+        ORDER BY c.jour_semaine, c.heure_debut";
+$result = mysqli_query($db_handle, $sql);
+$rendezvous = [];
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rendezvous[] = $row;
     }
+} else {
+    die("Erreur dans la requête SQL : " . mysqli_error($db_handle));
 }
 
 mysqli_close($db_handle);
@@ -52,7 +49,7 @@ mysqli_close($db_handle);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="image/png" href="images/logo.png" />
     <link rel="stylesheet" href="sports.css" />
-    <title>Connexion</title>
+    <title>Vos Rendez-Vous</title>
 </head>
 
 <body>
@@ -84,25 +81,35 @@ mysqli_close($db_handle);
             </form>
         </div>
     </nav>
-    
+
     <div class="container mt-5 pt-5">
-        <h2 class="text-center">Connexion</h2>
-        <?php if ($error_message) { ?>
-            <div class="alert alert-danger"><?php echo htmlspecialchars($error_message); ?></div>
+        <h2 class="text-center">Vos Rendez-Vous</h2>
+        <?php if (!empty($rendezvous)) { ?>
+            <table class="table table-bordered mt-4">
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Heure Début</th>
+                        <th>Heure Fin</th>
+                        <th>Coach</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($rendezvous as $rdv) { ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($rdv['jour_semaine']); ?></td>
+                            <td><?php echo htmlspecialchars($rdv['heure_debut']); ?></td>
+                            <td><?php echo htmlspecialchars($rdv['heure_fin']); ?></td>
+                            <td><?php echo htmlspecialchars($rdv['coach_prenom'] . " " . $rdv['coach_nom']); ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        <?php } else { ?>
+            <p>Aucun rendez-vous trouvé.</p>
         <?php } ?>
-        <form method="POST" action="connexion.php">
-            <div class="form-group">
-                <label for="email">Email :</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Mot de passe :</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" name="login" class="btn btn-primary">Connexion</button>
-        </form>
     </div>
-    
+
     <footer class="footer text-center py-4">
         <div class="container">
             <p>Contactez-nous :</p>

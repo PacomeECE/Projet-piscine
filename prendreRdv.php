@@ -13,43 +13,23 @@ if (!$db_handle) {
 $error_message = "";
 $success_message = "";
 
-// Traitement de la connexion
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    // Vérifier les informations de connexion
-    $sql = "SELECT id_utilisateur, nom, prenom FROM utilisateurs WHERE email = '$email' AND mot_de_passe = '$password'";
-    $result = mysqli_query($db_handle, $sql);
-
-    if ($result) {
-        if (mysqli_num_rows($result) == 1) {
-            $user = mysqli_fetch_assoc($result);
-            $_SESSION['user_email'] = $email;
-            $_SESSION['user_id'] = $user['id_utilisateur'];
-            $_SESSION['user_nom'] = $user['nom'];
-            $_SESSION['user_prenom'] = $user['prenom'];
-        } else {
-            $error_message = "Email ou mot de passe incorrect.";
-        }
-    } else {
-        $error_message = "Erreur dans la requête SQL : " . mysqli_error($db_handle);
-    }
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_email'])) {
+    header("Location: connexion.php");
+    exit();
 }
 
 // Traitement de la déconnexion
 if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
-    header("Location: prendreRdv.php");
-    exit();
-}
-
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['user_email'])) {
     header("Location: connexion.php");
     exit();
 }
+
+// Vérification de la session
+$user_id = $_SESSION['user_id'];
+echo "<p>DEBUG: Utilisateur connecté - ID: " . $user_id . ", Nom: " . $_SESSION['user_nom'] . ", Prénom: " . $_SESSION['user_prenom'] . "</p>";
 
 // Récupérer les coachs disponibles en joignant les tables coachs et utilisateurs
 $sql = "SELECT c.id_coach, u.nom, u.prenom 
@@ -96,12 +76,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['reserver'])) {
 
     foreach ($selected_creneaux as $creneau_id) {
         $creneau_id = intval($creneau_id); // Assurez-vous que l'ID du créneau est un entier
-        $sql = "INSERT INTO rendezvous (id_client, id_coach, id_creneau, date_rdv, cree_a) VALUES ($client_id, $selected_coach_id, $creneau_id, '$selected_day', '$date_creation')";
+        $sql = "INSERT INTO rendezvous (id_client, id_coach, id_creneau, cree_a) VALUES ($client_id, $selected_coach_id, $creneau_id, '$date_creation')";
+        echo "<p>DEBUG: $sql</p>"; // Instruction de débogage
         if (!mysqli_query($db_handle, $sql)) {
             $error_message = "Erreur dans l'insertion : " . mysqli_error($db_handle);
+            break; // Arrêtez l'insertion si une erreur se produit
         } else {
             $success_message = "Rendez-vous pris avec succès !";
         }
+    }
+
+    if ($success_message) {
+        header("Location: rdv.php");
+        exit();
     }
 }
 
