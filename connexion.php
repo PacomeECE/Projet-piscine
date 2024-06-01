@@ -29,8 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             $_SESSION['user_nom'] = $user['nom'];
             $_SESSION['user_prenom'] = $user['prenom'];
             $_SESSION['role_utilisateur'] = $user['role_utilisateur'];
-            $_SESSION['carte_etudiante'] = $user['carte_etudiante'];
-
+            $_SESSION['carte_etudiante'] = $user['carte_etudiant'];
 
             // Si l'utilisateur est un coach, récupérer les informations supplémentaires
             if ($user['role_utilisateur'] == 'coach') {

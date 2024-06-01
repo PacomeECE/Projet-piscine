@@ -24,6 +24,8 @@ $user_nom = $_SESSION['user_nom'];
 $user_prenom = $_SESSION['user_prenom'];
 $user_email = $_SESSION['user_email'];
 $role = $_SESSION['role_utilisateur'];
+$carte_etudiante = $_SESSION['carte_etudiant'];
+
 
 // Définir les variables pour les informations supplémentaires
 $adresse_ligne1 = "";
@@ -32,7 +34,11 @@ $ville = "";
 $code_postal = "";
 $pays = "";
 $telephone = "";
-$carte_etudiante = "";
+$numero_carte = "";
+$nom_proprietaire = "";
+$date_expiration = "";
+$cvv = "";
+$type_carte = "";
 
 // Récupérer les informations supplémentaires de la table utilisateurs
 $sql = "SELECT * FROM utilisateurs WHERE id_utilisateur = $user_id";
@@ -45,17 +51,25 @@ if ($result) {
     $code_postal = $user['code_postal'];
     $pays = $user['pays'];
     $telephone = $user['telephone'];
-    $carte_etudiante = isset($user['carte_etudiante']) ? $user['carte_etudiante'] : '';
+    $numero_carte = $user['numero_carte'];
+    $nom_proprietaire = $user['nom_proprietaire'];
+    $date_expiration = $user['date_expiration'];
+    $cvv = $user['cvv'];
+    $type_carte = $user['type_carte'];
 }
 
 // Récupérer l'historique des paiements pour le client
 $historique_paiements = [];
+$abonnement = false;
 if ($role == 'client') {
     $sql_paiements = "SELECT * FROM paiements WHERE id_client = $user_id ORDER BY date_paiement DESC";
     $result_paiements = mysqli_query($db_handle, $sql_paiements);
     if ($result_paiements) {
         while ($row = mysqli_fetch_assoc($result_paiements)) {
             $historique_paiements[] = $row;
+            if ($row['nom'] == 'abonnement') {
+                $abonnement = true;
+            }
         }
     }
 }
@@ -76,18 +90,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_coach'])) {
     $code_postal = $_POST['code_postal'];
     $pays = $_POST['pays'];
     $telephone = $_POST['telephone'];
-    
+
     // Insérer dans la table utilisateurs
     $sql_user = "INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe, role_utilisateur, adresse_ligne1, adresse_ligne2, ville, code_postal, pays, telephone) 
                  VALUES ('$coach_nom', '$coach_prenom', '$coach_email', '$coach_mot_de_passe', 'coach', '$adresse_ligne1', '$adresse_ligne2', '$ville', '$code_postal', '$pays', '$telephone')";
-    
+
     if (mysqli_query($db_handle, $sql_user)) {
         $coach_id = mysqli_insert_id($db_handle); // Récupérer l'ID utilisateur du nouveau coach
 
         // Insérer dans la table coachs
         $sql_coach = "INSERT INTO coachs (id_utilisateur, specialite, photo_url, video_url, cv) 
                       VALUES ($coach_id, '$coach_specialite', '$coach_photo_url', '$coach_video_url', '$coach_cv')";
-        
+
         if (!mysqli_query($db_handle, $sql_coach)) {
             $error_message = "Erreur dans l'ajout de coach (table coachs) : " . mysqli_error($db_handle);
         }
@@ -159,6 +173,10 @@ mysqli_close($db_handle);
         .hidden-form {
             display: none;
         }
+        .info-discrete {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 
@@ -195,7 +213,7 @@ mysqli_close($db_handle);
     <div class="container mt-5 pt-5">
         <div class="mb-4">
             <span>Connecté en tant que <?php echo htmlspecialchars($user_prenom . " " . $user_nom); ?></span>
-            <form method="POST" action="compte.php" class="d-inline">
+            <form method="POST" action="connexion.php" class="d-inline">
                 <button type="submit" name="logout" class="btn btn-link">Déconnexion</button>
             </form>
         </div>
@@ -342,12 +360,19 @@ mysqli_close($db_handle);
             <p><strong>Adresse:</strong> <?php echo htmlspecialchars($adresse_ligne1 . ' ' . $adresse_ligne2 . ', ' . $ville . ', ' . $code_postal . ', ' . $pays); ?></p>
             <p><strong>Carte Étudiante:</strong> <?php echo htmlspecialchars($carte_etudiante); ?></p>
 
+            <h4>Informations de paiement</h4>
+            <p class="info-discrete"><strong>Numéro de carte:</strong> <?php echo htmlspecialchars($numero_carte); ?></p>
+            <p class="info-discrete"><strong>Nom du propriétaire:</strong> <?php echo htmlspecialchars($nom_proprietaire); ?></p>
+            <p class="info-discrete"><strong>Date d'expiration:</strong> <?php echo htmlspecialchars($date_expiration); ?></p>
+            <p class="info-discrete"><strong>CVV:</strong> <?php echo htmlspecialchars($cvv); ?></p>
+            <p class="info-discrete"><strong>Type de carte:</strong> <?php echo htmlspecialchars($type_carte); ?></p>
+
             <h4>Vos rendez-vous</h4>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Coach</th>
-                        <th>Jour</</th>
+                        <th>Jour</th>
                         <th>Heure Début</th>
                         <th>Heure Fin</th>
                         <th>Action</th>
@@ -361,7 +386,7 @@ mysqli_close($db_handle);
                             <td><?php echo htmlspecialchars($rdv['heure_debut']); ?></td>
                             <td><?php echo htmlspecialchars($rdv['heure_fin']); ?></td>
                             <td>
-                                <form method="POST" action="rdv.php" class="d-inline">
+                                <form method="POST" action="rdv.php">
                                     <input type="hidden" name="rdv_id" value="<?php echo $rdv['id_rdv']; ?>">
                                     <button type="submit" name="delete_rdv" class="btn btn-danger btn-sm">Supprimer</button>
                                 </form>
@@ -372,24 +397,33 @@ mysqli_close($db_handle);
             </table>
 
             <h4>Historique des paiements</h4>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID Paiement</th>
-                        <th>Montant</th>
-                        <th>Date de Paiement</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($historique_paiements as $paiement) { ?>
+            <?php if (empty($historique_paiements)) { ?>
+                <p>Aucun paiement trouvé.</p>
+            <?php } else { ?>
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td><?php echo htmlspecialchars($paiement['id_paiement']); ?></td>
-                            <td><?php echo htmlspecialchars($paiement['montant']); ?></td>
-                            <td><?php echo htmlspecialchars($paiement['date_paiement']); ?></td>
+                            <th>ID Paiement</th>
+                            <th>Montant</th>
+                            <th>Date de Paiement</th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($historique_paiements as $paiement) { ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($paiement['id_paiement']); ?></td>
+                                <td><?php echo htmlspecialchars($paiement['montant']); ?></td>
+                                <td><?php echo htmlspecialchars($paiement['date_paiement']); ?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            <?php } ?>
+
+            <?php if (!$abonnement) { ?>
+                <p>Vous n'avez pas encore souscrit à un abonnement.</p>
+                <a href="abonnement.php" class="btn btn-primary">Souscrire à un abonnement</a>
+            <?php } ?>
 
         <?php } ?>
     </div>
@@ -417,12 +451,6 @@ mysqli_close($db_handle);
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Afficher le formulaire d'ajout de coach
-        function showAddCoachForm() {
-            document.getElementById('addCoachForm').style.display = 'block';
-        }
-    </script>
 </body>
 
 </html>
