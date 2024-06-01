@@ -61,7 +61,7 @@ function regrouperCreneaux($creneauxJour) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="image/png" href="images/logo.png" />
     <link rel="stylesheet" href="sports.css" />
-    <title>SPORTIFY - Basketball</title>
+    <title>SPORTIFY - Cours collectifs</title>
     <style>
         .availability-table {
             margin-top: 20px;
@@ -179,23 +179,20 @@ function regrouperCreneaux($creneauxJour) {
         <div class="coach-profile mt-5">
             <div class="card">
                 <div class="card-header text-center">
-                    <h1>Basketball</h1>
+                    <h1>Cours collectifs</h1>
                 </div>
                 <div class="card-body">
                     <div class="coach-info">
-                        <h3>Kim Possible - Coach, Basketball</h3>
+                    <h3>Angela Baha - Coach, Cours Collectifs</h3>
                         <div class="row">
                             <div class="col-md-4 text-center">
-                                <img src="images/coach6.jpeg" alt="Kim Possible" class="img-fluid">
+                                <img src="images/coach4.jpg" alt="Angela Baha" class="img-fluid">
                             </div>
                             <div class="col-md-8">
-                                <p><strong>Salle:</strong> G-010</p>
-                                <p><strong>Téléphone:</strong> 07 46 91 73 27</p>
-                                <p><strong>Email:</strong> <a href="mailto:kim.possible@edu.ece.fr">kim.possible@edu.ece.fr</a></p>
-                                <p><strong>CV:</strong> Formation: Diplôme en éducation physique. Expériences: Entraîneur de basketball depuis 10 ans. Autres: Spécialisée en stratégie de jeu.</p>
-                                <div class="embed-responsive embed-responsive-16by9 mt-3">
-                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/3bxihqPKF08?si=7gbvOv2naC0KVgOA" allowfullscreen></iframe>
-                                </div>
+                                <p><strong>Salle:</strong> EM318</p>
+                                <p><strong>Téléphone:</strong> 07 46 91 73 25</p>
+                                <p><strong>Email:</strong> <a href="mailto:angela.baha@edu.ece.fr">angela.baha@edu.ece.fr</a></p>
+                                <p><strong>CV:</strong> Formation: Instructrice certifiée Pilates. Expériences: Enseigne le Pilates depuis 7 ans. Autres: Spécialisée en rééducation posturale.</p>
                             </div>
                         </div>
 

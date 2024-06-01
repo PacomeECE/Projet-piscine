@@ -7,11 +7,11 @@ if (!$db_handle) {
     die("Échec de la connexion à la base de données : " . mysqli_connect_error());
 }
 
-// Récupérer les créneaux disponibles pour le coach Sylvain Saroule (id_coach = 3)
+// Récupérer les créneaux disponibles pour le coach Kim Possible (id_coach = 6)
 $sql = "SELECT c.jour_semaine, c.heure_debut, c.heure_fin
         FROM disponibilites_coachs dc
         JOIN creneaux c ON dc.id_creneau = c.id_creneau
-        WHERE dc.id_coach = 3 AND dc.disponible = 1
+        WHERE dc.id_coach = 6 AND dc.disponible = 1
         ORDER BY c.jour_semaine, c.heure_debut";
 
 $result = mysqli_query($db_handle, $sql);
@@ -26,6 +26,28 @@ if ($result) {
 }
 
 mysqli_close($db_handle);
+
+function regrouperCreneaux($creneauxJour) {
+    $regroupes = [];
+    $debut = null;
+    $fin = null;
+    foreach ($creneauxJour as $creneau) {
+        if ($debut === null) {
+            $debut = $creneau['heure_debut'];
+            $fin = $creneau['heure_fin'];
+        } elseif ($creneau['heure_debut'] === $fin) {
+            $fin = $creneau['heure_fin'];
+        } else {
+            $regroupes[] = ['heure_debut' => $debut, 'heure_fin' => $fin];
+            $debut = $creneau['heure_debut'];
+            $fin = $creneau['heure_fin'];
+        }
+    }
+    if ($debut !== null) {
+        $regroupes[] = ['heure_debut' => $debut, 'heure_fin' => $fin];
+    }
+    return $regroupes;
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,10 +65,13 @@ mysqli_close($db_handle);
     <style>
         .availability-table {
             margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
         }
 
         .availability-table th, .availability-table td {
-            vertical-align: middle;
+            border: 1px solid #ddd;
+            padding: 8px;
             text-align: center;
         }
 
@@ -60,31 +85,27 @@ mysqli_close($db_handle);
         }
 
         .availability-table td.available {
-            background-color: #f8f9fa;
-            color: black;
+            background-color: #d4edda;
         }
 
         .availability-table td.unavailable {
-            background-color: #f8d7da;
+            background-color: #96bbfe;
         }
 
         .badge {
-            background-color: #9fb7ff;
-            color: black;
+            background-color: #96bbfe;
+            color: white;
             padding: 5px 10px;
             border-radius: 5px;
             display: inline-block;
             margin-bottom: 5px;
         }
 
-        .badge.unavailable {
-            background-color: #f8d7da;
-        }
-
         .coach-profile {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
         .coach-info {
@@ -104,12 +125,22 @@ mysqli_close($db_handle);
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 10px;
+            text-align: left;
         }
 
         .creneau-list {
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .creneau-list .badge {
+            background-color: #007bff;
+            color: white;
         }
     </style>
 </head>
@@ -155,7 +186,7 @@ mysqli_close($db_handle);
                         <h3>Sylvain Saroule - Coach, Biking</h3>
                         <div class="row">
                             <div class="col-md-4 text-center">
-                                <img src="images/coach3.jpg" alt="Sylvain Saroule" class="img-fluid">
+                                <img src="images/coach3.jpeg" alt="Sylvain Saroule" class="img-fluid">
                             </div>
                             <div class="col-md-8">
                                 <p><strong>Salle:</strong> EM010</p>
@@ -163,34 +194,46 @@ mysqli_close($db_handle);
                                 <p><strong>Email:</strong> <a href="mailto:sylvain.saroule@edu.ece.fr">sylvain.saroule@edu.ece.fr</a></p>
                                 <p><strong>CV:</strong> Formation: Champion national de vélo d'intérieur. Expériences: Entraîneur de Biking depuis 10 ans. Autres: Spécialisé en préparation physique.</p>
                             </div>
+                            </div>
                         </div>
 
                         <!-- Tableau des disponibilités -->
-                        <div class="availability-table mt-4">
-                            <?php
-                            if (isset($error_message)) {
-                                echo "<p>" . htmlspecialchars($error_message) . "</p>";
-                            } else {
-                                $jours = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
-                                foreach ($jours as $jour) {
-                                    echo "<div class='day-header'>" . htmlspecialchars($jour) . "</div>";
-                                    echo "<div class='creneau-list'>";
-                                    if (isset($creneaux[$jour])) {
-                                        foreach ($creneaux[$jour] as $creneau) {
-                                            echo "<div class='badge'>" . htmlspecialchars($creneau['heure_debut']) . " - " . htmlspecialchars($creneau['heure_fin']) . "</div>";
+                        <table class="availability-table mt-4">
+                            <thead>
+                                <tr>
+                                    <th>Jour</th>
+                                    <th>Disponibilité</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (isset($error_message)) {
+                                    echo "<tr><td colspan='2'>" . htmlspecialchars($error_message) . "</td></tr>";
+                                } else {
+                                    $jours = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+                                    foreach ($jours as $jour) {
+                                        echo "<tr>";
+                                        echo "<td>" . htmlspecialchars($jour) . "</td>";
+                                        echo "<td>";
+                                        if (isset($creneaux[$jour])) {
+                                            $creneaux_regroupes = regrouperCreneaux($creneaux[$jour]);
+                                            foreach ($creneaux_regroupes as $creneau) {
+                                                echo "<div class='badge'>" . htmlspecialchars($creneau['heure_debut']) . " - " . htmlspecialchars($creneau['heure_fin']) . "</div> ";
+                                            }
+                                        } else {
+                                            echo "<div class='badge unavailable'>Aucun créneau disponible</div>";
                                         }
-                                    } else {
-                                        echo "<div class='badge unavailable'>Aucun créneau disponible</div>";
+                                        echo "</td>";
+                                        echo "</tr>";
                                     }
-                                    echo "</div>";
                                 }
-                            }
-                            ?>
-                        </div>
+                                ?>
+                            </tbody>
+                        </table>
 
                         <div class="buttons mt-3 text-center">
-                            <button class="btn btn-success mr-2">Prendre un RDV</button>
-                            <button class="btn btn-info mr-2">Communiquer avec le coach</button>
+                            <a href="prendreRdv.php" class="btn btn-success mr-2">Prendre un RDV</a>
+                            <a href="contact.php" class="btn btn-info mr-2">Communiquer avec le coach</a>
                         </div>
                     </div>
                 </div>
@@ -219,6 +262,7 @@ mysqli_close($db_handle);
             </iframe>
         </div>
     </footer>
+    <script src="recherche.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
