@@ -33,7 +33,7 @@ function performSearch() {
     targetFile = "salle.html";
   } else if (query === "biking" || query === "velo" || query === "vélo" || query === "velos" || query === "vélos" || query === "cyclisme" || query === "cycliste" || query === "sylvain saroule" || query === "saroule" || query === "sylvain" || query === "pédaler" || query === "coach sylvain" || query === "bicyclette" || query === "vtt" || query === "course") {
     targetFile = "biking.php";
-  } else if (query === "cardio-training" || query === "cardio" || query === "training" || query === "maxime détente" || query === "maxime" || query === "coach maxime" || query === "détente" || query === "coach détente" || query === "endurance" || query === "exercice" || query === "activité physique") {
+  } else if (query === "cardio-training" || query === "cardio" || query === "training" || query === "maxine détente" || query === "maxine" || query === "coach maxine" || query === "détente" || query === "coach détente" || query === "endurance" || query === "exercice" || query === "activité physique") {
     targetFile = "cardio.php";
   } else if (query === "cours collectif" || query === "collectif" || query === "angela baha" || query === "angela" || query === "baha" || query === "coach angela" || query === "coach baha" || query === "classe" || query === "cours en groupe" || query === "séance collective") {
     targetFile = "coursCo.php";

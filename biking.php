@@ -230,10 +230,17 @@ function regrouperCreneaux($creneauxJour) {
                                 ?>
                             </tbody>
                         </table>
-
                         <div class="buttons mt-3 text-center">
                             <a href="prendreRdv.php" class="btn btn-success mr-2">Prendre un RDV</a>
-                            <a href="contact.php" class="btn btn-info mr-2">Communiquer avec le coach</a>
+                        </div>
+                        <form id="form-email" action="mailto:sylvain.saroule@edu.ece.fr" method="post" enctype="text/plain">
+                        <div class="form-group">
+                            <div class="label-container">
+                                <label for="message">Contacter le Coach :</label>
+                            </div>
+                            <textarea id="Demande du client" class="form-control" rows="5" required placeholder="Écrivez votre message ici." name="Demande du client"></textarea></div>
+                                <button type="submit" class="btn btn-info">Envoyer</button>
+                        </form>
                         </div>
                     </div>
                 </div>
