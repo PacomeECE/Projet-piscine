@@ -17,42 +17,42 @@ function performSearch() {
   var query = searchInput.value.toLowerCase();
   var targetFile = "";
 
-  if (query === "coach" || query === "coachs" || query === "personnel" || query === "liste" || query === "coachs spotifs" || query === "coach sportif") {
+  if (query === "coach" || query === "coachs" || query === "personnel" || query === "liste" || query === "coachs sportifs" || query === "coach sportif") {
     targetFile = "personnel.html";
   } else if (query === "accueil" || query ==="acueil"  || query ==="accueils"  || query === "actualite" || query ==="actualites" ||query ==="actualité"   || query ==="actualités"){
     targetFile = "accueil.html";
   } else if (query === "alimentation" || query === "bouffe" || query === "nutrition" || query === "graill" || query === "manger" || query === "à table" || query === "nourriture"){
     targetFile = "alimentation.html";
-  } else if (query === "horaires" || query === "horaire" || query === "ouverture" || query === "heures" || query === "dates" || query === "date" || query === "heure" || query === "heures d'ouverture" || query === "heure d'ouverture"){
-    targetFile = "horaires.html";
+  } else if (query === "horaires" || query === "horaire" || query === "ouverture" || query === "heures" || query === "regles" || query === "reglement" || query === "heure" || query === "heures d'ouverture" || query === "heure d'ouverture"){
+    targetFile = "regles.html";
   } else if (query === "règles" || query === "regles" || query === "regle" || query === "regles" || query === "reglement" || query === "règlement" || query === "reglements" || query === "règlements"){
     targetFile = "regles.html" ;
-  } else if (query === "nouveaux clients" || query === "nouveau client" || query === "nouveau" || query === "nouveaux" || query === "new"){
+  } else if (query === "nouveaux clients" || query === "nouveau client" || query === "nouveau" || query === "nouveaux" || query === "new" || query === "inscription" || query === "s'inscrire"){
     targetFile = "creerCompte.html";
-  } else if (query === "salle" || query === "salles" || query ==="omnes" || query === "ece" || query === "inseec" || query === "supdepub" || query === "heip" ||query === "esce" || query === "ifg" || query === "ceds" || query === "supdecreation" || query === "crea" || query === "supcareer" || query === "univesity of monaco" || query === "eu business school" || query === "ebs" | query ==="cei" || query === "datascientist" || query === "eiffel"){
+  } else if (query === "salle" || query === "salles" || query ==="omnes" || query === "ece" || query ==="équipement" || query ==="équipements" || query === "eiffel"){
     targetFile = "salle.html";
-  } else if (query === "Biking" || query === "Velo" || query === "Vélo" || query === "Velos" || query === "Vélos" || query === "Cyclisme"|| query === "Cycliste"|| query === "Leonardio diCarpaccio"|| query === "Leo diCarpaccio"|| query === "Leonardo"|| query === "Leo"|| query === "Coach Leo"){
-    targetFile = "biking.html";
-  } else if (query === "Cardio-Taining" || query === "cardio" || query === "training" || query === "Brad beat" || query === "brad" || query === "coach brad"|| query === "beat"|| query === "coach beat"){
-    targetFile = "cardio.html"
-  } else if (query === "Cours colectif" || query === "collectif" || query === "cours-collectif" || query === "vin gasoil" || query === "vin" || query === "gasoil"|| query === "coach vin"|| query === "coach gasoil"){
-    targetFile = "coursCo.html"
-  } else if (query === "basketball" || query === "basket"|| query === "basketeur" || query === "Antonin doat" || query === "antonin" || query === "coach antonin"|| query === "coach doat"|| query === "doat" || query === "coach chauve"){
+  } else if (query === "Biking" || query === "Velo" || query === "Vélo" || query === "Velos" || query === "Vélos" || query === "Cyclisme"|| query === "Cycliste"|| query === "Sylvain Saroule"|| query === "Saroule"|| query === "Sylvain"|| query === "Pédaler"|| query === "Coach Sylvain"){
+    targetFile = "biking.php";
+  } else if (query === "Cardio-Taining" || query === "cardio" || query === "training" || query === "Maxime Détente" || query === "Maxime" || query === "coach Maxime"|| query === "Détente"|| query === "coach Détente"){
+    targetFile = "cardio.php"
+  } else if (query === "Cours colectif" || query === "collectif" || query === "cours collectif" || query === "Angela Baha" || query === "Angela" || query === "Baha"|| query === "coach Angela"|| query === "coach Baha"){
+    targetFile = "coursCo.php"
+  } else if (query === "basketball" || query === "basket"|| query === "basketeur" || query === "Kim Possible" || query === "Kim" || query === "coach Kim"|| query === "coach Possible"|| query === "Possible"){
     targetFile = "basket.html"
-  } else if (query === "football" || query === "foot"|| query === "footballeur" || query === "gilles ollivier" || query === "gilles" || query === "ollivier"|| query === "coach gilles"|| query === "coach ollivier"){
+  } else if (query === "football" || query === "foot"|| query === "footballeur" || query === "Zizzou Legrand" || query === "Zizzou" || query === "Legrand"|| query === "coach Zizzou"|| query === "coach Legrand"){
     targetFile = "foot.html"
-  } else if (query === "rugby" || query === "rugbyman" || query === "sebastien charal" || query === "sebastien charalle" || query === "coach sebastien"|| query === "coach seb"|| query === "seb"|| query === "coach charal"|| query === "coach charalle"){
-    targetFile = "rugby.html"
-  } else if (query === "tenis" || query === "tennis" || query === "roger la ferrière" || query === "roger la ferriere" || query === "roger"|| query === "la ferriere"|| query === "la ferrière"|| query === "coach roger"|| query === "coach la ferrière"|| query === "coach la ferriere"){
-    targetFile = "tennis.html"
-  } else if (query === "natation" || query === "nager" || query === "piscine" || query === "pacome golvet" || query === "pacôme golvet"|| query === "coach pacome"|| query === "coach pacôme"|| query === "coach golvet"|| query === "golvet"|| query === "nageur"|| query === "croal"|| query === "brasse" || query === "coach pas doué" || query === "coach peu doué" || query === "coach copieur" || query === "coach 0/20"){
-    targetFile = "natation.html"
-  } else if (query === "plongeon" || query === "plongoir" || query === "plonger" || query === "plongeur" || query === "man aleau"|| query === "man"|| query === "aleau"|| query === "coach man"|| query === "coach aleau"|| query === "bouteille"){
-    targetFile = "plongeon.html"
-  } else if (query === "musculation" || query === "muscu" || query === "muscle" || query === "masse" || query === "bodybuilding"|| query === "nicolas pinier"|| query === "nicolas"|| query === "pinier"|| query === "coach nico"|| query === "nico"|| query === "coach nicolas"|| query === "coach pinier" || query === "coach pignouf"){
-    targetFile = "muscu.html"
-  } else if (query === "fitness" || query === "fitnesse" || query === "fit" || query === "margot" || query === "margaux"|| query === "margo"|| query === "robinet"|| query === "raubinait"|| query === "margot raubinait"|| query === "margaux raubinait"|| query === "margot robinet"|| query === "margaux robinet"|| query === "coach margot"|| query === "coach margaux"|| query === "coach robinet"|| query === "coach raubinait"|| query === "coach margo"){
-    targetFile = "fitness.html"
+  } else if (query === "rugby" || query === "rugbyman" || query === "Côme Unfrigo" || query === "Côme" || query === "coach Côme"|| query === "coach Unfrigo"|| query === "Unfrigo"){
+    targetFile = "rugby.php"
+  } else if (query === "tenis" || query === "tennis" || query === "Nina Iguess" || query === "Nina" || query === "Iguess"|| query === "coach Nina"|| query === "coach Iguess"){
+    targetFile = "tennis.php"
+  } else if (query === "natation" || query === "nager" || query === "piscine" || query === "Ariel Lapetitesirene" || query === "Ariel"|| query === "Lapetitesirene"|| query === "coach Ariel"|| query === "coach Lapetitesirene" || query === "nageur"|| query === "croal"|| query === "brasse"){
+    targetFile = "natation.php"
+  } else if (query === "plongeon" || query === "plongoir" || query === "plonger" || query === "plongeur" || query === "Nicolas Latetenbas"|| query === "Nicolas"|| query === "Latetenbas"|| query === "coach Nicolas"|| query === "coach Latetenbas"|| query === "coach Nico"){
+    targetFile = "plongeon.php"
+  } else if (query === "musculation" || query === "muscu" || query === "muscle" || query === "masse" || query === "bodybuilding"|| query === "Iliès Matrixé"|| query === "Iliès"|| query === "Matrixé"|| query === "coach Iliès"|| query === "Iliès"|| query === "coach Matrixé"|| query === "Ilies" || query === "coach Matrixe"){
+    targetFile = "muscu.php"
+  } else if (query === "fitness" || query === "fitnesse" || query === "fit" || query === "guy" || query === "fit"|| query === "Guy Fit"|| query === "coach guy"|| query === "coach fit"){
+    targetFile = "fitness.php"
   } else {
     alert("Pas de résultat trouvé !");
   }
