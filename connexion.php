@@ -12,23 +12,30 @@ if (!$db_handle) {
 // Variables d'erreur
 $error_message = "";
 
+// Déterminer l'URL de redirection après connexion
+$redirect_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'accueil.html';
+
 // Traitement de la connexion
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     // Vérifier les informations de connexion
-    $sql = "SELECT id_utilisateur, nom, prenom FROM utilisateurs WHERE email = '$email' AND mot_de_passe = '$password'";
+    $sql = "SELECT id_utilisateur, nom, prenom, role_utilisateur FROM utilisateurs WHERE email = '$email' AND mot_de_passe = '$password'";
     $result = mysqli_query($db_handle, $sql);
 
     if ($result) {
         if (mysqli_num_rows($result) == 1) {
             $user = mysqli_fetch_assoc($result);
             $_SESSION['user_email'] = $email;
-            $_SESSION['user_id'] = $user['id_utilisateur']; // Ajout de l'ID utilisateur
+            $_SESSION['user_id'] = $user['id_utilisateur'];
             $_SESSION['user_nom'] = $user['nom'];
             $_SESSION['user_prenom'] = $user['prenom'];
-            header("Location: prendreRdv.php");
+            $_SESSION['role_utilisateur'] = $user['role_utilisateur']; // Ajout du rôle utilisateur
+
+            // Redirection vers l'URL précédente
+            $redirect_url = $_POST['redirect_url'];
+            header("Location: $redirect_url");
             exit();
         } else {
             $error_message = "Email ou mot de passe incorrect.";
@@ -91,6 +98,7 @@ mysqli_close($db_handle);
             <div class="alert alert-danger"><?php echo htmlspecialchars($error_message); ?></div>
         <?php } ?>
         <form method="POST" action="connexion.php">
+            <input type="hidden" name="redirect_url" value="<?php echo htmlspecialchars($redirect_url); ?>">
             <div class="form-group">
                 <label for="email">Email :</label>
                 <input type="email" class="form-control" id="email" name="email" required>

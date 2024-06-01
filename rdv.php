@@ -15,16 +15,45 @@ if (!isset($_SESSION['user_email'])) {
     exit();
 }
 
-$user_id = $_SESSION['user_id'];
+// Traitement de la déconnexion
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: connexion.php");
+    exit();
+}
 
-// Récupérer les rendez-vous de l'utilisateur connecté
-$sql = "SELECT r.id_rdv, u.nom AS coach_nom, u.prenom AS coach_prenom, c.heure_debut, c.heure_fin, c.jour_semaine
+// Traitement de la suppression d'un rendez-vous
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_rdv'])) {
+    $rdv_id = $_POST['rdv_id'];
+    $sql = "DELETE FROM rendezvous WHERE id_rdv = $rdv_id";
+    if (mysqli_query($db_handle, $sql)) {
+        $success_message = "Rendez-vous supprimé avec succès.";
+    } else {
+        $error_message = "Erreur lors de la suppression du rendez-vous : " . mysqli_error($db_handle);
+    }
+}
+
+$user_id = $_SESSION['user_id'];
+$role = $_SESSION['role_utilisateur'];
+
+// Vérifier si l'utilisateur est admin
+if ($role != 'admin') {
+    header("Location: accueil.html");
+    exit();
+}
+
+// Requête SQL pour récupérer tous les rendez-vous
+$sql = "SELECT r.id_rdv, r.id_client, r.id_coach, r.id_creneau, r.cree_a, 
+               u1.nom AS client_nom, u1.prenom AS client_prenom, 
+               u2.nom AS coach_nom, u2.prenom AS coach_prenom, 
+               c.jour_semaine, c.heure_debut, c.heure_fin
         FROM rendezvous r
-        JOIN coachs co ON r.id_coach = co.id_coach
-        JOIN utilisateurs u ON co.id_coach = u.id_utilisateur
+        JOIN utilisateurs u1 ON r.id_client = u1.id_utilisateur
+        JOIN utilisateurs u2 ON r.id_coach = u2.id_utilisateur
         JOIN creneaux c ON r.id_creneau = c.id_creneau
-        WHERE r.id_client = $user_id
-        ORDER BY c.jour_semaine, c.heure_debut";
+        ORDER BY r.cree_a DESC";
+
 $result = mysqli_query($db_handle, $sql);
 $rendezvous = [];
 if ($result) {
@@ -49,7 +78,7 @@ mysqli_close($db_handle);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="image/png" href="images/logo.png" />
     <link rel="stylesheet" href="sports.css" />
-    <title>Vos Rendez-Vous</title>
+    <title>Gestion des Rendez-Vous</title>
 </head>
 
 <body>
@@ -72,7 +101,7 @@ mysqli_close($db_handle);
                     <a class="nav-link" href="toutParcourir.html">Tout Parcourir</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="rdv.php">Rendez-Vous</a>
+                    <a class="nav-link" href="rdv.html">Rendez-Vous</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0 ml-auto">
@@ -83,7 +112,23 @@ mysqli_close($db_handle);
     </nav>
 
     <div class="container mt-5 pt-5">
-        <h2 class="text-center">Vos Rendez-Vous</h2>
+        <h2 class="text-center">Gestion des Rendez-Vous</h2>
+        <?php if (isset($_SESSION['user_nom']) && isset($_SESSION['user_prenom'])) { ?>
+            <div class="mb-4">
+                <span>Connecté en tant que <?php echo htmlspecialchars($_SESSION['user_prenom'] . " " . $_SESSION['user_nom']); ?></span>
+                <form method="POST" action="rdv.php" class="d-inline">
+                    <button type="submit" name="logout" class="btn btn-link">Déconnexion</button>
+                </form>
+            </div>
+        <?php } ?>
+
+        <?php if (isset($success_message)) { ?>
+            <div class="alert alert-success"><?php echo htmlspecialchars($success_message); ?></div>
+        <?php } ?>
+        <?php if (isset($error_message)) { ?>
+            <div class="alert alert-danger"><?php echo htmlspecialchars($error_message); ?></div>
+        <?php } ?>
+
         <?php if (!empty($rendezvous)) { ?>
             <table class="table table-bordered mt-4">
                 <thead>
@@ -91,7 +136,10 @@ mysqli_close($db_handle);
                         <th>Jour</th>
                         <th>Heure Début</th>
                         <th>Heure Fin</th>
+                        <th>Client</th>
                         <th>Coach</th>
+                        <th>Date de Création</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,7 +148,15 @@ mysqli_close($db_handle);
                             <td><?php echo htmlspecialchars($rdv['jour_semaine']); ?></td>
                             <td><?php echo htmlspecialchars($rdv['heure_debut']); ?></td>
                             <td><?php echo htmlspecialchars($rdv['heure_fin']); ?></td>
+                            <td><?php echo htmlspecialchars($rdv['client_prenom'] . " " . $rdv['client_nom']); ?></td>
                             <td><?php echo htmlspecialchars($rdv['coach_prenom'] . " " . $rdv['coach_nom']); ?></td>
+                            <td><?php echo htmlspecialchars($rdv['cree_a']); ?></td>
+                            <td>
+                                <form method="POST" action="rdv.php" class="d-inline">
+                                    <input type="hidden" name="rdv_id" value="<?php echo $rdv['id_rdv']; ?>">
+                                    <button type="submit" name="delete_rdv" class="btn btn-danger btn-sm">Supprimer</button>
+                                </form>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -109,7 +165,7 @@ mysqli_close($db_handle);
             <p>Aucun rendez-vous trouvé.</p>
         <?php } ?>
     </div>
-
+    <br><br>
     <footer class="footer text-center py-4">
         <div class="container">
             <p>Contactez-nous :</p>

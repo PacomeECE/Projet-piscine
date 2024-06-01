@@ -50,8 +50,10 @@ $selected_coach_id = isset($_GET['coach_id']) ? $_GET['coach_id'] : (isset($_POS
 $selected_day = isset($_GET['jour']) ? $_GET['jour'] : (isset($_POST['jour']) ? $_POST['jour'] : '');
 
 $creneaux = [];
+$reserved_creneaux = [];
 if ($selected_coach_id && $selected_day) {
-    $sql = "SELECT c.id_creneau, c.heure_debut, c.heure_fin
+    $sql = "SELECT c.id_creneau, c.heure_debut, c.heure_fin, 
+                   (SELECT COUNT(*) FROM rendezvous r WHERE r.id_creneau = c.id_creneau AND r.id_coach = $selected_coach_id) AS is_reserved
             FROM disponibilites_coachs dc
             JOIN creneaux c ON dc.id_creneau = c.id_creneau
             WHERE dc.id_coach = $selected_coach_id AND dc.disponible = 1 AND c.jour_semaine = '$selected_day'
@@ -60,6 +62,9 @@ if ($selected_coach_id && $selected_day) {
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
             $creneaux[] = $row;
+            if ($row['is_reserved'] > 0) {
+                $reserved_creneaux[] = $row['id_creneau'];
+            }
         }
     } else {
         die("Erreur dans la requête SQL : " . mysqli_error($db_handle));
@@ -126,6 +131,11 @@ mysqli_close($db_handle);
             color: white;
             border-color: #007bff;
         }
+        .creneau.reserved {
+            background-color: #d3d3d3;
+            color: #6c757d;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 
@@ -149,13 +159,13 @@ mysqli_close($db_handle);
                     <a class="nav-link" href="toutParcourir.html">Tout Parcourir</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="rdv.html">Rendez-Vous</a>
+                    <a class="nav-link" href="rdv.php">Rendez-Vous</a>
                 </li>
             </ul>
-            <div class="search-container form-inline my-2 my-lg-0 ml-auto">
-                <input type="search" id="search-input" placeholder="Taper pour Rechercher" class="form-control mr-sm-2">
-                <button id="search-button" class="btn my-2 my-sm-0" type="button">Rechercher</button>
-            </div>
+            <form class="form-inline my-2 my-lg-0 ml-auto">
+                <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
+                <button class="btn my-2 my-sm-0" type="submit">Rechercher</button>
+            </form>
         </div>
     </nav>
 
@@ -209,7 +219,7 @@ mysqli_close($db_handle);
                 <input type="hidden" name="jour" value="<?php echo $selected_day; ?>">
                 <div class="grid-creneaux">
                     <?php foreach ($creneaux as $creneau) { ?>
-                        <div class="creneau" data-id-creneau="<?php echo $creneau['id_creneau']; ?>" data-heure-debut="<?php echo $creneau['heure_debut']; ?>">
+                        <div class="creneau <?php echo in_array($creneau['id_creneau'], $reserved_creneaux) ? 'reserved' : ''; ?>" data-id-creneau="<?php echo $creneau['id_creneau']; ?>" data-heure-debut="<?php echo $creneau['heure_debut']; ?>">
                             <?php echo htmlspecialchars($creneau['heure_debut']) . " - " . htmlspecialchars($creneau['heure_fin']); ?>
                         </div>
                     <?php } ?>
@@ -246,39 +256,16 @@ mysqli_close($db_handle);
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function areCreneauxConsecutifs(selectedCreneaux) {
-            if (selectedCreneaux.length < 2) return true;
-            for (let i = 1; i < selectedCreneaux.length; i++) {
-                if (selectedCreneaux[i] - selectedCreneaux[i - 1] !== 1) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
         $(document).ready(function() {
-            let selectedCreneaux = [];
-
             $('.creneau').on('click', function() {
-                const creneauId = parseInt($(this).data('id-creneau'), 10);
-
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                    selectedCreneaux = selectedCreneaux.filter(id => id !== creneauId);
-                } else {
-                    selectedCreneaux.push(creneauId);
-                    selectedCreneaux.sort((a, b) => a - b);
-
-                    if (!areCreneauxConsecutifs(selectedCreneaux)) {
-                        alert('Veuillez sélectionner des créneaux consécutifs.');
-                        selectedCreneaux = selectedCreneaux.filter(id => id !== creneauId);
-                        return;
-                    }
-
-                    $(this).addClass('selected');
+                if ($(this).hasClass('reserved')) {
+                    return;
                 }
 
-                $('#selectedCreneaux').val(selectedCreneaux.join(','));
+                $('.creneau').removeClass('selected');
+                $(this).addClass('selected');
+                const creneauId = $(this).data('id-creneau');
+                $('#selectedCreneaux').val(creneauId);
             });
         });
     </script>
