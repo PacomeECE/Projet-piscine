@@ -17,23 +17,23 @@ function performSearch() {
   var query = searchInput.value.toLowerCase();
   var targetFile = "";
 
-  if (query === "coach" || query === "coachs" || query === "personnel" || query === "liste" || query === "coachs sportifs" || query === "coach sportif" || query === "équipe" || query === "staff") {
+  if (query === "coach" || query === "coachs" || query === "personnel" || query === "liste" || query === "coachs spotifs" || query === "coach sportif") {
     targetFile = "personnel.html";
-  } else if (query === "accueil" || query === "acueil" || query === "accueils" || query === "actualite" || query === "actualites" || query === "actualité" || query === "actualités" || query === "news" || query === "page d'accueil") {
+  } else if (query === "accueil" || query ==="acueil"  || query ==="accueils"  || query === "actualite" || query ==="actualites" ||query ==="actualité"   || query ==="actualités"){
     targetFile = "accueil.html";
-  } else if (query === "alimentation" || query === "bouffe" || query === "nutrition" || query === "graill" || query === "manger" || query === "à table" || query === "nourriture" || query === "diététique" || query === "repas" || query === "régime") {
+  } else if (query === "alimentation" || query === "bouffe" || query === "nutrition" || query === "graill" || query === "manger" || query === "à table" || query === "nourriture"){
     targetFile = "alimentation.html";
-  } else if (query === "horaires" || query === "horaire" || query === "ouverture" || query === "heures" || query === "regles" || query === "reglement" || query === "heure" || query === "heures d'ouverture" || query === "heure d'ouverture" || query === "calendrier" || query === "planning") {
-    targetFile = "regles.html";
-  } else if (query === "règles" || query === "regles" || query === "regle" || query === "règlement" || query === "reglements" || query === "règlements" || query === "conditions" || query === "instructions" || query === "consignes") {
-    targetFile = "regles.html";
-  } else if (query === "nouveaux clients" || query === "nouveau client" || query === "nouveau" || query === "nouveaux" || query === "inscription" || query === "s'inscrire" || query === "adhérer" || query === "devenir membre" || query === "nouvel utilisateur" || query === "enregistrement") {
+  } else if (query === "horaires" || query === "horaire" || query === "ouverture" || query === "heures" || query === "dates" || query === "date" || query === "heure" || query === "heures d'ouverture" || query === "heure d'ouverture"){
+    targetFile = "horaires.html";
+  } else if (query === "règles" || query === "regles" || query === "regle" || query === "regles" || query === "reglement" || query === "règlement" || query === "reglements" || query === "règlements"){
+    targetFile = "regles.html" ;
+  } else if (query === "nouveaux clients" || query === "nouveau client" || query === "nouveau" || query === "nouveaux" || query === "new"){
     targetFile = "creerCompte.html";
-  } else if (query === "salle" || query === "salles" || query === "omnes" || query === "ece" || query === "équipement" || query === "équipements" || query === "eiffel" || query === "local" || query === "locaux" || query === "installation" || query === "installations") {
+  } else if (query === "salle" || query === "salles" || query ==="omnes" || query === "ece" || query === "inseec" || query === "supdepub" || query === "heip" ||query === "esce" || query === "ifg" || query === "ceds" || query === "supdecreation" || query === "crea" || query === "supcareer" || query === "univesity of monaco" || query === "eu business school" || query === "ebs" | query ==="cei" || query === "datascientist" || query === "eiffel"){
     targetFile = "salle.html";
-  } else if (query === "biking" || query === "velo" || query === "vélo" || query === "velos" || query === "vélos" || query === "cyclisme" || query === "cycliste" || query === "sylvain saroule" || query === "saroule" || query === "sylvain" || query === "pédaler" || query === "coach sylvain" || query === "bicyclette" || query === "vtt" || query === "course") {
+  } else if (query === "Biking" || query === "Velo" || query === "Vélo" || query === "Velos" || query === "Vélos" || query === "Cyclisme"|| query === "Cycliste"|| query === "Leonardio diCarpaccio"|| query === "Leo diCarpaccio"|| query === "Leonardo"|| query === "Leo"|| query === "Coach Leo"){
     targetFile = "biking.php";
-  } else if (query === "cardio-training" || query === "cardio" || query === "training" || query === "maxine détente" || query === "maxine" || query === "coach maxine" || query === "détente" || query === "coach détente" || query === "endurance" || query === "exercice" || query === "activité physique") {
+  } else if (query === "cardio-training" || query === "cardio" || query === "training" || query === "maxime détente" || query === "maxime" || query === "coach maxime" || query === "détente" || query === "coach détente" || query === "endurance" || query === "exercice" || query === "activité physique") {
     targetFile = "cardio.php";
   } else if (query === "cours collectif" || query === "collectif" || query === "angela baha" || query === "angela" || query === "baha" || query === "coach angela" || query === "coach baha" || query === "classe" || query === "cours en groupe" || query === "séance collective") {
     targetFile = "coursCo.php";
