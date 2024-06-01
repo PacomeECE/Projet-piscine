@@ -61,7 +61,7 @@ function regrouperCreneaux($creneauxJour) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="image/png" href="images/logo.png" />
     <link rel="stylesheet" href="sports.css" />
-    <title>SPORTIFY - Biking</title>
+    <title>SPORTIFY - Rugby</title>
     <style>
         .availability-table {
             margin-top: 20px;
@@ -179,21 +179,20 @@ function regrouperCreneaux($creneauxJour) {
         <div class="coach-profile mt-5">
             <div class="card">
                 <div class="card-header text-center">
-                    <h1>Biking</h1>
+                    <h1>Rugby</h1>
                 </div>
                 <div class="card-body">
                     <div class="coach-info">
-                        <h3>Sylvain Saroule - Coach, Biking</h3>
+                    <h3>Côme Unfrigo - Coach, Rugby</h3>
                         <div class="row">
                             <div class="col-md-4 text-center">
-                                <img src="images/coach3.jpeg" alt="Sylvain Saroule" class="img-fluid">
+                                <img src="images/coach8.jpg" alt="Come Unfrigo" class="img-fluid">
                             </div>
                             <div class="col-md-8">
-                                <p><strong>Salle:</strong> EM010</p>
-                                <p><strong>Téléphone:</strong> 07 46 91 73 24</p>
-                                <p><strong>Email:</strong> <a href="mailto:sylvain.saroule@edu.ece.fr">sylvain.saroule@edu.ece.fr</a></p>
-                                <p><strong>CV:</strong> Formation: Champion national de vélo d'intérieur. Expériences: Entraîneur de Biking depuis 10 ans. Autres: Spécialisé en préparation physique.</p>
-                            </div>
+                                <p><strong>Salle:</strong> EM319</p>
+                                <p><strong>Téléphone:</strong> 07 46 91 73 29</p>
+                                <p><strong>Email:</strong> <a href="mailto:come.unfrigo@edu.ece.fr">come.unfrigo@edu.ece.fr</a></p>
+                                <p><strong>CV:</strong> Formation: Champion national de rugby. Expériences: Entraîneur de rugby depuis 12 ans. Autres: Spécialisé en préparation physique.</p>
                             </div>
                         </div>
 
