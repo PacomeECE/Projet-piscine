@@ -12,16 +12,13 @@ if (!$db_handle) {
 // Variables d'erreur
 $error_message = "";
 
-// Déterminer l'URL de redirection après connexion
-$redirect_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'accueil.html';
-
 // Traitement de la connexion
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     // Vérifier les informations de connexion
-    $sql = "SELECT id_utilisateur, nom, prenom, role_utilisateur FROM utilisateurs WHERE email = '$email' AND mot_de_passe = '$password'";
+    $sql = "SELECT * FROM utilisateurs WHERE email = '$email' AND mot_de_passe = '$password'";
     $result = mysqli_query($db_handle, $sql);
 
     if ($result) {
@@ -31,10 +28,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             $_SESSION['user_id'] = $user['id_utilisateur'];
             $_SESSION['user_nom'] = $user['nom'];
             $_SESSION['user_prenom'] = $user['prenom'];
-            $_SESSION['role_utilisateur'] = $user['role_utilisateur']; // Ajout du rôle utilisateur
+            $_SESSION['role_utilisateur'] = $user['role_utilisateur'];
+            $_SESSION['carte_etudiante'] = $user['carte_etudiante'];
 
-            // Redirection vers l'URL précédente
-            $redirect_url = $_POST['redirect_url'];
+
+            // Si l'utilisateur est un coach, récupérer les informations supplémentaires
+            if ($user['role_utilisateur'] == 'coach') {
+                $sql_coach = "SELECT * FROM coachs WHERE id_utilisateur = " . $user['id_utilisateur'];
+                $result_coach = mysqli_query($db_handle, $sql_coach);
+                if ($result_coach) {
+                    $coach = mysqli_fetch_assoc($result_coach);
+                    $_SESSION['coach_specialite'] = $coach['specialite'];
+                    $_SESSION['coach_photo_url'] = $coach['photo_url'];
+                    $_SESSION['coach_video_url'] = $coach['video_url'];
+                    $_SESSION['coach_cv'] = $coach['cv'];
+                }
+            }
+
+            // Rediriger vers la page de destination si elle est définie, sinon vers la page compte
+            $redirect_url = isset($_GET['redirect_url']) ? $_GET['redirect_url'] : 'compte.php';
             header("Location: $redirect_url");
             exit();
         } else {
@@ -76,7 +88,7 @@ mysqli_close($db_handle);
                     <a class="nav-link" href="accueil.html">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="connexion.html">Compte</a>
+                    <a class="nav-link" href="connexion.php">Compte</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="toutParcourir.html">Tout Parcourir</a>
@@ -98,7 +110,6 @@ mysqli_close($db_handle);
             <div class="alert alert-danger"><?php echo htmlspecialchars($error_message); ?></div>
         <?php } ?>
         <form method="POST" action="connexion.php">
-            <input type="hidden" name="redirect_url" value="<?php echo htmlspecialchars($redirect_url); ?>">
             <div class="form-group">
                 <label for="email">Email :</label>
                 <input type="email" class="form-control" id="email" name="email" required>
@@ -109,6 +120,9 @@ mysqli_close($db_handle);
             </div>
             <button type="submit" name="login" class="btn btn-primary">Connexion</button>
         </form>
+        <p class="text-center mt-3">
+            <a href="creerCompte.php">Je n'ai pas encore de compte chez vous. Je souhaite m'en créer un.</a>
+        </p>
     </div>
     
     <footer class="footer text-center py-4">
