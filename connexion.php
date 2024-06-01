@@ -74,7 +74,7 @@ mysqli_close($db_handle);
                     <a class="nav-link" href="toutParcourir.html">Tout Parcourir</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="rdv.html">Rendez-Vous</a>
+                    <a class="nav-link" href="rdv.php">Rendez-Vous</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0 ml-auto">
