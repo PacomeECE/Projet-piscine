@@ -87,7 +87,7 @@ mysqli_close($db_handle);
                     <a class="nav-link" href="accueil.html">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="connexion.php">Compte</a>
+                    <a class="nav-link" href="compte.php">Compte</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="toutParcourir.html">Tout Parcourir</a>
@@ -120,7 +120,7 @@ mysqli_close($db_handle);
             <button type="submit" name="login" class="btn btn-primary">Connexion</button>
         </form>
         <p class="text-center mt-3">
-            <a href="creerCompte.php">Je n'ai pas encore de compte chez vous. Je souhaite m'en créer un.</a>
+            <a href="creerCompte.html">Je n'ai pas encore de compte chez vous. Je souhaite m'en créer un.</a>
         </p>
     </div>
     
