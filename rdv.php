@@ -37,11 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_rdv'])) {
 $user_id = $_SESSION['user_id'];
 $role = $_SESSION['role_utilisateur'];
 
-// Vérifier si l'utilisateur est admin
-if ($role = 'admin') {
-    header("Location: accueil.html");
-    exit();
-}
+
 
 // Requête SQL pour récupérer tous les rendez-vous
 $sql = "SELECT r.id_rdv, r.id_client, r.id_coach, r.id_creneau, r.cree_a, 

@@ -1,5 +1,7 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Connexion à la base de données
 $database = "Projet-piscine";
@@ -31,7 +33,7 @@ if ($result) {
 }
 
 // Traitement de l'abonnement
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['valider_paiement'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['montant'])) {
     $montant = $_POST['montant'];
     $date_paiement = date('Y-m-d H:i:s');
     $nom_abonnement = "Abonnement";
@@ -39,8 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['valider_paiement'])) {
     // Insérer dans la table paiements
     $sql = "INSERT INTO paiements (id_client, montant, date_paiement, nom) VALUES ($user_id, $montant, '$date_paiement', '$nom_abonnement')";
     if (mysqli_query($db_handle, $sql)) {
-        header("Location: compte.php");
-        exit();
+        echo "<script>
+                setTimeout(function() {
+                    window.location.href = 'compte.php';
+                }, 3000);
+              </script>";
     } else {
         $error_message = "Erreur lors de l'abonnement : " . mysqli_error($db_handle);
     }
@@ -148,7 +153,7 @@ mysqli_close($db_handle);
             <p><strong>Type de carte:</strong> <?php echo htmlspecialchars($user_payment_info['type_carte']); ?></p>
             <form id="paymentForm" method="POST" action="abonnement.php">
                 <input type="hidden" id="montant" name="montant">
-                <button type="submit" name="valider_paiement" class="btn btn-success" onclick="showLoadingSpinner()">Valider le paiement</button>
+                <button type="button" name="valider_paiement" class="btn btn-success" onclick="startPaymentProcess()">Valider le paiement</button>
             </form>
         </div>
 
@@ -191,6 +196,13 @@ mysqli_close($db_handle);
 
         function showLoadingSpinner() {
             document.getElementById('loadingSpinner').style.display = 'block';
+        }
+
+        function startPaymentProcess() {
+            showLoadingSpinner();
+            setTimeout(function() {
+                document.getElementById('paymentForm').submit();
+            }, 3000); // Durée de l'animation de chargement en millisecondes (3 secondes)
         }
     </script>
 </body>
