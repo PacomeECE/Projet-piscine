@@ -31,6 +31,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             $_SESSION['role_utilisateur'] = $user['role_utilisateur'];
             $_SESSION['carte_etudiante'] = $user['carte_etudiant'];
 
+            // Récupérer les informations de paiement pour le client
+            if ($user['role_utilisateur'] == 'client') {
+                $sql_paiement = "SELECT numero_carte, nom_proprietaire, date_expiration, type_carte 
+                                 FROM utilisateurs WHERE id_utilisateur = " . $user['id_utilisateur'];
+                $result_paiement = mysqli_query($db_handle, $sql_paiement);
+                if ($result_paiement && mysqli_num_rows($result_paiement) == 1) {
+                    $paiement = mysqli_fetch_assoc($result_paiement);
+                    $_SESSION['numero_carte'] = $paiement['numero_carte'];
+                    $_SESSION['nom_proprietaire'] = $paiement['nom_proprietaire'];
+                    $_SESSION['date_expiration'] = $paiement['date_expiration'];
+                    $_SESSION['type_carte'] = $paiement['type_carte'];
+                }
+            }
+
             // Si l'utilisateur est un coach, récupérer les informations supplémentaires
             if ($user['role_utilisateur'] == 'coach') {
                 $sql_coach = "SELECT * FROM coachs WHERE id_utilisateur = " . $user['id_utilisateur'];
@@ -45,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             }
 
             // Rediriger vers la page de destination si elle est définie, sinon vers la page compte
-            $redirect_url = 'compte.php';
+            $redirect_url = isset($_GET['redirect_url']) ? $_GET['redirect_url'] : 'compte.php';
             header("Location: $redirect_url");
             exit();
         } else {
