@@ -142,6 +142,56 @@ function regrouperCreneaux($creneauxJour) {
             background-color: #007bff;
             color: white;
         }
+        #chatbox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#chatlogs {
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.message {
+    margin-bottom: 10px;
+}
+
+.sender {
+    font-weight: bold;
+}
+
+.text {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+#chatbuttons {
+    padding: 10px;
+    text-align: center;
+}
+
+.reponse-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.reponse-btn:hover {
+    background-color: #0056b3;
+}
     </style>
 </head>
 
@@ -186,7 +236,7 @@ function regrouperCreneaux($creneauxJour) {
                         <h3>Sylvain Saroule - Coach, Biking</h3>
                         <div class="row">
                             <div class="col-md-4 text-center">
-                                <img src="images/coach3.jpeg" alt="Sylvain Saroule" class="img-fluid">
+                                <img src="images/coach3.jpg" alt="Sylvain Saroule" class="img-fluid">
                             </div>
                             <div class="col-md-8">
                                 <p><strong>Salle:</strong> EM010</p>
@@ -247,7 +297,19 @@ function regrouperCreneaux($creneauxJour) {
             </div>
         </div>
     </main>
-
+    <div id="chatbox"> 
+        <div id="chatlogs">
+            <div class="message">
+                <span class="sender">Coach virtuel:</span>
+                <span class="text">Bonjour! Comment puis-je vous aider aujourd'hui?</span>
+            </div>
+        </div>
+        <div id="chatbuttons">
+            <button class="reponse-btn" onclick="addMessage('Prenez-vous des débutants ?')">Prenez-vous des débutants ?</button>
+            <button class="reponse-btn" onclick="addMessage('Quels sont vos tarifs?')">Quels sont vos tarifs ?</button>
+            <button class="reponse-btn" onclick="addMessage('Pouvez-vous me parler de vos services?')">Pouvez-vous me parler de vos services ?</button>
+        </div>
+    </div>
     <footer class="footer text-center py-4">
         <div class="container">
             <p>Contactez-nous :</p>

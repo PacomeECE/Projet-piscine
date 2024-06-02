@@ -1,55 +1,3 @@
-<?php
-// Connexion à la base de données
-$database = "Projet-piscine";
-$db_handle = mysqli_connect('localhost', 'root', '', $database);
-
-if (!$db_handle) {
-    die("Échec de la connexion à la base de données : " . mysqli_connect_error());
-}
-
-// Récupérer les créneaux disponibles pour le coach Kim Possible (id_coach = 6)
-$sql = "SELECT c.jour_semaine, c.heure_debut, c.heure_fin
-        FROM disponibilites_coachs dc
-        JOIN creneaux c ON dc.id_creneau = c.id_creneau
-        WHERE dc.id_coach = 1 AND dc.disponible = 1
-        ORDER BY c.jour_semaine, c.heure_debut";
-
-$result = mysqli_query($db_handle, $sql);
-
-$creneaux = [];
-if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $creneaux[$row['jour_semaine']][] = $row;
-    }
-} else {
-    $error_message = "Erreur dans la requête SQL : " . mysqli_error($db_handle);
-}
-
-mysqli_close($db_handle);
-
-function regrouperCreneaux($creneauxJour) {
-    $regroupes = [];
-    $debut = null;
-    $fin = null;
-    foreach ($creneauxJour as $creneau) {
-        if ($debut === null) {
-            $debut = $creneau['heure_debut'];
-            $fin = $creneau['heure_fin'];
-        } elseif ($creneau['heure_debut'] === $fin) {
-            $fin = $creneau['heure_fin'];
-        } else {
-            $regroupes[] = ['heure_debut' => $debut, 'heure_fin' => $fin];
-            $debut = $creneau['heure_debut'];
-            $fin = $creneau['heure_fin'];
-        }
-    }
-    if ($debut !== null) {
-        $regroupes[] = ['heure_debut' => $debut, 'heure_fin' => $fin];
-    }
-    return $regroupes;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -142,6 +90,56 @@ function regrouperCreneaux($creneauxJour) {
             background-color: #007bff;
             color: white;
         }
+        #chatbox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#chatlogs {
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.message {
+    margin-bottom: 10px;
+}
+
+.sender {
+    font-weight: bold;
+}
+
+.text {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+#chatbuttons {
+    padding: 10px;
+    text-align: center;
+}
+
+.reponse-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.reponse-btn:hover {
+    background-color: #0056b3;
+}
     </style>
 </head>
 
@@ -247,30 +245,44 @@ function regrouperCreneaux($creneauxJour) {
         </div>
     </main>
 
+    <div id="chatbox"> 
+        <div id="chatlogs">
+            <div class="message">
+                <span class="sender">Coach virtuel:</span>
+                <span class="text">Bonjour! Comment puis-je vous aider aujourd'hui?</span>
+            </div>
+        </div>
+        <div id="chatbuttons">
+            <button class="reponse-btn" onclick="addMessage('Prenez-vous des débutants ?')">Prenez-vous des débutants ?</button>
+            <button class="reponse-btn" onclick="addMessage('Quels sont vos tarifs?')">Quels sont vos tarifs ?</button>
+            <button class="reponse-btn" onclick="addMessage('Pouvez-vous me parler de vos services?')">Pouvez-vous me parler de vos services ?</button>
+        </div>
+    </div>
+
     <footer class="footer text-center py-4">
         <div class="container">
             <p>Contactez-nous :</p>
-            <p>
-                <i class="fas fa-phone" style="margin-right: 10px;"></i>
-                <a href="tel:0144876211">01 44 87 62 11</a>
-            </p>
-            <p>
-                <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>
-                <a href="https://www.google.com/maps/search/?api=1&query=10+Rue+Sextius+Michel,+Paris,+France">10 rue Sextius Michel, Paris, France</a>
-            </p>
-            <p>
-                <i class="fas fa-envelope" style="margin-right: 10px;"></i>
-                <a href="mailto:salle.sports@omnessports.fr">salle.sports@omnessports.fr</a>
-            </p>
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8767.74803941555!2d2.28749683632621!3d48.84760618152228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2sECE%20-%20Ecole%20d&#39;ing%C3%A9nieurs%20-%20Engineering%20school.!5e0!3m2!1sfr!2sfr!4v1685374726975!5m2!1sfr!2sfr"
-                width="1000" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="https://www.facebook.com/sportify" class="btn-social btn-outline">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://www.twitter.com/sportify" class="btn-social btn-outline">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://www.instagram.com/sportify" class="btn-social btn-outline">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </li>
+            </ul>
+            <p>&copy; 2024 SPORTIFY. Tous droits réservés.</p>
         </div>
     </footer>
     <script src="recherche.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script></body>
 </html>
