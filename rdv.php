@@ -37,18 +37,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_rdv'])) {
 $user_id = $_SESSION['user_id'];
 $role = $_SESSION['role_utilisateur'];
 
-
-
-// Requête SQL pour récupérer tous les rendez-vous
-$sql = "SELECT r.id_rdv, r.id_client, r.id_coach, r.id_creneau, r.cree_a, 
-               u1.nom AS client_nom, u1.prenom AS client_prenom, 
-               u2.nom AS coach_nom, u2.prenom AS coach_prenom, 
-               c.jour_semaine, c.heure_debut, c.heure_fin
-        FROM rendezvous r
-        JOIN utilisateurs u1 ON r.id_client = u1.id_utilisateur
-        JOIN utilisateurs u2 ON r.id_coach = u2.id_utilisateur
-        JOIN creneaux c ON r.id_creneau = c.id_creneau
-        ORDER BY r.cree_a DESC";
+// Requête SQL pour récupérer les rendez-vous en fonction du rôle de l'utilisateur
+if ($role == 'admin') {
+    $sql = "SELECT r.id_rdv, r.id_client, r.id_coach, r.id_creneau, r.cree_a, 
+                   u1.nom AS client_nom, u1.prenom AS client_prenom, 
+                   u2.nom AS coach_nom, u2.prenom AS coach_prenom, 
+                   c.jour_semaine, c.heure_debut, c.heure_fin
+            FROM rendezvous r
+            JOIN utilisateurs u1 ON r.id_client = u1.id_utilisateur
+            JOIN utilisateurs u2 ON r.id_coach = u2.id_utilisateur
+            JOIN creneaux c ON r.id_creneau = c.id_creneau
+            ORDER BY r.cree_a DESC";
+} elseif ($role == 'client') {
+    $sql = "SELECT r.id_rdv, r.id_client, r.id_coach, r.id_creneau, r.cree_a, 
+                   u1.nom AS client_nom, u1.prenom AS client_prenom, 
+                   u2.nom AS coach_nom, u2.prenom AS coach_prenom, 
+                   c.jour_semaine, c.heure_debut, c.heure_fin
+            FROM rendezvous r
+            JOIN utilisateurs u1 ON r.id_client = u1.id_utilisateur
+            JOIN utilisateurs u2 ON r.id_coach = u2.id_utilisateur
+            JOIN creneaux c ON r.id_creneau = c.id_creneau
+            WHERE r.id_client = $user_id
+            ORDER BY r.cree_a DESC";
+} elseif ($role == 'coach') {
+    $sql = "SELECT r.id_rdv, r.id_client, r.id_coach, r.id_creneau, r.cree_a, 
+                   u1.nom AS client_nom, u1.prenom AS client_prenom, 
+                   u2.nom AS coach_nom, u2.prenom AS coach_prenom, 
+                   c.jour_semaine, c.heure_debut, c.heure_fin
+            FROM rendezvous r
+            JOIN utilisateurs u1 ON r.id_client = u1.id_utilisateur
+            JOIN utilisateurs u2 ON r.id_coach = u2.id_utilisateur
+            JOIN creneaux c ON r.id_creneau = c.id_creneau
+            WHERE r.id_coach = $user_id
+            ORDER BY r.cree_a DESC";
+}
 
 $result = mysqli_query($db_handle, $sql);
 $rendezvous = [];
@@ -97,7 +119,7 @@ mysqli_close($db_handle);
                     <a class="nav-link" href="toutParcourir.html">Tout Parcourir</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="rdv.html">Rendez-Vous</a>
+                    <a class="nav-link" href="rdv.php">Rendez-Vous</a>
                 </li>
             </ul>
             <div class="search-container form-inline my-2 my-lg-0 ml-auto">
