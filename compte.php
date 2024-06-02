@@ -24,8 +24,7 @@ $user_nom = $_SESSION['user_nom'];
 $user_prenom = $_SESSION['user_prenom'];
 $user_email = $_SESSION['user_email'];
 $role = $_SESSION['role_utilisateur'];
-$carte_etudiante = $_SESSION['carte_etudiant'];
-
+$carte_etudiante = $_SESSION['carte_etudiante'];
 
 // Définir les variables pour les informations supplémentaires
 $adresse_ligne1 = "";
@@ -67,7 +66,7 @@ if ($role == 'client') {
     if ($result_paiements) {
         while ($row = mysqli_fetch_assoc($result_paiements)) {
             $historique_paiements[] = $row;
-            if ($row['nom'] == 'abonnement') {
+            if ($row['nom'] == 'Abonnement') {
                 $abonnement = true;
             }
         }
@@ -173,8 +172,9 @@ mysqli_close($db_handle);
         .hidden-form {
             display: none;
         }
+
         .info-discrete {
-            color: #6c757d;
+            color: black;
             font-size: 0.9em;
         }
     </style>
@@ -360,13 +360,6 @@ mysqli_close($db_handle);
             <p><strong>Adresse:</strong> <?php echo htmlspecialchars($adresse_ligne1 . ' ' . $adresse_ligne2 . ', ' . $ville . ', ' . $code_postal . ', ' . $pays); ?></p>
             <p><strong>Carte Étudiante:</strong> <?php echo htmlspecialchars($carte_etudiante); ?></p>
 
-            <h4>Informations de paiement</h4>
-            <p class="info-discrete"><strong>Numéro de carte:</strong> <?php echo htmlspecialchars($numero_carte); ?></p>
-            <p class="info-discrete"><strong>Nom du propriétaire:</strong> <?php echo htmlspecialchars($nom_proprietaire); ?></p>
-            <p class="info-discrete"><strong>Date d'expiration:</strong> <?php echo htmlspecialchars($date_expiration); ?></p>
-            <p class="info-discrete"><strong>CVV:</strong> <?php echo htmlspecialchars($cvv); ?></p>
-            <p class="info-discrete"><strong>Type de carte:</strong> <?php echo htmlspecialchars($type_carte); ?></p>
-
             <h4>Vos rendez-vous</h4>
             <table class="table table-bordered">
                 <thead>
@@ -396,6 +389,12 @@ mysqli_close($db_handle);
                 </tbody>
             </table>
 
+            <h4>Informations de paiement</h4>
+            <p class="info-discrete"><strong>Numéro de carte:</strong> **** **** **** <?php echo substr($numero_carte, -4); ?></p>
+            <p class="info-discrete"><strong>Nom du propriétaire:</strong> <?php echo htmlspecialchars($nom_proprietaire); ?></p>
+            <p class="info-discrete"><strong>Date d'expiration:</strong> <?php echo htmlspecialchars($date_expiration); ?></p>
+            <p class="info-discrete"><strong>Type de carte:</strong> <?php echo htmlspecialchars($type_carte); ?></p>
+
             <h4>Historique des paiements</h4>
             <?php if (empty($historique_paiements)) { ?>
                 <p>Aucun paiement trouvé.</p>
@@ -403,7 +402,7 @@ mysqli_close($db_handle);
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>ID Paiement</th>
+                            <th>Description</th>
                             <th>Montant</th>
                             <th>Date de Paiement</th>
                         </tr>
@@ -411,7 +410,7 @@ mysqli_close($db_handle);
                     <tbody>
                         <?php foreach ($historique_paiements as $paiement) { ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($paiement['id_paiement']); ?></td>
+                                <td><?php echo htmlspecialchars($paiement['nom']); ?></td>
                                 <td><?php echo htmlspecialchars($paiement['montant']); ?></td>
                                 <td><?php echo htmlspecialchars($paiement['date_paiement']); ?></td>
                             </tr>
@@ -427,7 +426,7 @@ mysqli_close($db_handle);
 
         <?php } ?>
     </div>
-
+                <br><br>
     <footer class="footer text-center py-4">
         <div class="container">
             <p>Contactez-nous :</p>
@@ -449,6 +448,7 @@ mysqli_close($db_handle);
             </iframe>
         </div>
     </footer>
+    <script src="recherche.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

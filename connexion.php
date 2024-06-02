@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
             }
 
             // Rediriger vers la page de destination si elle est définie, sinon vers la page compte
-            $redirect_url = isset($_GET['redirect_url']) ? $_GET['redirect_url'] : 'compte.php';
+            $redirect_url = 'compte.php';
             header("Location: $redirect_url");
             exit();
         } else {
