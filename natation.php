@@ -239,11 +239,13 @@ function regrouperCreneaux($creneauxJour) {
                                 <img src="images/coach10.jpeg" alt="Ariel Laptitesirene" class="img-fluid">
                             </div>
                             <div class="col-md-8">
+                                <br><br>
                                 <p><strong>Salle:</strong> EM321</p>
                                 <p><strong>Téléphone:</strong> 07 46 91 73 31</p>
                                 <p><strong>Email:</strong> <a href="mailto:ariel.laptitesirene@edu.ece.fr">ariel.laptitesirene@edu.ece.fr</a></p>
-                                <p><strong>CV:</strong> Formation: Diplômée en natation sportive. Expériences: Entraîneur de natation depuis 5 ans. Autres: Spécialisée en endurance et technique de nage.</p>
-                            </div>
+                                <div class="buttons mt-3 text-center">
+                                    <a href="cvCoach.php?id=10" class="btn btn-info mr-2">Voir le CV</a>
+                                </div>                            </div>
                         </div>
 
                         <!-- Tableau des disponibilités -->

@@ -239,11 +239,13 @@ function regrouperCreneaux($creneauxJour) {
                                 <img src="images/coach5.jpeg" alt="Ilies Matrixé" class="img-fluid">
                             </div>
                             <div class="col-md-8">
+                                <br><br>
                                 <p><strong>Salle:</strong> SC114</p>
                                 <p><strong>Téléphone:</strong> 07 46 91 73 26</p>
                                 <p><strong>Email:</strong> <a href="mailto:ilies.matrixe@edu.ece.fr">ilies.matrixe@edu.ece.fr</a></p>
-                                <p><strong>CV:</strong> Formation: Diplôme en sciences du sport. Expériences: Entraîneur personnel depuis 12 ans. Autres: Spécialisé en hypertrophie musculaire.</p>
-                            </div>
+                                <div class="buttons mt-3 text-center">
+                                    <a href="cvCoach.php?id=5" class="btn btn-info mr-2">Voir le CV</a>
+                                </div>                            </div>
                         </div>
 
                         <!-- Tableau des disponibilités -->

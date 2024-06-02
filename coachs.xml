@@ -4,120 +4,142 @@
         <Nom>Fit</Nom>
         <Prenom>Guy</Prenom>
         <Specialite>Fitness</Specialite>
-        <Photo>coach1.jpg</Photo>
+        <Photo>images/coach1.jpg</Photo>
         <Video>https://youtu.be/EKR3kZg6wck?si=LLk9X3yrei0id2VM</Video>
         <Telephone>07 46 91 73 22</Telephone>
         <Email>guy.fit@edu.ece.fr</Email>
-        <CV>Formation: Licence STAPS. Expériences: Coach personnel depuis 5 ans. Autres: Spécialisé en nutrition sportive.</CV>
+        <Formation>Licence STAPS</Formation>
+        <Experience>Coach personnel depuis 5 ans</Experience>
+        <Autres>Spécialisé en nutrition sportive</Autres>
     </Coach>
     <Coach>
         <ID>2</ID>
         <Nom>Detente</Nom>
         <Prenom>Maxine</Prenom>
         <Specialite>Cardio-Training</Specialite>
-        <Photo>coach2.jpeg</Photo>
+        <Photo>images/coach2.jpeg</Photo>
         <Video>https://youtu.be/cJhMDf1UzD8?si=vNgclgB0CdG7pfzw</Video>
         <Telephone>07 46 91 73 23</Telephone>
         <Email>maxine.detente@edu.ece.fr</Email>
-        <CV>Formation: Diplôme de professeur de yoga sportif. Expériences: Enseigne le Cardio-Training depuis 8 ans. Autres: Expert en méditation et relaxation.</CV>
+        <Formation>Diplôme de professeur de yoga sportif</Formation>
+        <Experience>Enseigne le Cardio-Training depuis 8 ans</Experience>
+        <Autres>Expert en méditation et relaxation</Autres>
     </Coach>
     <Coach>
         <ID>3</ID>
         <Nom>Saroule</Nom>
         <Prenom>Sylvain</Prenom>
         <Specialite>Biking</Specialite>
-        <Photo>coach3.jpg</Photo>
+        <Photo>images/coach3.jpg</Photo>
         <Video>None</Video>
         <Telephone>07 46 91 73 24</Telephone>
         <Email>sylvain.saroule@edu.ece.fr</Email>
-        <CV>Formation: Champion national de vélo d'interieur. Expériences: Entraîneur de Biking depuis 10 ans. Autres: Spécialisé en préparation physique.</CV>
+        <Formation>Champion national de vélo d'interieur</Formation>
+        <Experience>Entraîneur de Biking depuis 10 ans</Experience>
+        <Autres>Spécialisé en préparation physique</Autres>
     </Coach>
     <Coach>
         <ID>4</ID>
         <Nom>Baha</Nom>
         <Prenom>Angela</Prenom>
         <Specialite>Cours Collectifs</Specialite>
-        <Photo>coach4.jpg</Photo>
+        <Photo>images/coach4.jpg</Photo>
         <Video>None</Video>
         <Telephone>07 46 91 73 25</Telephone>
         <Email>angela.baha@edu.ece.fr</Email>
-        <CV>Formation: Instructrice certifiée Pilates. Expériences: Enseigne le Pilates depuis 7 ans. Autres: Spécialisée en rééducation posturale.</CV>
+        <Formation>Instructrice certifiée Pilates</Formation>
+        <Experience>Enseigne le Pilates depuis 7 ans</Experience>
+        <Autres>Spécialisée en rééducation posturale</Autres>
     </Coach>
     <Coach>
         <ID>5</ID>
         <Nom>Matrixé</Nom>
         <Prenom>Ilies</Prenom>
         <Specialite>Musculation</Specialite>
-        <Photo>coach5.jpeg</Photo>
+        <Photo>images/coach5.jpeg</Photo>
         <Video>https://youtu.be/45l6bl8Uyr4?si=bqgYPtALl3NsEV3h</Video>
         <Telephone>07 46 91 73 26</Telephone>
         <Email>ilies.matrixe@edu.ece.fr</Email>
-        <CV>Formation: Diplôme en sciences du sport. Expériences: Entraîneur personnel depuis 12 ans. Autres: Spécialisé en hypertrophie musculaire.</CV>
+        <Formation>Diplôme en sciences du sport</Formation>
+        <Experience>Entraîneur personnel depuis 12 ans</Experience>
+        <Autres>Spécialisé en hypertrophie musculaire</Autres>
     </Coach>
     <Coach>
         <ID>6</ID>
         <Nom>Possible</Nom>
         <Prenom>Kim</Prenom>
         <Specialite>Basketball</Specialite>
-        <Photo>coach6.jpeg</Photo>
+        <Photo>images/coach6.jpeg</Photo>
         <Video>https://youtu.be/3bxihqPKF08?si=7gbvOv2naC0KVgOA</Video>
         <Telephone>07 46 91 73 27</Telephone>
         <Email>kim.possible@edu.ece.fr</Email>
-        <CV>Formation: Diplôme en éducation physique. Expériences: Entraîneur de basketball depuis 10 ans. Autres: Spécialisée en stratégie de jeu.</CV>
+        <Formation>Diplôme en éducation physique</Formation>
+        <Experience>Entraîneur de basketball depuis 10 ans</Experience>
+        <Autres>Spécialisée en stratégie de jeu</Autres>
     </Coach>
     <Coach>
         <ID>7</ID>
         <Nom>Legrand</Nom>
         <Prenom>Zizou</Prenom>
         <Specialite>Football</Specialite>
-        <Photo>coach7.jpeg</Photo>
+        <Photo>images/coach7.jpeg</Photo>
         <Video>None</Video>
         <Telephone>07 46 91 73 28</Telephone>
         <Email>zizou.legrand@edu.ece.fr</Email>
-        <CV>Formation: Licence en sciences du sport. Expériences: Entraîneur de football depuis 8 ans. Autres: Spécialisé en technique de jeu et fitness.</CV>
+        <Formation>Licence en sciences du sport</Formation>
+        <Experience>Entraîneur de football depuis 8 ans</Experience>
+        <Autres>Spécialisé en technique de jeu et fitness</Autres>
     </Coach>
     <Coach>
         <ID>8</ID>
         <Nom>Unfrigo</Nom>
         <Prenom>Come</Prenom>
         <Specialite>Rugby</Specialite>
-        <Photo>coach8.jpg</Photo>
+        <Photo>images/coach8.jpg</Photo>
         <Video>None</Video>
         <Telephone>07 46 91 73 29</Telephone>
         <Email>come.unfrigo@edu.ece.fr</Email>
-        <CV>Formation: Champion national de rugby. Expériences: Entraîneur de rugby depuis 12 ans. Autres: Spécialisé en préparation physique.</CV>
+        <Formation>Champion national de rugby</Formation>
+        <Experience>Entraîneur de rugby depuis 12 ans</Experience>
+        <Autres>Spécialisé en préparation physique</Autres>
     </Coach>
     <Coach>
         <ID>9</ID>
         <Nom>Iguess</Nom>
         <Prenom>Nina</Prenom>
         <Specialite>Tennis</Specialite>
-        <Photo>coach9.jpeg</Photo>
+        <Photo>images/coach9.jpeg</Photo>
         <Video>None</Video>
         <Telephone>07 46 91 73 30</Telephone>
         <Email>nina.iguess@edu.ece.fr</Email>
-        <CV>Formation: Diplômée en tennis de compétition. Expériences: Entraîneur de tennis depuis 7 ans. Autres: Spécialisée en technique de jeu et stratégie.</CV>
+        <Formation>Diplômée en tennis de compétition</Formation>
+        <Experience>Entraîneur de tennis depuis 7 ans</Experience>
+        <Autres>Spécialisée en technique de jeu et stratégie</Autres>
     </Coach>
     <Coach>
         <ID>10</ID>
         <Nom>Laptitesirene</Nom>
         <Prenom>Ariel</Prenom>
         <Specialite>Natation</Specialite>
-        <Photo>coach10.jpeg</Photo>
+        <Photo>images/coach10.jpeg</Photo>
         <Video>None</Video>
         <Telephone>07 46 91 73 31</Telephone>
         <Email>ariel.laptitesirene@edu.ece.fr</Email>
-        <CV>Formation: Diplômée en natation sportive. Expériences: Entraîneur de natation depuis 5 ans. Autres: Spécialisée en endurance et technique de nage.</CV>
+        <Formation>Diplômée en natation sportive</Formation>
+        <Experience>Entraîneuse de natation depuis 5 ans</Experience>
+        <Autres>Spécialisée en endurance et technique de nage.</Autres>
     </Coach>
     <Coach>
         <ID>11</ID>
-        <Nom>Latetenba</Nom>
+        <Nom>Latetenbas</Nom>
         <Prenom>Nicolas</Prenom>
         <Specialite>Plongeon</Specialite>
-        <Photo>coach11.jpeg</Photo>
+        <Photo>images/coach11.jpeg</Photo>
         <Video>None</Video>
         <Telephone>07 46 91 73 32</Telephone>
         <Email>nicolas.latetenba@edu.ece.fr</Email>
-        <CV>Formation: Champion national de plongeon. Expériences: Entraîneur de plongeon depuis 6 ans. Autres: Spécialisé en technique et acrobatie.</CV>
+        <Formation>Championnat national de plongeon</Formation>
+        <Experience>Entraîneur de plongeon depuis 6 ans</Experience>
+        <Autres>Spécialisé en technique et acrobatie..</Autres>
     </Coach>
 </Coachs>

@@ -239,11 +239,13 @@ function regrouperCreneaux($creneauxJour) {
                                 <img src="images/coach6.jpeg" alt="Kim Possible" class="img-fluid">
                             </div>
                             <div class="col-md-8">
+                                <br>
                                 <p><strong>Salle:</strong> G-010</p>
                                 <p><strong>Téléphone:</strong> 07 46 91 73 27</p>
                                 <p><strong>Email:</strong> <a href="mailto:kim.possible@edu.ece.fr">kim.possible@edu.ece.fr</a></p>
-                                <p><strong>CV:</strong> Formation: Diplôme en éducation physique. Expériences: Entraîneur de basketball depuis 10 ans. Autres: Spécialisée en stratégie de jeu.</p>
-                                <div class="embed-responsive embed-responsive-16by9 mt-3">
+                                <div class="buttons mt-3 text-center">
+                                    <a href="cvCoach.php?id=6" class="btn btn-info mr-2">Voir le CV</a>
+                                </div>                                <div class="embed-responsive embed-responsive-16by9 mt-3">
                                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/3bxihqPKF08?si=7gbvOv2naC0KVgOA" allowfullscreen></iframe>
                                 </div>
                             </div>

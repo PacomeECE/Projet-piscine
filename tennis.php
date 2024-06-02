@@ -239,11 +239,13 @@ function regrouperCreneaux($creneauxJour) {
                                 <img src="images/coach9.jpeg" alt="Nina Iguess" class="img-fluid">
                             </div>
                             <div class="col-md-8">
+                                <br><br>
                                 <p><strong>Salle:</strong> SC319</p>
                                 <p><strong>Téléphone:</strong> 07 46 91 73 30</p>
                                 <p><strong>Email:</strong> <a href="mailto:nina.iguess@edu.ece.fr">nina.iguess@edu.ece.fr</a></p>
-                                <p><strong>CV:</strong> Formation: Diplômée en tennis de compétition. Expériences: Entraîneur de tennis depuis 7 ans. Autres: Spécialisée en technique de jeu et stratégie.</p>
-                            </div>
+                                <div class="buttons mt-3 text-center">
+                                    <a href="cvCoach.php?id=9" class="btn btn-info mr-2">Voir le CV</a>
+                                </div>                            </div>
                         </div>
 
                         <!-- Tableau des disponibilités -->

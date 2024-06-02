@@ -239,10 +239,14 @@ function regrouperCreneaux($creneauxJour) {
                                 <img src="images/coach1.jpg" alt="Guy Fit" class="img-fluid">
                             </div>
                             <div class="col-md-8">
+                                <br><br>
                                 <p><strong>Salle:</strong> Em214</p>
                                 <p><strong>Téléphone:</strong> 07 46 91 73 22</p>
                                 <p><strong>Email:</strong> <a href="mailto:guy.fit@edu.ece.fr">guy.fit@edu.ece.fr</a></p>
-                                <p><strong>CV:</strong> Formation: Licence STAPS. Expériences: Coach personnel depuis 5 ans. Autres: Spécialisé en nutrition sportive.</p>
+                            <!-- Bouton CV -->
+                                <div class="buttons mt-3 text-center">
+                                    <a href="cvCoach.php?id=1" class="btn btn-info mr-2">Voir le CV</a>
+                                </div>
                             </div>
                         </div>
 

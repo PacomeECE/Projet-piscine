@@ -239,11 +239,13 @@ function regrouperCreneaux($creneauxJour) {
                                 <img src="images/coach7.jpeg" alt="Zizou Legrand" class="img-fluid">
                             </div>
                             <div class="col-md-8">
+                                <br><br>
                                 <p><strong>Salle:</strong> SC214</p>
                                 <p><strong>Téléphone:</strong> 07 46 91 73 28</p>
                                 <p><strong>Email:</strong> <a href="mailto:zizou.legrand@edu.ece.fr">zizou.legrand@edu.ece.fr</a></p>
-                                <p><strong>CV:</strong> Formation: Licence en sciences du sport. Expériences: Entraîneur de football depuis 8 ans. Autres: Spécialisé en technique de jeu et fitness.</p>
-                            </div>
+                                <div class="buttons mt-3 text-center">
+                                    <a href="cvCoach.php?id=7" class="btn btn-info mr-2">Voir le CV</a>
+                                </div>                            </div>
                         </div>
 
                         <!-- Tableau des disponibilités -->

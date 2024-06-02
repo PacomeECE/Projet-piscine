@@ -239,11 +239,13 @@ function regrouperCreneaux($creneauxJour) {
                                 <img src="images/coach8.jpg" alt="Come Unfrigo" class="img-fluid">
                             </div>
                             <div class="col-md-8">
+                                <br><br>
                                 <p><strong>Salle:</strong> EM319</p>
                                 <p><strong>Téléphone:</strong> 07 46 91 73 29</p>
                                 <p><strong>Email:</strong> <a href="mailto:come.unfrigo@edu.ece.fr">come.unfrigo@edu.ece.fr</a></p>
-                                <p><strong>CV:</strong> Formation: Champion national de rugby. Expériences: Entraîneur de rugby depuis 12 ans. Autres: Spécialisé en préparation physique.</p>
-                            </div>
+                                <div class="buttons mt-3 text-center">
+                                    <a href="cvCoach.php?id=8" class="btn btn-info mr-2">Voir le CV</a>
+                                </div>                            </div>
                         </div>
 
                         <!-- Tableau des disponibilités -->
