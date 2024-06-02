@@ -239,11 +239,13 @@ function regrouperCreneaux($creneauxJour) {
                                 <img src="images/coach2.jpeg" alt="Maxine Detente" class="img-fluid">
                             </div>
                             <div class="col-md-8">
+                                <br><br>
                                 <p><strong>Salle:</strong> EM009</p>
                                 <p><strong>Téléphone:</strong> 07 46 91 73 23</p>
                                 <p><strong>Email:</strong> <a href="mailto:maxine.detente@edu.ece.fr">maxine.detente@edu.ece.fr</a></p>
-                                <p><strong>CV:</strong> Formation: Diplôme de professeur de yoga sportif. Expériences: Enseigne le Cardio-Training depuis 8 ans. Autres: Expert en méditation et relaxation.</p>
-                            </div>
+                                <div class="buttons mt-3 text-center">
+                                    <a href="cvCoach.php?id=2" class="btn btn-info mr-2">Voir le CV</a>
+                                </div>                            </div>
                         </div>
 
                         <!-- Tableau des disponibilités -->

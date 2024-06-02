@@ -239,11 +239,13 @@ function regrouperCreneaux($creneauxJour) {
                                 <img src="images/coach3.jpg" alt="Sylvain Saroule" class="img-fluid">
                             </div>
                             <div class="col-md-8">
+                                <br><br>
                                 <p><strong>Salle:</strong> EM010</p>
                                 <p><strong>Téléphone:</strong> 07 46 91 73 24</p>
                                 <p><strong>Email:</strong> <a href="mailto:sylvain.saroule@edu.ece.fr">sylvain.saroule@edu.ece.fr</a></p>
-                                <p><strong>CV:</strong> Formation: Champion national de vélo d'intérieur. Expériences: Entraîneur de Biking depuis 10 ans. Autres: Spécialisé en préparation physique.</p>
-                            </div>
+                                <div class="buttons mt-3 text-center">
+                                    <a href="cvCoach.php?id=3" class="btn btn-info mr-2">Voir le CV</a>
+                                </div>                            </div>
                             </div>
                         </div>
 

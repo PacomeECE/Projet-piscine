@@ -239,11 +239,13 @@ function regrouperCreneaux($creneauxJour) {
                                 <img src="images/coach11.jpeg" alt="Nicolas Latetenba" class="img-fluid">
                             </div>
                             <div class="col-md-8">
+                                <br><br>
                                 <p><strong>Salle:</strong> EM218</p>
                                 <p><strong>Téléphone:</strong> 07 46 91 73 32</p>
                                 <p><strong>Email:</strong> <a href="mailto:nicolas.latetenba@edu.ece.fr">nicolas.latetenba@edu.ece.fr</a></p>
-                                <p><strong>CV:</strong> Formation: Champion national de plongeon. Expériences: Entraîneur de plongeon depuis 6 ans. Autres: Spécialisé en technique et acrobatie.</p>
-                            </div>
+                                <div class="buttons mt-3 text-center">
+                                    <a href="cvCoach.php?id=11" class="btn btn-info mr-2">Voir le CV</a>
+                                </div>                            </div>
                         </div>
 
                         <!-- Tableau des disponibilités -->
