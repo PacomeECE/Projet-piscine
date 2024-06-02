@@ -38,7 +38,7 @@ $user_id = $_SESSION['user_id'];
 $role = $_SESSION['role_utilisateur'];
 
 // Vérifier si l'utilisateur est admin
-if ($role != 'admin') {
+if ($role = 'admin') {
     header("Location: accueil.html");
     exit();
 }

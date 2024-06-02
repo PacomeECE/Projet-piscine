@@ -53,6 +53,8 @@ function performSearch() {
     targetFile = "muscu.php";
   } else if (query === "fitness" || query === "fitnesse" || query === "fit" || query === "guy fit" || query === "coach guy" || query === "coach fit" || query === "gymnastique" || query === "entraînement" || query === "exercice physique" || query === "forme physique") {
     targetFile = "fitness.php";
+  } else if (query === "offre" || query === "abonnement" || query === "abonement" || query === "souscription" ){
+    targetFile = "abonnement.php";
   } else {
     alert("Pas de résultat trouvé !");
   }
