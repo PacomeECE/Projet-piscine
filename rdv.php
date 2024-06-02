@@ -100,10 +100,10 @@ mysqli_close($db_handle);
                     <a class="nav-link" href="rdv.html">Rendez-Vous</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0 ml-auto">
-                <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
-                <button class="btn my-2 my-sm-0" type="submit">Rechercher</button>
-            </form>
+            <div class="search-container form-inline my-2 my-lg-0 ml-auto">
+                <input type="search" id="search-input" placeholder="Taper pour Rechercher" class="form-control mr-sm-2">
+                <button id="search-button" class="btn my-2 my-sm-0" type="button">Rechercher</button>
+            </div>
         </div>
     </nav>
 
@@ -183,6 +183,7 @@ mysqli_close($db_handle);
             </iframe>
         </div>
     </footer>
+    <script src="recherche.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
