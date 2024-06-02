@@ -186,7 +186,7 @@ function regrouperCreneaux($creneauxJour) {
                     <h3>Nathalie Céleri - Coach, Nutrition</h3>
                         <div class="row">
                             <div class="col-md-4 text-center">
-                                <img src="images/coach18.jpg" alt="Nathalie Céleri" class="img-fluid">
+                                <img src="images/nat.png" alt="Nathalie Céleri" class="img-fluid">
                             </div>
                             <div class="col-md-8">
                                 <p><strong>Salle:</strong> Em210</p>
