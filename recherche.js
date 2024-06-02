@@ -51,7 +51,7 @@
     targetFile = "plongeon.php";
   } else if (query === "musculation" || query === "muscu" || query === "muscle" || query === "masse" || query === "bodybuilding" || query === "iliès matrixé" || query === "iliès" || query === "matrixé" || query === "coach iliès" || query === "coach matrixé" || query === "ilies" || query === "coach matrixe" || query === "force" || query === "poids" || query === "haltères") {
     targetFile = "muscu.php";
-  } else if (query === "fitness" || query === "fitnesse" || query === "fit" || query === "guy fit" || query === "coach guy" || query === "coach fit" || query === "gymnastique" || query === "entraînement" || query === "exercice physique" || query === "forme physique") {
+  } else if (query === "fitness" || query === "fitnesse" || query === "fit" || query === "guy fit" || query === "coach guy" || query === "coach fit" || query === "gymnastique" || query === "entraînement" || query === "exercice physique" || query === "forme physique" || query === "guy") {
     targetFile = "fitness.php";
   } else {
     alert("Pas de résultat trouvé !");
