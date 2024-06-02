@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 02 juin 2024 à 13:50
+-- Généré le : dim. 02 juin 2024 à 14:05
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `coachs` (
   `cv` text,
   PRIMARY KEY (`id_coach`),
   KEY `id_utilisateur` (`id_utilisateur`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `coachs`
@@ -55,7 +55,7 @@ INSERT INTO `coachs` (`id_coach`, `id_utilisateur`, `specialite`, `photo_url`, `
 (9, 9, 'Tennis', 'coach9.jpeg', 'None', '<Coach>\r\n    <ID>9</ID>\r\n    <Nom>Iguess</Nom>\r\n    <Prenom>Nina</Prenom>\r\n    <Specialite>Tennis</Specialite>\r\n    <Photo>coach9.jpeg</Photo>\r\n    <Video>None</Video>\r\n    <Telephone>07 46 91 73 30</Telephone>\r\n    <Email>nina.iguess@edu.ece.fr</Email>\r\n    <CV>Formation: Diplômée en tennis de compétition. Expériences: Entraîneur de tennis depuis 7 ans. Autres: Spécialisée en technique de jeu et stratégie.</CV>\r\n</Coach>'),
 (10, 10, 'Natation', 'coach10.jpeg', 'None', '<Coach>\r\n    <ID>10</ID>\r\n    <Nom>Laptitesirene</Nom>\r\n    <Prenom>Ariel</Prenom>\r\n    <Specialite>Natation</Specialite>\r\n    <Photo>coach10.jpeg</Photo>\r\n    <Video>None</Video>\r\n    <Telephone>07 46 91 73 31</Telephone>\r\n    <Email>ariel.laptitesirene@edu.ece.fr</Email>\r\n    <CV>Formation: Diplômée en natation sportive. Expériences: Entraîneur de natation depuis 5 ans. Autres: Spécialisée en endurance et technique de nage.</CV>\r\n</Coach>'),
 (11, 11, 'Plongeon', 'coach11.jpeg', 'None', '<Coach>\r\n    <ID>11</ID>\r\n    <Nom>Latetenba</Nom>\r\n    <Prenom>Nicolas</Prenom>\r\n    <Specialite>Plongeon</Specialite>\r\n    <Photo>coach11.jpeg</Photo>\r\n    <Video>None</Video>\r\n    <Telephone>07 46 91 73 32</Telephone>\r\n    <Email>nicolas.latetenba@edu.ece.fr</Email>\r\n    <CV>Formation: Champion national de plongeon. Expériences: Entraîneur de plongeon depuis 6 ans. Autres: Spécialisé en technique et acrobatie.</CV>\r\n</Coach>'),
-(12, 17, 'Marathon', 'nat.jpg', 'nat', 'lol');
+(18, 18, 'Nutrition', 'images/nat.png', NULL, '<Coach>\r\n    <ID>18</ID>\r\n    <Nom>Céleri</Nom>\r\n    <Prenom>Nathalie</Prenom>\r\n    <Specialite>Nutrition</Specialite>\r\n    <Photo>nat.png</Photo>\r\n    <Video>None</Video>\r\n    <Telephone>01 30 33 16 16</Telephone>\r\n    <Email>nat.celeri@edu.ece.fr</Email>\r\n    <CV>Formation: Diplôme en diététique et nutrition. Expériences: Diététicienne depuis 10 ans. Autres: Spécialisée en nutrition sportive et gestion de poids.</CV>\r\n</Coach>');
 
 -- --------------------------------------------------------
 
@@ -2084,7 +2084,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `type_carte` enum('Visa','MasterCard','American Express','PayPal') DEFAULT NULL,
   PRIMARY KEY (`id_utilisateur`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateurs`
@@ -2105,7 +2105,8 @@ INSERT INTO `utilisateurs` (`id_utilisateur`, `prenom`, `nom`, `email`, `mot_de_
 (12, 'Lola', 'Legall', 'lola.legall@edu.ece.fr', 'martin', '1 Admin St.', 'Apt 101', 'Paris', '75001', 'France', '06 12 34 56 78', '123456780', 'admin', '2024-05-30 15:06:16', '1111222233334444', 'Lola Legall', '12/26', '123', 'Visa'),
 (13, 'Pacôme', 'Golvet', 'pacome.golvet@edu.ece.fr', 'Rohr', '2 Admin Blvd.', '', 'Epalles', '03251', 'France', '06 87 65 43 21', '123456781', 'admin', '2024-05-30 15:06:16', '5555666677778888', 'Pacôme Golvet', '11/25', '456', 'MasterCard'),
 (14, 'Amandine', 'Soyez', 'amandine.soyez@edu.ece.fr', 'Rohr', '3 Admin Ave.', 'Suite 300', 'Fayot', '03250', 'France', '06 98 76 54 32', '123456782', 'admin', '2024-05-30 15:06:16', '9999000011112222', 'Amandine Soyez', '10/24', '789', 'American Express'),
-(16, 'Amandine', 'Soyez', 'amandine27478@gmail.com', 'Moulin', '25 Bis rue de l\'Armorique', 'Appartement 4', 'PARIS 15', '75015', 'France', '0631779407', '123456789', 'client', '2024-05-30 16:11:50', '1234567890123456', 'Amandine Soyez', '12/14', '123', 'American Express');
+(16, 'Amandine', 'Soyez', 'amandine27478@gmail.com', 'Moulin', '25 Bis rue de l\'Armorique', 'Appartement 4', 'PARIS 15', '75015', 'France', '0631779407', '123456789', 'client', '2024-05-30 16:11:50', '1234567890123456', 'Amandine Soyez', '12/14', '123', 'American Express'),
+(18, 'Nathalie', 'Céleri', 'nat.celeri@edu.ece.fr', 'password', '12 rue Charles ', NULL, 'Mayet', '03250', 'France', '0130331616', '098987675', 'coach', '2024-06-02 13:54:31', NULL, NULL, NULL, NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
