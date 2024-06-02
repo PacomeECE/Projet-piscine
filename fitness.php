@@ -1,3 +1,55 @@
+<?php
+// Connexion à la base de données
+$database = "Projet-piscine";
+$db_handle = mysqli_connect('localhost', 'root', '', $database);
+
+if (!$db_handle) {
+    die("Échec de la connexion à la base de données : " . mysqli_connect_error());
+}
+
+// Récupérer les créneaux disponibles pour le coach Kim Possible (id_coach = 6)
+$sql = "SELECT c.jour_semaine, c.heure_debut, c.heure_fin
+        FROM disponibilites_coachs dc
+        JOIN creneaux c ON dc.id_creneau = c.id_creneau
+        WHERE dc.id_coach = 1 AND dc.disponible = 1
+        ORDER BY c.jour_semaine, c.heure_debut";
+
+$result = mysqli_query($db_handle, $sql);
+
+$creneaux = [];
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $creneaux[$row['jour_semaine']][] = $row;
+    }
+} else {
+    $error_message = "Erreur dans la requête SQL : " . mysqli_error($db_handle);
+}
+
+mysqli_close($db_handle);
+
+function regrouperCreneaux($creneauxJour) {
+    $regroupes = [];
+    $debut = null;
+    $fin = null;
+    foreach ($creneauxJour as $creneau) {
+        if ($debut === null) {
+            $debut = $creneau['heure_debut'];
+            $fin = $creneau['heure_fin'];
+        } elseif ($creneau['heure_debut'] === $fin) {
+            $fin = $creneau['heure_fin'];
+        } else {
+            $regroupes[] = ['heure_debut' => $debut, 'heure_fin' => $fin];
+            $debut = $creneau['heure_debut'];
+            $fin = $creneau['heure_fin'];
+        }
+    }
+    if ($debut !== null) {
+        $regroupes[] = ['heure_debut' => $debut, 'heure_fin' => $fin];
+    }
+    return $regroupes;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
