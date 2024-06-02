@@ -53,6 +53,10 @@
     targetFile = "muscu.php";
   } else if (query === "fitness" || query === "fitnesse" || query === "fit" || query === "guy fit" || query === "coach guy" || query === "coach fit" || query === "gymnastique" || query === "entraînement" || query === "exercice physique" || query === "forme physique" || query === "guy") {
     targetFile = "fitness.php";
+  } else if (query === "abonnement" || query === "adhésion" || query === "souscription" || query === "souscrire" || query === "adhérer" || query === "s'abonner" || query === "payer" || query === "payant" || query === "mensuel" || query === "annuel" || query === "trimestriel") {
+    targetFile = "abonnement.php";
+  } else if (query === "nutritioniste" || query === "nathalie" || query === "Célerie" || query === " Nathalie Célerie " || query === " Nat" ) {
+    targetFile = "nutritioniste.php";
   } else {
     alert("Pas de résultat trouvé !");
   }

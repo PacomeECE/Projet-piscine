@@ -318,24 +318,22 @@ function regrouperCreneaux($creneauxJour) {
     <footer class="footer text-center py-4">
         <div class="container">
             <p>Contactez-nous :</p>
-            <ul class="list-inline">
-                <li class="list-inline-item">
-                    <a href="https://www.facebook.com/sportify" class="btn-social btn-outline">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://www.twitter.com/sportify" class="btn-social btn-outline">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="https://www.instagram.com/sportify" class="btn-social btn-outline">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </li>
-            </ul>
-            <p>&copy; 2024 SPORTIFY. Tous droits réservés.</p>
+            <p>
+                <i class="fas fa-phone" style="margin-right: 10px;"></i>
+                <a href="tel:0144876211">01 44 87 62 11</a>
+            </p>
+            <p>
+                <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>
+                <a href="https://www.google.com/maps/search/?api=1&query=10+Rue+Sextius+Michel,+Paris,+France">10 rue Sextius Michel, Paris, France</a>
+            </p>
+            <p>
+                <i class="fas fa-envelope" style="margin-right: 10px;"></i>
+                <a href="mailto:salle.sports@omnessports.fr">salle.sports@omnessports.fr</a>
+            </p>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8767.74803941555!2d2.28749683632621!3d48.84760618152228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2sECE%20-%20Ecole%20d&#39;ing%C3%A9nieurs%20-%20Engineering%20school.!5e0!3m2!1sfr!2sfr!4v1685374726975!5m2!1sfr!2sfr"
+                width="1000" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
         </div>
     </footer>
     <script src="recherche.js"></script>

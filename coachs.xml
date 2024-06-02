@@ -147,10 +147,12 @@
     <Nom>Céleri</Nom>
     <Prenom>Nathalie</Prenom>
     <Specialite>Nutrition</Specialite>
-    <Photo>nat.png</Photo>
+    <Photo>images/nat.png</Photo>
     <Video>None</Video>
     <Telephone>01 30 33 16 16</Telephone>
     <Email>nat.celeri@edu.ece.fr</Email>
-    <CV>Formation: Diplôme en diététique et nutrition. Expériences: Diététicienne depuis 10 ans. Autres: Spécialisée en nutrition sportive et gestion de poids.</CV>
+    <Formation>Diplôme en diététique et nutrition.</Formation>
+    <Experience>Diététicienne depuis 10 ans.</Experience>
+    <Autres>Spécialisée en nutrition sportive et gestion de poids.</Autres>
 </Coach>
 </Coachs>
