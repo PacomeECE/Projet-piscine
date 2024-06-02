@@ -91,7 +91,7 @@ mysqli_close($db_handle);
                     <a class="nav-link" href="accueil.html">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="connexion.html">Compte</a>
+                    <a class="nav-link" href="compte.php">Compte</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="toutParcourir.html">Tout Parcourir</a>

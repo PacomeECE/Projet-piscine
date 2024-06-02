@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 // Connexion à la base de données
 $database = "Projet-piscine";
 $db_handle = mysqli_connect('localhost', 'root', '', $database);
@@ -9,95 +7,47 @@ if (!$db_handle) {
     die("Échec de la connexion à la base de données : " . mysqli_connect_error());
 }
 
-// Variables d'erreur et de succès
-$error_message = "";
-$success_message = "";
+// Récupérer les créneaux disponibles pour le coach Nathalie Céleri (id_coach = 18)
+$sql = "SELECT c.jour_semaine, c.heure_debut, c.heure_fin
+        FROM disponibilites_coachs dc
+        JOIN creneaux c ON dc.id_creneau = c.id_creneau
+        WHERE dc.id_coach = 18 AND dc.disponible = 1
+        ORDER BY c.jour_semaine, c.heure_debut";
 
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['user_email'])) {
-    header("Location: connexion.php");
-    exit();
-}
-
-// Traitement de la déconnexion
-if (isset($_POST['logout'])) {
-    session_unset();
-    session_destroy();
-    header("Location: connexion.php");
-    exit();
-}
-
-// Vérification de la session
-$user_id = $_SESSION['user_id'];
-echo "<p>DEBUG: Utilisateur connecté - ID: " . $user_id . ", Nom: " . $_SESSION['user_nom'] . ", Prénom: " . $_SESSION['user_prenom'] . "</p>";
-
-// Récupérer les nutritionnistes disponibles en joignant les tables nutritionnistes et utilisateurs
-$sql = "SELECT n.id_nutritionniste, u.nom, u.prenom 
-        FROM nutritionnistes n
-        JOIN utilisateurs u ON n.id_nutritionniste = u.id_utilisateur";
 $result = mysqli_query($db_handle, $sql);
-$nutritionnistes = [];
-if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $nutritionnistes[] = $row;
-    }
-} else {
-    die("Erreur dans la requête SQL : " . mysqli_error($db_handle));
-}
-
-// Récupérer les créneaux disponibles pour un nutritionniste donné et un jour donné
-$selected_nutritionniste_id = isset($_GET['nutritionniste_id']) ? $_GET['nutritionniste_id'] : (isset($_POST['nutritionniste_id']) ? $_POST['nutritionniste_id'] : '');
-$selected_day = isset($_GET['jour']) ? $_GET['jour'] : (isset($_POST['jour']) ? $_POST['jour'] : '');
 
 $creneaux = [];
-$reserved_creneaux = [];
-if ($selected_nutritionniste_id && $selected_day) {
-    $sql = "SELECT c.id_creneau, c.heure_debut, c.heure_fin, 
-                   (SELECT COUNT(*) FROM rendezvous r WHERE r.id_creneau = c.id_creneau AND r.id_nutritionniste = $selected_nutritionniste_id) AS is_reserved
-            FROM disponibilites_nutritionnistes dn
-            JOIN creneaux c ON dn.id_creneau = c.id_creneau
-            WHERE dn.id_nutritionniste = $selected_nutritionniste_id AND dn.disponible = 1 AND c.jour_semaine = '$selected_day'
-            ORDER BY c.heure_debut";
-    $result = mysqli_query($db_handle, $sql);
-    if ($result) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $creneaux[] = $row;
-            if ($row['is_reserved'] > 0) {
-                $reserved_creneaux[] = $row['id_creneau'];
-            }
-        }
-    } else {
-        die("Erreur dans la requête SQL : " . mysqli_error($db_handle));
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $creneaux[$row['jour_semaine']][] = $row;
     }
-}
-
-// Traitement de la réservation des créneaux
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['reserver'])) {
-    $selected_nutritionniste_id = $_POST['nutritionniste_id'];
-    $selected_day = $_POST['jour'];
-    $selected_creneaux = explode(',', $_POST['selected_creneaux']);
-    $client_id = $_SESSION['user_id'];
-    $date_creation = date('Y-m-d H:i:s');
-
-    foreach ($selected_creneaux as $creneau_id) {
-        $creneau_id = intval($creneau_id); // Assurez-vous que l'ID du créneau est un entier
-        $sql = "INSERT INTO rendezvous (id_client, id_nutritionniste, id_creneau, cree_a) VALUES ($client_id, $selected_nutritionniste_id, $creneau_id, '$date_creation')";
-        echo "<p>DEBUG: $sql</p>"; // Instruction de débogage
-        if (!mysqli_query($db_handle, $sql)) {
-            $error_message = "Erreur dans l'insertion : " . mysqli_error($db_handle);
-            break; // Arrêtez l'insertion si une erreur se produit
-        } else {
-            $success_message = "Rendez-vous pris avec succès !";
-        }
-    }
-
-    if ($success_message) {
-        header("Location: rdv.php");
-        exit();
-    }
+} else {
+    $error_message = "Erreur dans la requête SQL : " . mysqli_error($db_handle);
 }
 
 mysqli_close($db_handle);
+
+function regrouperCreneaux($creneauxJour) {
+    $regroupes = [];
+    $debut = null;
+    $fin = null;
+    foreach ($creneauxJour as $creneau) {
+        if ($debut === null) {
+            $debut = $creneau['heure_debut'];
+            $fin = $creneau['heure_fin'];
+        } elseif ($creneau['heure_debut'] === $fin) {
+            $fin = $creneau['heure_fin'];
+        } else {
+            $regroupes[] = ['heure_debut' => $debut, 'heure_fin' => $fin];
+            $debut = $creneau['heure_debut'];
+            $fin = $creneau['heure_fin'];
+        }
+    }
+    if ($debut !== null) {
+        $regroupes[] = ['heure_debut' => $debut, 'heure_fin' => $fin];
+    }
+    return $regroupes;
+}
 ?>
 
 <!DOCTYPE html>
@@ -111,30 +61,86 @@ mysqli_close($db_handle);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="image/png" href="images/logo.png" />
     <link rel="stylesheet" href="sports.css" />
-    <title>Prendre un RDV</title>
+    <title>SPORTIFY - Nutrition</title>
     <style>
-        .grid-creneaux {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
+        .availability-table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
         }
-        .creneau {
-            padding: 10px;
-            background-color: #f8f9fa;
+
+        .availability-table th, .availability-table td {
             border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 8px;
             text-align: center;
-            cursor: pointer;
         }
-        .creneau.selected {
+
+        .availability-table th {
             background-color: #007bff;
             color: white;
-            border-color: #007bff;
         }
-        .creneau.reserved {
-            background-color: #d3d3d3;
-            color: #6c757d;
-            cursor: not-allowed;
+
+        .availability-table td {
+            background-color: #f8f9fa;
+        }
+
+        .availability-table td.available {
+            background-color: #d4edda;
+        }
+
+        .availability-table td.unavailable {
+            background-color: #96bbfe;
+        }
+
+        .badge {
+            background-color: #96bbfe;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .coach-profile {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .coach-info {
+            padding: 20px;
+        }
+
+        .coach-info img {
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .day-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .creneau-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .creneau-list .badge {
+            background-color: #007bff;
+            color: white;
         }
     </style>
 </head>
@@ -162,113 +168,123 @@ mysqli_close($db_handle);
                     <a class="nav-link" href="rdv.php">Rendez-Vous</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0 ml-auto">
-                <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
-                <button class="btn my-2 my-sm-0" type="submit">Rechercher</button>
-            </form>
+            <div class="search-container form-inline my-2 my-lg-0 ml-auto">
+                <input type="search" id="search-input" placeholder="Taper pour Rechercher" class="form-control mr-sm-2">
+                <button id="search-button" class="btn my-2 my-sm-0" type="button">Rechercher</button>
+            </div>
         </div>
     </nav>
 
-    <div class="container mt-5 pt-5">
-        <h2 class="text-center">Prendre un Rendez-Vous</h2>
-        <?php if (isset($_SESSION['user_nom']) && isset($_SESSION['user_prenom'])) { ?>
-            <div class="mb-4">
-                <span>Connecté en tant que <?php echo htmlspecialchars($_SESSION['user_prenom'] . " " . $_SESSION['user_nom']); ?></span>
-                <form method="POST" action="prendreRdv.php" class="d-inline">
-                    <button type="submit" name="logout" class="btn btn-link">Déconnexion</button>
-                </form>
-            </div>
-        <?php } ?>
-
-        <?php if ($success_message) { ?>
-            <div class="alert alert-success"><?php echo htmlspecialchars($success_message); ?></div>
-        <?php } ?>
-        <?php if ($error_message) { ?>
-            <div class="alert alert-danger"><?php echo htmlspecialchars($error_message); ?></div>
-        <?php } ?>
-
-        <form method="GET" action="prendreRdv.php">
-            <div class="form-group">
-                <label for="nutritionniste">Nutritionniste :</label>
-                <select class="form-control" id="nutritionniste" name="nutritionniste_id" onchange="this.form.submit()">
-                    <option value="">Sélectionner un nutritionniste</option>
-                    <?php foreach ($nutritionnistes as $nutritionniste) { ?>
-                        <option value="<?php echo $nutritionniste['id_nutritionniste']; ?>" <?php echo $selected_nutritionniste_id == $nutritionniste['id_nutritionniste'] ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($nutritionniste['prenom'] . " " . $nutritionniste['nom']); ?>
-                        </option>
-                    <?php } ?>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="jour">Jour :</label>
-                <select class="form-control" id="jour" name="jour" onchange="this.form.submit()">
-                    <option value="">Sélectionner un jour</option>
-                    <?php
-                    $jours = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
-                    foreach ($jours as $jour) {
-                        echo "<option value=\"$jour\" " . ($selected_day == $jour ? 'selected' : '') . ">$jour</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-        </form>
-
-        <?php if (!empty($creneaux)) { ?>
-            <form method="POST" action="prendreRdv.php">
-                <input type="hidden" name="nutritionniste_id" value="<?php echo $selected_nutritionniste_id; ?>">
-                <input type="hidden" name="jour" value="<?php echo $selected_day; ?>">
-                <div class="grid-creneaux">
-                    <?php foreach ($creneaux as $creneau) { ?>
-                        <div class="creneau <?php echo in_array($creneau['id_creneau'], $reserved_creneaux) ? 'reserved' : ''; ?>" data-id-creneau="<?php echo $creneau['id_creneau']; ?>" data-heure-debut="<?php echo $creneau['heure_debut']; ?>">
-                            <?php echo htmlspecialchars($creneau['heure_debut']) . " - " . htmlspecialchars($creneau['heure_fin']); ?>
-                        </div>
-                    <?php } ?>
+    <main class="container mt-5 pt-5">
+        <div class="coach-profile mt-5">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h1>Nutrition</h1>
                 </div>
-                <input type="hidden" id="selectedCreneaux" name="selected_creneaux" value="">
-                <button type="submit" name="reserver" class="btn btn-primary mt-3">Prendre RDV</button>
-            </form>
-        <?php } else if ($selected_day) { ?>
-            <p>Aucun créneau disponible pour ce jour.</p>
-        <?php } ?>
+                <div class="card-body">
+                    <div class="coach-info">
+                    <h3>Nathalie Céleri - Coach, Nutrition</h3>
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <img src="images/coach18.jpg" alt="Nathalie Céleri" class="img-fluid">
+                            </div>
+                            <div class="col-md-8">
+                                <p><strong>Salle:</strong> Em210</p>
+                                <p><strong>Téléphone:</strong> 07 46 91 73 29</p>
+                                <p><strong>Email:</strong> <a href="mailto:nat.celeri@edu.ece.fr">nat.celeri@edu.ece.fr</a></p>
+                                <p><strong>CV:</strong> Formation: Diplôme en diététique et nutrition. Expériences: Diététicienne depuis 10 ans. Autres: Spécialisée en nutrition sportive et gestion de poids.</p>
+                            </div>
+                        </div>
+
+                        <!-- Tableau des disponibilités -->
+                        <table class="availability-table mt-4">
+                            <thead>
+                                <tr>
+                                    <th>Jour</th>
+                                    <th>Disponibilité</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (isset($error_message)) {
+                                    echo "<tr><td colspan='2'>" . htmlspecialchars($error_message) . "</td></tr>";
+                                } else {
+                                    $jours = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+                                    foreach ($jours as $jour) {
+                                        echo "<tr>";
+                                        echo "<td>" . htmlspecialchars($jour) . "</td>";
+                                        echo "<td>";
+                                        if (isset($creneaux[$jour])) {
+                                            $creneaux_regroupes = regrouperCreneaux($creneaux[$jour]);
+                                            foreach ($creneaux_regroupes as $creneau) {
+                                                echo "<div class='badge'>" . htmlspecialchars($creneau['heure_debut']) . " - " . htmlspecialchars($creneau['heure_fin']) . "</div> ";
+                                            }
+                                        } else {
+                                            echo "<div class='badge unavailable'>Aucun créneau disponible</div>";
+                                        }
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+
+                        <div class="buttons mt-3 text-center">
+                            <a href="prendreRdv.php" class="btn btn-success mr-2">Prendre un RDV</a>
+                        </div>
+                        <form id="form-email" action="mailto:nat.celeri@edu.ece.fr" method="post" enctype="text/plain">
+                        <div class="form-group">
+                            <div class="label-container">
+                                <label for="message">Contacter le Coach :</label>
+                                </div>
+                            <textarea id="Demande du client" class="form-control" rows="5" required placeholder="Écrivez votre message ici." name="Demande du client"></textarea></div>
+                                <button type="submit" class="btn btn-info">Envoyer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="chatbox"> 
+        <div id="chatlogs">
+            <div class="message">
+                <span class="sender">Coach virtuel:</span>
+                <span class="text">Bonjour! Comment puis-je vous aider aujourd'hui?</span>
+            </div>
+        </div>
+        <div id="chatbuttons">
+            <button class="reponse-btn" onclick="addMessage('Prenez-vous des débutants ?')">Prenez-vous des débutants ?</button>
+            <button class="reponse-btn" onclick="addMessage('Quels sont vos tarifs?')">Quels sont vos tarifs ?</button>
+            <button class="reponse-btn" onclick="addMessage('Pouvez-vous me parler de vos services?')">Pouvez-vous me parler de vos services ?</button>
+        </div>
     </div>
 
     <footer class="footer text-center py-4">
         <div class="container">
             <p>Contactez-nous :</p>
-            <p>
-                <i class="fas fa-phone" style="margin-right: 10px;"></i>
-                <a href="tel:0144876211">01 44 87 62 11</a>
-            </p>
-            <p>
-                <i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>
-                <a href="https://www.google.com/maps/search/?api=1&query=10+Rue+Sextius+Michel,+Paris,+France">10 rue Sextius Michel, Paris, France</a>
-            </p>
-            <p>
-                <i class="fas fa-envelope" style="margin-right: 10px;"></i>
-                <a href="mailto:salle.sports@omnessports.fr">salle.sports@omnessports.fr</a>
-            </p>
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8767.74803941555!2d2.28749683632621!3d48.84760618152228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2sECE%20-%20Ecole%20d&#39;ing%C3%A9nieurs%20-%20Engineering%20school.!5e0!3m2!1sfr!2sfr!4v1685374726975!5m2!1sfr!2sfr"
-                width="1000" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="https://www.facebook.com/sportify" class="btn-social btn-outline">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://www.twitter.com/sportify" class="btn-social btn-outline">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="https://www.instagram.com/sportify" class="btn-social btn-outline">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </li>
+            </ul>
+            <p>&copy; 2024 SPORTIFY. Tous droits réservés.</p>
         </div>
     </footer>
+    <script src="recherche.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.creneau').on('click', function() {
-                if ($(this).hasClass('reserved')) {
-                    return;
-                }
-
-                $('.creneau').removeClass('selected');
-                $(this).addClass('selected');
-                const creneauId = $(this).data('id-creneau');
-                $('#selectedCreneaux').val(creneauId);
-            });
-        });
-    </script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script></body>
 </html>
