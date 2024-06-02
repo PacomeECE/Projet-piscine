@@ -1,21 +1,21 @@
-/* Sélection de l'input de recherche */
-var searchInput = document.getElementById("search-input");
+    /* Sélection de l'input de recherche */
+    var searchInput = document.getElementById("search-input");
 
-/* Ajout d'un détecteur de pression de la touche "Entrée" lors de la recherche */
-searchInput.addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();  // Empêche la soumission du formulaire
-    performSearch();
-  }
-});
+    /* Ajout d'un détecteur de pression de la touche "Entrée" lors de la recherche */
+    searchInput.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();  // Empêche la soumission du formulaire
+            performSearch();
+        }
+    });
 
-/* Ajout d'un détecteur de pression du bouton de recherche */
-document.getElementById("search-button").addEventListener("click", performSearch);
+    /* Ajout d'un détecteur de pression du bouton de recherche */
+    document.getElementById("search-button").addEventListener("click", performSearch);
 
-/* Fonction pour effectuer la recherche */
-function performSearch() {
-  var query = searchInput.value.toLowerCase();
-  var targetFile = "";
+    /* Fonction pour effectuer la recherche */
+    function performSearch() {
+        var query = searchInput.value.toLowerCase();
+        var targetFile = "";
 
   if (query === "coach" || query === "coachs" || query === "personnel" || query === "liste" || query === "coachs spotifs" || query === "coach sportif") {
     targetFile = "personnel.html";
@@ -53,14 +53,90 @@ function performSearch() {
     targetFile = "muscu.php";
   } else if (query === "fitness" || query === "fitnesse" || query === "fit" || query === "guy fit" || query === "coach guy" || query === "coach fit" || query === "gymnastique" || query === "entraînement" || query === "exercice physique" || query === "forme physique") {
     targetFile = "fitness.php";
-  } else if (query === "offre" || query === "abonnement" || query === "abonement" || query === "souscription" ){
-    targetFile = "abonnement.php";
   } else {
     alert("Pas de résultat trouvé !");
   }
 
-  // Rediriger vers le fichier ciblé si un fichier cible est défini
-  if (targetFile !== "") {
-    window.location.href = targetFile;
-  }
-}
+        // Rediriger vers le fichier ciblé si un fichier cible est défini
+        if (targetFile !== "") {
+            window.location.href = targetFile;
+        }
+      }
+
+      function addMessage(text) {
+        // Create a new message div
+        var messageDiv = document.createElement("div");
+        messageDiv.className = "message";
+    
+        var userSpan = document.createElement("span");
+        userSpan.className = "sender";
+        userSpan.textContent = "Utilisateur:";
+    
+        var userText = document.createElement("span");
+        userText.className = "text";
+        userText.textContent = text;
+    
+        messageDiv.appendChild(userSpan);
+        messageDiv.appendChild(userText);
+    
+        var chatlogs = document.getElementById("chatlogs");
+        chatlogs.appendChild(messageDiv);
+        chatlogs.scrollTop = chatlogs.scrollHeight;
+    
+        // Simuler une réponse automatique du coach après un délai
+        setTimeout(function() {
+            var responseDiv = document.createElement("div");
+            responseDiv.className = "message";
+    
+            var coachSpan = document.createElement("span");
+            coachSpan.className = "sender";
+            coachSpan.textContent = "Coach virtuel:";
+    
+            var responseText = document.createElement("span");
+            responseText.className = "text";
+    
+            var responsesDebutants = [
+                "Bien sûr ! Tout le monde doit bien commencer quelque part.",
+                "Oui, nous accueillons les débutants avec plaisir.",
+                "Absolument, nous avons des programmes spécialement conçus pour les débutants.",
+                "Oui, nous proposons des séances adaptées pour tous les niveaux, y compris les débutants."
+            ];
+    
+            var responsesTarifs = [
+                "Mes tarifs sont de 50€ par séance sans abonnement.",
+                "Le tarif standard est de 50€ par séance, avec des réductions pour les forfaits.",
+                "Chaque séance coûte 50€, mais nous offrons des forfaits à prix réduit.",
+                "Le coût est de 50€ par séance, avec des options d'abonnement disponibles."
+            ];
+    
+            var responsesServices = [
+                "Je propose des services de coaching personnalisé dans ma discipline, de nutrition et de préparation physique.",
+                "Nos services incluent le coaching personnalisé, des conseils en nutrition et la préparation physique.",
+                "Nous offrons des séances de coaching personnalisé, des plans de nutrition et des programmes de préparation physique.",
+                "Les services comprennent le coaching personnalisé, la nutrition et la préparation physique."
+            ];
+    
+            if (text.includes("débutants")) {
+                responseText.textContent = responsesDebutants[Math.floor(Math.random() * responsesDebutants.length)];
+            } else if (text.includes("tarifs")) {
+                responseText.textContent = responsesTarifs[Math.floor(Math.random() * responsesTarifs.length)];
+            } else if (text.includes("services")) {
+                responseText.textContent = responsesServices[Math.floor(Math.random() * responsesServices.length)];
+            } else {
+                responseText.textContent = "Je vais examiner votre demande et vous répondre bientôt.";
+            }
+    
+            responseDiv.appendChild(coachSpan);
+            responseDiv.appendChild(responseText);
+    
+            chatlogs.appendChild(responseDiv);
+            chatlogs.scrollTop = chatlogs.scrollHeight;
+        }, 1000);
+    }
+    
+  
+  
+    
+    
+    
+    
